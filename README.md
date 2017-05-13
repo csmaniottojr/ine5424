@@ -1,8 +1,10 @@
-# INE5424 - FinalProject
+# Trabalhos de implementação da disciplina INE5424
 
-**Topic: Multicarrier Wi-Fi Access Point for Vehicles**
+Trabalho 1: Threads no EPOS
+Trabalho 2: ?
+Trabalho final: Implementação da Internet Física do Google no EPOS
 
-Group:
+Equipe:
 
 [Cesar Smaniotto Júnior](https://github.com/csmaniottojr)\
 [Gilney Nathanael Mathias](https://github.com/nogenem)\
