@@ -2,7 +2,7 @@
 
 Trabalho 1: Threads no EPOS\
 Trabalho 2: ?\
-Trabalho final: Implementação da Internet Física do Google no EPOS\
+Trabalho final: Implementação da Internet Física do Google no EPOS
 
 Equipe:
 
