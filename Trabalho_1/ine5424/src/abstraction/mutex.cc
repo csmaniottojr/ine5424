@@ -7,6 +7,7 @@ __BEGIN_SYS
 Mutex::Mutex(): _locked(false)
 {
     db<Synchronizer>(TRC) << "Mutex() => " << this << endl;
+    
 }
 
 
@@ -22,8 +23,7 @@ void Mutex::lock()
 
     begin_atomic();
     if(tsl(_locked))
-        while(tsl(_locked))
-            sleep(); // implicit end_atomic()
+        sleep(); // implicit end_atomic()
     else
         end_atomic();
 }

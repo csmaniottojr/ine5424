@@ -21,7 +21,7 @@ void Semaphore::p()
     db<Synchronizer>(TRC) << "Semaphore::p(this=" << this << ",value=" << _value << ")" << endl;
 
     fdec(_value);
-    while(_value < 0)
+   if(_value < 0)
         sleep();
 }
 

@@ -12,7 +12,7 @@ __END_UTIL
 __BEGIN_SYS
 
 // Class attributes
-Scheduler_Timer * Thread::_timer;
+Scheduler_Timer* Thread::_timer;
 
 Thread* volatile Thread::_running;
 Thread::Queue Thread::_ready;
@@ -26,16 +26,15 @@ void Thread::constructor_prolog(unsigned int stack_size)
     _stack = reinterpret_cast<char *>(kmalloc(stack_size));
 }
 
-
 void Thread::constructor_epilog(const Log_Addr & entry, unsigned int stack_size)
 {
     db<Thread>(TRC) << "Thread(entry=" << entry
-                    << ",state=" << _state
-                    << ",priority=" << _link.rank()
-                    << ",stack={b=" << reinterpret_cast<void *>(_stack)
-                    << ",s=" << stack_size
-                    << "},context={b=" << _context
-                    << "," << *_context << "}) => " << this << endl;
+    << ",state=" << _state
+    << ",priority=" << _link.rank()
+    << ",stack={b=" << reinterpret_cast<void *>(_stack)
+    << ",s=" << stack_size
+    << "},context={b=" << _context
+    << "," << *_context << "}) => " << this << endl;
 
     switch(_state) {
         case RUNNING: break;
@@ -46,17 +45,16 @@ void Thread::constructor_epilog(const Log_Addr & entry, unsigned int stack_size)
     unlock();
 }
 
-
 Thread::~Thread()
 {
     lock();
 
     db<Thread>(TRC) << "~Thread(this=" << this
-                    << ",state=" << _state
-                    << ",priority=" << _link.rank()
-                    << ",stack={b=" << reinterpret_cast<void *>(_stack)
-                    << ",context={b=" << _context
-                    << "," << *_context << "})" << endl;
+    << ",state=" << _state
+    << ",priority=" << _link.rank()
+    << ",stack={b=" << reinterpret_cast<void *>(_stack)
+    << ",context={b=" << _context
+    << "," << *_context << "})" << endl;
 
     _ready.remove(this);
     _suspended.remove(this);
@@ -66,7 +64,6 @@ Thread::~Thread()
     kfree(_stack);
 }
 
-
 int Thread::join()
 {
     lock();
@@ -74,13 +71,12 @@ int Thread::join()
     db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
 
     while(_state != FINISHING)
-        yield(); // implicit unlock()
+    yield(); // implicit unlock()
 
     unlock();
 
     return *reinterpret_cast<int *>(_stack);
 }
-
 
 void Thread::pass()
 {
@@ -101,7 +97,6 @@ void Thread::pass()
     unlock();
 }
 
-
 void Thread::suspend()
 {
     lock();
@@ -109,7 +104,7 @@ void Thread::suspend()
     db<Thread>(TRC) << "Thread::suspend(this=" << this << ")" << endl;
 
     if(_running != this)
-        _ready.remove(this);
+    _ready.remove(this);
 
     _state = SUSPENDED;
     _suspended.insert(&_link);
@@ -120,11 +115,10 @@ void Thread::suspend()
 
         dispatch(this, _running);
     } else
-        idle(); // implicit unlock()
+    idle(); // implicit unlock()
 
     unlock();
 }
-
 
 void Thread::resume()
 {
@@ -132,13 +126,61 @@ void Thread::resume()
 
     db<Thread>(TRC) << "Thread::resume(this=" << this << ")" << endl;
 
-   _suspended.remove(this);
-   _state = READY;
-   _ready.insert(&_link);
+    _suspended.remove(this);
+    _state = READY;
+    _ready.insert(&_link);
 
-   unlock();
+    unlock();
+}
+//EDITED BY DECKER
+void Thread::sleep(Queue & queue_wait) {
+    assert(locked()); //Must be locked.
+
+
+    Thread * prev = running();//get the running thread
+    prev->_sync_queue=&queue_wait;//set the waiting queue of a synchronizer;
+    prev->_state = WAITING;//Change the running thread state
+    Queue::Element * runing_link = &prev->_link;//Get the queue element for the running one.
+    queue_wait.insert(runing_link);//Insert the running thread into the queue
+    //Now, must schedule another thread to run!
+    if(_ready.empty()) {    //Check if there is someone to be executed
+        idle();
+    } else {    //And if there is someone...
+        Thread * next = _ready.remove()->object();//Get the next thread
+        _running = next;//Run!
+        _running->_state = READY;//Change the actual thread state
+        dispatch(prev,next);//Change the context in CPU
+    }
+    unlock();
 }
 
+void Thread::wakeup(Queue & queue_wait) {
+  /*Tem que pegar a cabeça da lista, por ela como ready e jogar na fila de ready e tirar da lista de wait*/
+
+    assert(locked());
+    if(queue_wait.empty()){
+        //Should never happen
+        return;
+    }
+    Thread * woken = queue_wait.remove()->object();
+    woken->_state = READY;
+    _ready.insert(&woken->_link);
+
+    unlock();
+
+}
+
+void Thread::wakeupAll(Queue &queue_wait){
+    assert(locked());
+    if(queue_wait.empty()){
+        //Should never happen
+        return;
+    }
+    while(!queue_wait.empty()){
+        wakeup(queue_wait);
+    }
+    unlock();
+}
 
 // Class methods
 void Thread::yield()
@@ -157,11 +199,10 @@ void Thread::yield()
 
         dispatch(prev, _running);
     } else
-        idle();
+    idle();
 
     unlock();
 }
-
 
 void Thread::exit(int status)
 {
@@ -170,7 +211,7 @@ void Thread::exit(int status)
     db<Thread>(TRC) << "Thread::exit(status=" << status << ") [running=" << running() << "]" << endl;
 
     while(_ready.empty() && !_suspended.empty())
-        idle(); // implicit unlock();
+    idle(); // implicit unlock();
 
     lock();
 
@@ -197,24 +238,21 @@ void Thread::exit(int status)
     unlock();
 }
 
-
 void Thread::reschedule()
 {
     yield();
 }
-
 
 void Thread::time_slicer(const IC::Interrupt_Id & i)
 {
     reschedule();
 }
 
-
 void Thread::dispatch(Thread * prev, Thread * next)
 {
     if(prev != next) {
         if(prev->_state == RUNNING)
-            prev->_state = READY;
+        prev->_state = READY;
         next->_state = RUNNING;
 
         db<Thread>(TRC) << "Thread::dispatch(prev=" << prev << ",next=" << next << ")" << endl;
@@ -226,7 +264,6 @@ void Thread::dispatch(Thread * prev, Thread * next)
 
     unlock();
 }
-
 
 int Thread::idle()
 {

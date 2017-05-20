@@ -5,6 +5,7 @@
 
 #include <cpu.h>
 #include <thread.h>
+#include <utility/queue.h>
 
 __BEGIN_SYS
 
@@ -17,14 +18,17 @@ protected:
     bool tsl(volatile bool & lock) { return CPU::tsl(lock); }
     int finc(volatile int & number) { return CPU::finc(number); }
     int fdec(volatile int & number) { return CPU::fdec(number); }
-
+    
     // Thread operations
     void begin_atomic() { Thread::lock(); }
     void end_atomic() { Thread::unlock(); }
 
-    void sleep() { Thread::yield(); } // implicit unlock()
-    void wakeup() { end_atomic(); }
-    void wakeup_all() { end_atomic(); }
+    void sleep() { Thread::sleep(_queue); } // implicit unlock()
+    void wakeup() {Thread::wakeup(_queue); }// implicit unlock()
+    void wakeup_all() { Thread::wakeupAll(_queue); }// implicit unlock()
+
+    // Data structures
+    Thread::Queue _queue;
 };
 
 __END_SYS

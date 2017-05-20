@@ -78,6 +78,9 @@ public:
     void suspend();
     void resume();
 
+    static void sleep(Queue &queue);
+    static void wakeup(Queue &queue);
+    static void wakeupAll(Queue &queue);
     static Thread * volatile self() { return running(); }
     static void yield();
     static void exit(int status = 0);
@@ -107,13 +110,14 @@ protected:
     Context * volatile _context;
     volatile State _state;
     Queue::Element _link;
-
+    Queue *_sync_queue;
     static Scheduler_Timer * _timer;
 
 private:
     static Thread * volatile _running;
     static Queue _ready;
     static Queue _suspended;
+
 };
 
 
