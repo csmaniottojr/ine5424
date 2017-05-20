@@ -13,6 +13,6 @@
 
 #### Equipe
 
-__[Cesar Smaniotto Júnior](https://github.com/csmaniottojr)__
-__[Gilney Nathanael Mathias](https://github.com/nogenem)__
+__[Cesar Smaniotto Júnior](https://github.com/csmaniottojr)__/
+__[Gilney Nathanael Mathias](https://github.com/nogenem)__/
 __[Luis Gustavo Lorgus Decker](https://github.com/luisdecker)__
