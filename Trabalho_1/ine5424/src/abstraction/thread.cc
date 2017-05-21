@@ -58,6 +58,8 @@ Thread::~Thread()
 
     _ready.remove(this);
     _suspended.remove(this);
+    if(_sync_queue != 0)
+      _sync_queue->remove(this);
 
     unlock();
 
@@ -104,7 +106,7 @@ void Thread::suspend()
     db<Thread>(TRC) << "Thread::suspend(this=" << this << ")" << endl;
 
     if(_running != this)
-    _ready.remove(this);
+      _ready.remove(this);
 
     _state = SUSPENDED;
     _suspended.insert(&_link);
@@ -115,7 +117,7 @@ void Thread::suspend()
 
         dispatch(this, _running);
     } else
-    idle(); // implicit unlock()
+      idle(); // implicit unlock()
 
     unlock();
 }
@@ -132,54 +134,70 @@ void Thread::resume()
 
     unlock();
 }
-//EDITED BY DECKER
+
 void Thread::sleep(Queue & queue_wait) {
     assert(locked()); //Must be locked.
 
-
     Thread * prev = running();//get the running thread
-    prev->_sync_queue=&queue_wait;//set the waiting queue of a synchronizer;
+    prev->_sync_queue = &queue_wait;//set the waiting queue of a synchronizer;
     prev->_state = WAITING;//Change the running thread state
     Queue::Element * runing_link = &prev->_link;//Get the queue element for the running one.
     queue_wait.insert(runing_link);//Insert the running thread into the queue
+
     //Now, must schedule another thread to run!
     if(_ready.empty()) {    //Check if there is someone to be executed
         idle();
     } else {    //And if there is someone...
         Thread * next = _ready.remove()->object();//Get the next thread
         _running = next;//Run!
-        _running->_state = READY;//Change the actual thread state
-        dispatch(prev,next);//Change the context in CPU
+        _running->_state = RUNNING;//Change the actual thread state
+        dispatch(prev, next);//Change the context in CPU
     }
+
     unlock();
 }
 
 void Thread::wakeup(Queue & queue_wait) {
-  /*Tem que pegar a cabeça da lista, por ela como ready e jogar na fila de ready e tirar da lista de wait*/
-
     assert(locked());
+
     if(queue_wait.empty()){
         //Should never happen
         return;
     }
+
     Thread * woken = queue_wait.remove()->object();
     woken->_state = READY;
+    woken->_sync_queue = 0;
     _ready.insert(&woken->_link);
 
     unlock();
 
+    //The ready queue was changed
+    if(preemptive)
+      reschedule();
 }
 
 void Thread::wakeupAll(Queue &queue_wait){
     assert(locked());
+
     if(queue_wait.empty()){
         //Should never happen
         return;
     }
+
+    Thread * woken = 0;
     while(!queue_wait.empty()){
-        wakeup(queue_wait);
+      woken = queue_wait.remove()->object();
+      woken->_state = READY;
+      woken->_sync_queue = 0;
+      _ready.insert(&woken->_link);
     }
+
     unlock();
+
+    //The ready queue was changed
+    if(preemptive)
+      reschedule();
 }
 
 // Class methods
