@@ -29,12 +29,12 @@ void Thread::constructor_prolog(unsigned int stack_size)
 void Thread::constructor_epilog(const Log_Addr & entry, unsigned int stack_size)
 {
     db<Thread>(TRC) << "Thread(entry=" << entry
-    << ",state=" << _state
-    << ",priority=" << _link.rank()
-    << ",stack={b=" << reinterpret_cast<void *>(_stack)
-    << ",s=" << stack_size
-    << "},context={b=" << _context
-    << "," << *_context << "}) => " << this << endl;
+      << ",state=" << _state
+      << ",priority=" << _link.rank()
+      << ",stack={b=" << reinterpret_cast<void *>(_stack)
+      << ",s=" << stack_size
+      << "},context={b=" << _context
+      << "," << *_context << "}) => " << this << endl;
 
     switch(_state) {
         case RUNNING: break;
@@ -50,16 +50,17 @@ Thread::~Thread()
     lock();
 
     db<Thread>(TRC) << "~Thread(this=" << this
-    << ",state=" << _state
-    << ",priority=" << _link.rank()
-    << ",stack={b=" << reinterpret_cast<void *>(_stack)
-    << ",context={b=" << _context
-    << "," << *_context << "})" << endl;
+      << ",state=" << _state
+      << ",priority=" << _link.rank()
+      << ",stack={b=" << reinterpret_cast<void *>(_stack)
+      << ",context={b=" << _context
+      << "," << *_context << "})" << endl;
 
     _ready.remove(this);
     _suspended.remove(this);
     if(_sync_queue != 0)
       _sync_queue->remove(this);
+    wakeup_all(_joining);
 
     unlock();
 
@@ -72,8 +73,8 @@ int Thread::join()
 
     db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
 
-    while(_state != FINISHING)
-    yield(); // implicit unlock()
+    if(_state != FINISHING)
+      sleep(_joining);
 
     unlock();
 
@@ -177,7 +178,7 @@ void Thread::wakeup(Queue & queue_wait) {
       reschedule();
 }
 
-void Thread::wakeupAll(Queue &queue_wait){
+void Thread::wakeup_all(Queue &queue_wait){
     assert(locked());
 
     if(queue_wait.empty()){
@@ -217,7 +218,7 @@ void Thread::yield()
 
         dispatch(prev, _running);
     } else
-    idle();
+      idle();
 
     unlock();
 }
@@ -229,10 +230,11 @@ void Thread::exit(int status)
     db<Thread>(TRC) << "Thread::exit(status=" << status << ") [running=" << running() << "]" << endl;
 
     while(_ready.empty() && !_suspended.empty())
-    idle(); // implicit unlock();
+      idle(); // implicit unlock();
 
     lock();
 
+    wakeup_all(_running->_joining);
     if(!_ready.empty()) {
         Thread * prev = _running;
         prev->_state = FINISHING;
@@ -270,7 +272,7 @@ void Thread::dispatch(Thread * prev, Thread * next)
 {
     if(prev != next) {
         if(prev->_state == RUNNING)
-        prev->_state = READY;
+          prev->_state = READY;
         next->_state = RUNNING;
 
         db<Thread>(TRC) << "Thread::dispatch(prev=" << prev << ",next=" << next << ")" << endl;

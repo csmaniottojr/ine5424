@@ -80,7 +80,7 @@ public:
 
     static void sleep(Queue &queue);
     static void wakeup(Queue &queue);
-    static void wakeupAll(Queue &queue);
+    static void wakeup_all(Queue &queue);
     static Thread * volatile self() { return running(); }
     static void yield();
     static void exit(int status = 0);
@@ -111,6 +111,8 @@ protected:
     volatile State _state;
     Queue::Element _link;
     Queue *_sync_queue;
+    Queue _joining;
+
     static Scheduler_Timer * _timer;
 
 private:

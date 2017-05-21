@@ -18,14 +18,14 @@ protected:
     bool tsl(volatile bool & lock) { return CPU::tsl(lock); }
     int finc(volatile int & number) { return CPU::finc(number); }
     int fdec(volatile int & number) { return CPU::fdec(number); }
-    
+
     // Thread operations
     void begin_atomic() { Thread::lock(); }
     void end_atomic() { Thread::unlock(); }
 
     void sleep() { Thread::sleep(_queue); } // implicit unlock()
     void wakeup() {Thread::wakeup(_queue); }// implicit unlock()
-    void wakeup_all() { Thread::wakeupAll(_queue); }// implicit unlock()
+    void wakeup_all() { Thread::wakeup_all(_queue); }// implicit unlock()
 
     // Data structures
     Thread::Queue _queue;
@@ -34,4 +34,3 @@ protected:
 __END_SYS
 
 #endif
-
