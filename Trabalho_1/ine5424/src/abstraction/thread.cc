@@ -234,7 +234,8 @@ void Thread::exit(int status)
 
     lock();
 
-    wakeup_all(_running->_joining);
+    wakeup_all(_running->_joining);// implicit unlock();
+    lock();
     if(!_ready.empty()) {
         Thread * prev = _running;
         prev->_state = FINISHING;

@@ -179,17 +179,17 @@ Index: include/synchronizer.h
 --- include/synchronizer.h	(revisão 4509)
 +++ include/synchronizer.h	(cópia de trabalho)
 @@ -5,6 +5,7 @@
- 
+
  #include <cpu.h>
  #include <thread.h>
 +#include <utility/queue.h>
- 
+
  __BEGIN_SYS
- 
+
 @@ -22,12 +23,14 @@
      void begin_atomic() { Thread::lock(); }
      void end_atomic() { Thread::unlock(); }
- 
+
 -    void sleep() { Thread::yield(); } // implicit unlock()
 -    void wakeup() { end_atomic(); }
 -    void wakeup_all() { end_atomic(); }
@@ -200,9 +200,9 @@ Index: include/synchronizer.h
 +    // Data structures
 +    Thread::Queue _queue;
  };
- 
+
  __END_SYS
- 
+
  #endif
 -
 Index: include/system/config.h
@@ -231,7 +231,7 @@ Index: include/system/config.h
 +#define __arch_ia32__
 +#define __mach_pc__
 +#define __mmod_legacy__
- 
+
  #if defined (__arch_avr__) || defined (__mmod_lm3s811__)
  #define __no_networking__
 Index: include/thread.h
@@ -241,7 +241,7 @@ Index: include/thread.h
 @@ -78,6 +78,9 @@
      void suspend();
      void resume();
- 
+
 +    static void sleep(Queue &queue);
 +    static void wakeup(Queue &queue);
 +    static void wakeup_all(Queue &queue);
@@ -254,17 +254,17 @@ Index: include/thread.h
      Queue::Element _link;
 +    Queue *_sync_queue;
 +    Queue _joining;
- 
+
      static Scheduler_Timer * _timer;
- 
+
 @@ -114,6 +119,7 @@
      static Thread * volatile _running;
      static Queue _ready;
      static Queue _suspended;
 +
  };
- 
- 
+
+
 Index: makefile
 ===================================================================
 --- makefile	(revisão 4509)
@@ -286,7 +286,7 @@ Index: makefile
 -else
 -		$(MAKE) all1
 -endif
--		
+-
 -all1: $(SUBDIRS)
 -
 -$(SUBDIRS): FORCE
@@ -353,7 +353,7 @@ Index: makefile
 -		(cd img && $(MAKECLEAN))
 -		(cd src && $(MAKECLEAN))
 -		find $(LIB) -maxdepth 1 -type f -exec $(CLEAN) {} \;
--		
+-
 -veryclean: clean
 -		(cd tools && $(MAKECLEAN))
 -		find $(LIB) -maxdepth 1 -type f -exec $(CLEAN) {} \;
@@ -371,15 +371,15 @@ Index: makefile
 -		find $(TOP) -name ".*project" -exec $(CLEAN) {} \;
 -		find $(TOP) -name CVS -type d -print | xargs $(CLEANDIR)
 -		find $(TOP) -name .svn -type d -print | xargs $(CLEANDIR)
--		find $(TOP) -name "*.h" -print | xargs sed -i "1r $(TOP)/LICENSE" 
--		find $(TOP) -name "*.cc" -print | xargs sed -i "1r $(TOP)/LICENSE" 
+-		find $(TOP) -name "*.h" -print | xargs sed -i "1r $(TOP)/LICENSE"
+-		find $(TOP) -name "*.cc" -print | xargs sed -i "1r $(TOP)/LICENSE"
 -		sed -e 's/^\/\//#/' LICENSE > LICENSE.mk
--		find $(TOP) -name "makedefs" -print | xargs sed -i "1r $(TOP)/LICENSE.mk" 
+-		find $(TOP) -name "makedefs" -print | xargs sed -i "1r $(TOP)/LICENSE.mk"
 -		find $(TOP) -name "makefile" -print | xargs sed -i "1r $(TOP)/LICENSE.mk"
--		$(CLEAN) LICENSE.mk 
+-		$(CLEAN) LICENSE.mk
 -		sed -e 's/^\/\//#/' LICENSE > LICENSE.as
--		find $(TOP) -name "*.S" -print | xargs sed -i "1r $(TOP)/LICENSE.as" 
--		$(CLEAN) LICENSE.as 
+-		find $(TOP) -name "*.S" -print | xargs sed -i "1r $(TOP)/LICENSE.as"
+-		$(CLEAN) LICENSE.as
 -
 -FORCE:
 +# EPOS Main Makefile
@@ -398,7 +398,7 @@ Index: makefile
 +else
 +		$(MAKE) all1
 +endif
-+		
++
 +all1: $(SUBDIRS)
 +
 +$(SUBDIRS): FORCE
@@ -465,7 +465,7 @@ Index: makefile
 +		(cd img && $(MAKECLEAN))
 +		(cd src && $(MAKECLEAN))
 +		find $(LIB) -maxdepth 1 -type f -exec $(CLEAN) {} \;
-+		
++
 +veryclean: clean
 +		(cd tools && $(MAKECLEAN))
 +		find $(LIB) -maxdepth 1 -type f -exec $(CLEAN) {} \;
@@ -483,15 +483,15 @@ Index: makefile
 +		find $(TOP) -name ".*project" -exec $(CLEAN) {} \;
 +		find $(TOP) -name CVS -type d -print | xargs $(CLEANDIR)
 +		find $(TOP) -name .svn -type d -print | xargs $(CLEANDIR)
-+		find $(TOP) -name "*.h" -print | xargs sed -i "1r $(TOP)/LICENSE" 
-+		find $(TOP) -name "*.cc" -print | xargs sed -i "1r $(TOP)/LICENSE" 
++		find $(TOP) -name "*.h" -print | xargs sed -i "1r $(TOP)/LICENSE"
++		find $(TOP) -name "*.cc" -print | xargs sed -i "1r $(TOP)/LICENSE"
 +		sed -e 's/^\/\//#/' LICENSE > LICENSE.mk
-+		find $(TOP) -name "makedefs" -print | xargs sed -i "1r $(TOP)/LICENSE.mk" 
++		find $(TOP) -name "makedefs" -print | xargs sed -i "1r $(TOP)/LICENSE.mk"
 +		find $(TOP) -name "makefile" -print | xargs sed -i "1r $(TOP)/LICENSE.mk"
-+		$(CLEAN) LICENSE.mk 
++		$(CLEAN) LICENSE.mk
 +		sed -e 's/^\/\//#/' LICENSE > LICENSE.as
-+		find $(TOP) -name "*.S" -print | xargs sed -i "1r $(TOP)/LICENSE.as" 
-+		$(CLEAN) LICENSE.as 
++		find $(TOP) -name "*.S" -print | xargs sed -i "1r $(TOP)/LICENSE.as"
++		$(CLEAN) LICENSE.as
 +
 +FORCE:
 Index: src/abstraction/mutex.cc
@@ -502,12 +502,12 @@ Index: src/abstraction/mutex.cc
  Mutex::Mutex(): _locked(false)
  {
      db<Synchronizer>(TRC) << "Mutex() => " << this << endl;
-+    
++
  }
- 
- 
+
+
 @@ -22,8 +23,7 @@
- 
+
      begin_atomic();
      if(tsl(_locked))
 -        while(tsl(_locked))
@@ -523,7 +523,7 @@ Index: src/abstraction/semaphore.cc
 @@ -20,9 +20,12 @@
  {
      db<Synchronizer>(TRC) << "Semaphore::p(this=" << this << ",value=" << _value << ")" << endl;
- 
+
 +    begin_atomic();
      fdec(_value);
 -    while(_value < 0)
@@ -532,12 +532,12 @@ Index: src/abstraction/semaphore.cc
 +    else
 +      end_atomic();
  }
- 
- 
+
+
 @@ -30,9 +33,12 @@
  {
      db<Synchronizer>(TRC) << "Semaphore::v(this=" << this << ",value=" << _value << ")" << endl;
- 
+
 +    begin_atomic();
      finc(_value);
      if(_value < 1)
@@ -545,7 +545,7 @@ Index: src/abstraction/semaphore.cc
 +    else
 +      end_atomic();
  }
- 
+
  __END_SYS
 Index: src/abstraction/thread.cc
 ===================================================================
@@ -553,17 +553,17 @@ Index: src/abstraction/thread.cc
 +++ src/abstraction/thread.cc	(cópia de trabalho)
 @@ -12,7 +12,7 @@
  __BEGIN_SYS
- 
+
  // Class attributes
 -Scheduler_Timer * Thread::_timer;
 +Scheduler_Timer* Thread::_timer;
- 
+
  Thread* volatile Thread::_running;
  Thread::Queue Thread::_ready;
 @@ -26,16 +26,15 @@
      _stack = reinterpret_cast<char *>(kmalloc(stack_size));
  }
- 
+
 -
  void Thread::constructor_epilog(const Log_Addr & entry, unsigned int stack_size)
  {
@@ -580,18 +580,18 @@ Index: src/abstraction/thread.cc
 +      << ",s=" << stack_size
 +      << "},context={b=" << _context
 +      << "," << *_context << "}) => " << this << endl;
- 
+
      switch(_state) {
          case RUNNING: break;
 @@ -46,20 +45,22 @@
      unlock();
  }
- 
+
 -
  Thread::~Thread()
  {
      lock();
- 
+
      db<Thread>(TRC) << "~Thread(this=" << this
 -                    << ",state=" << _state
 -                    << ",priority=" << _link.rank()
@@ -603,38 +603,38 @@ Index: src/abstraction/thread.cc
 +      << ",stack={b=" << reinterpret_cast<void *>(_stack)
 +      << ",context={b=" << _context
 +      << "," << *_context << "})" << endl;
- 
+
      _ready.remove(this);
      _suspended.remove(this);
 +    if(_sync_queue != 0)
 +      _sync_queue->remove(this);
 +    wakeup_all(_joining);
- 
+
      unlock();
- 
+
 @@ -66,7 +67,6 @@
      kfree(_stack);
  }
- 
+
 -
  int Thread::join()
  {
      lock();
 @@ -73,8 +73,8 @@
- 
+
      db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
- 
+
 -    while(_state != FINISHING)
 -        yield(); // implicit unlock()
 +    if(_state != FINISHING)
 +      sleep(_joining);
- 
+
      unlock();
- 
+
 @@ -81,7 +81,6 @@
      return *reinterpret_cast<int *>(_stack);
  }
- 
+
 -
  void Thread::pass()
  {
@@ -642,52 +642,52 @@ Index: src/abstraction/thread.cc
 @@ -101,7 +100,6 @@
      unlock();
  }
- 
+
 -
  void Thread::suspend()
  {
      lock();
 @@ -109,7 +107,7 @@
      db<Thread>(TRC) << "Thread::suspend(this=" << this << ")" << endl;
- 
+
      if(_running != this)
 -        _ready.remove(this);
 +      _ready.remove(this);
- 
+
      _state = SUSPENDED;
      _suspended.insert(&_link);
 @@ -120,12 +118,11 @@
- 
+
          dispatch(this, _running);
      } else
 -        idle(); // implicit unlock()
 +      idle(); // implicit unlock()
- 
+
      unlock();
  }
- 
+
 -
  void Thread::resume()
  {
      lock();
 @@ -132,14 +129,78 @@
- 
+
      db<Thread>(TRC) << "Thread::resume(this=" << this << ")" << endl;
- 
+
 -   _suspended.remove(this);
 -   _state = READY;
 -   _ready.insert(&_link);
 +    _suspended.remove(this);
 +    _state = READY;
 +    _ready.insert(&_link);
- 
+
 -   unlock();
 +    unlock();
  }
- 
+
 +void Thread::sleep(Queue & queue_wait) {
 +    assert(locked()); //Must be locked.
- 
+
 +    Thread * prev = running();//get the running thread
 +    prev->_sync_queue = &queue_wait;//set the waiting queue of a synchronizer;
 +    prev->_state = WAITING;//Change the running thread state
@@ -754,48 +754,49 @@ Index: src/abstraction/thread.cc
  void Thread::yield()
  {
 @@ -157,12 +218,11 @@
- 
+
          dispatch(prev, _running);
      } else
 -        idle();
 +      idle();
- 
+
      unlock();
  }
- 
+
 -
  void Thread::exit(int status)
  {
      lock();
 @@ -170,10 +230,11 @@
      db<Thread>(TRC) << "Thread::exit(status=" << status << ") [running=" << running() << "]" << endl;
- 
+
      while(_ready.empty() && !_suspended.empty())
 -        idle(); // implicit unlock();
 +      idle(); // implicit unlock();
- 
+
      lock();
- 
-+    wakeup_all(_running->_joining);
+
++    wakeup_all(_running->_joining);// implicit unlock();
++    lock();
      if(!_ready.empty()) {
          Thread * prev = _running;
          prev->_state = FINISHING;
 @@ -197,24 +258,21 @@
      unlock();
  }
- 
+
 -
  void Thread::reschedule()
  {
      yield();
  }
- 
+
 -
  void Thread::time_slicer(const IC::Interrupt_Id & i)
  {
      reschedule();
  }
- 
+
 -
  void Thread::dispatch(Thread * prev, Thread * next)
  {
@@ -804,12 +805,12 @@ Index: src/abstraction/thread.cc
 -            prev->_state = READY;
 +          prev->_state = READY;
          next->_state = RUNNING;
- 
+
          db<Thread>(TRC) << "Thread::dispatch(prev=" << prev << ",next=" << next << ")" << endl;
 @@ -227,7 +285,6 @@
      unlock();
  }
- 
+
 -
  int Thread::idle()
  {
