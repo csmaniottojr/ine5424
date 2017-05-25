@@ -73,6 +73,8 @@ int Thread::join()
 
     db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
 
+    assert(this != _running);//não deve dar join em si mesma
+
     if(_state != FINISHING)
       sleep(_joining);
 
