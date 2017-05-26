@@ -7,7 +7,6 @@ __BEGIN_SYS
 Mutex::Mutex(): _locked(false)
 {
     db<Synchronizer>(TRC) << "Mutex() => " << this << endl;
-    
 }
 
 

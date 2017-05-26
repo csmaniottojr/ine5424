@@ -5,7 +5,6 @@
 
 #include <cpu.h>
 #include <thread.h>
-#include <utility/queue.h>
 
 __BEGIN_SYS
 
@@ -13,6 +12,10 @@ class Synchronizer_Common
 {
 protected:
     Synchronizer_Common() {}
+    ~Synchronizer_Common(){
+        begin_atomic();
+        wakeup_all();
+    }
 
     // Atomic operations
     bool tsl(volatile bool & lock) { return CPU::tsl(lock); }

@@ -110,7 +110,7 @@ protected:
     Context * volatile _context;
     volatile State _state;
     Queue::Element _link;
-    Queue *_sync_queue;
+    Queue * volatile _sync_queue;
     Queue _joining;
 
     static Scheduler_Timer * _timer;
@@ -119,7 +119,6 @@ private:
     static Thread * volatile _running;
     static Queue _ready;
     static Queue _suspended;
-
 };
 
 

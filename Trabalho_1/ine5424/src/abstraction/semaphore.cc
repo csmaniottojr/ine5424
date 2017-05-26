@@ -25,7 +25,7 @@ void Semaphore::p()
     if(_value < 0)
         sleep();
     else
-      end_atomic();
+        end_atomic();
 }
 
 
@@ -38,7 +38,7 @@ void Semaphore::v()
     if(_value < 1)
         wakeup();
     else
-      end_atomic();
+        end_atomic();
 }
 
 __END_SYS
