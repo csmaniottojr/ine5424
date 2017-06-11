@@ -4,8 +4,8 @@
     <df root="." name="0">
       <df name="app">
         <in>alarm_test.cc</in>
+        <in>alarm_test_traits.h</in>
         <in>philosophers_dinner.cc</in>
-        <in>philosophers_dinner_traits.h</in>
         <in>producer_consumer.cc</in>
       </df>
       <df name="bin">

@@ -45,17 +45,18 @@ Alarm::~Alarm() {
 
 void Alarm::delay(const Microsecond & time) {
     db<Alarm>(TRC) << "Alarm::delay(time=" << time << ")" << endl;
+    db<Alarm>(WRN) << _elapsed << endl;
+
 
     Semaphore semaphore(0);
     Semaphore_Handler handler(&semaphore);
     Alarm alarm_delay(time, &handler, 1); //Se time < tick, v();
     semaphore.p();
+    db<Alarm>(WRN) << _elapsed << endl;
+
 }
 
 void Alarm::handler(const IC::Interrupt_Id & i) {
-    static Tick next_tick;
-    static Handler * next_handler;
-
     lock();
 
     _elapsed++;
@@ -63,27 +64,17 @@ void Alarm::handler(const IC::Interrupt_Id & i) {
     if (Traits<Alarm>::visible) {
         Display display;
         int lin, col;
-
         display.position(&lin, &col);
         display.position(0, 79);
         display.putc(_elapsed);
         display.position(lin, col);
     }
 
-    if (next_tick)
-        next_tick--;
-    if (!next_tick) {
-        if (next_handler) {
-            db<Alarm>(TRC) << "Alarm::handler(h=" << reinterpret_cast<void *> (next_handler) << ")" << endl;
-            (*next_handler)();
-        }
-        if (_request.empty())
-            next_handler = 0;
-        else {
+    Alarm * alarm = 0;
+    if (!_request.empty()) {
+        if (_request.head()->promote() <= 0) {
             Queue::Element * e = _request.remove();
-            Alarm * alarm = e->object();
-            next_tick = alarm->_ticks;
-            next_handler = alarm->_handler;
+            alarm = e->object();
             if (alarm->_times != -1)
                 alarm->_times--;
             if (alarm->_times) {
@@ -91,6 +82,11 @@ void Alarm::handler(const IC::Interrupt_Id & i) {
                 _request.insert(e);
             }
         }
+    }
+
+    if (alarm != 0) {
+        db<Alarm>(TRC) << "Alarm::handler(h=" << reinterpret_cast<void *> (alarm->_handler) << ")" << endl;
+        (*alarm->_handler)();
     }
 
     unlock();
