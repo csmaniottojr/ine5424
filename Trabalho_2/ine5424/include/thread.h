@@ -45,7 +45,9 @@ public:
     enum {
         HIGH = 0,
         NORMAL = 15,
-        LOW = 31
+        MAIN = 15,
+        LOW = 31,
+        IDLE = 32
     };
 
     // Thread Configuration
@@ -114,6 +116,7 @@ protected:
     Queue _joining;
 
     static Scheduler_Timer * _timer;
+    static volatile unsigned int _thread_counter; 
 
 private:
     static Thread * volatile _running;
