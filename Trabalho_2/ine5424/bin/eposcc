@@ -6,7 +6,7 @@
 #=========================================================================
 # PATHS
 #=========================================================================
-EPOS=/home/gilne/Documentos/git/ine5424/Trabalho_2/ine5424
+EPOS=/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424
 TMP=/tmp
 INC=$EPOS/include
 SRC=$EPOS/src

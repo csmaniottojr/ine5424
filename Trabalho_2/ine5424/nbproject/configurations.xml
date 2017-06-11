@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="app">
+        <in>philosophers_dinner.cc</in>
+        <in>producer_consumer.cc</in>
+      </df>
+      <df name="src">
+        <df name="abstraction">
+          <in>alarm.cc</in>
+          <in>alarm_init.cc</in>
+          <in>alarm_test.cc</in>
+          <in>chronometer_test.cc</in>
+          <in>condition.cc</in>
+          <in>mutex.cc</in>
+          <in>mutex_test.cc</in>
+          <in>semaphore.cc</in>
+          <in>semaphore_test.cc</in>
+          <in>synchronizer_test.cc</in>
+          <in>system_init.cc</in>
+          <in>thread.cc</in>
+          <in>thread_init.cc</in>
+          <in>thread_test.cc</in>
+        </df>
+        <df name="architecture">
+          <df name="ia32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>ia32_crt0.S</in>
+            <in>ia32_crtbegin.c</in>
+            <in>ia32_crtend.c</in>
+            <in>memchr.S</in>
+            <in>memcmp.S</in>
+            <in>memcpy.S</in>
+            <in>memset.S</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>strchr.S</in>
+            <in>strlen.S</in>
+          </df>
+        </df>
+        <df name="boot">
+          <in>pc_boot.S</in>
+          <in>pc_boot.s</in>
+        </df>
+        <df name="init">
+          <in>init_application.cc</in>
+          <in>init_first.cc</in>
+          <in>init_system.cc</in>
+        </df>
+        <df name="machine">
+          <df name="common">
+            <in>rtc_common.cc</in>
+            <in>serial_display.cc</in>
+          </df>
+          <df name="pc">
+            <in>display.cc</in>
+            <in>ic.cc</in>
+            <in>ic_entry.cc</in>
+            <in>ic_init.cc</in>
+            <in>info.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>pci.cc</in>
+            <in>pci_init.cc</in>
+            <in>pci_test.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+        </df>
+        <df name="setup">
+          <in>pc_setup.cc</in>
+        </df>
+        <df name="system">
+          <in>application_scaffold.cc</in>
+          <in>system_scaffold.cc</in>
+        </df>
+        <df name="utility">
+          <in>elf.cc</in>
+          <in>hash_test.cc</in>
+          <in>heap.cc</in>
+          <in>list_test.cc</in>
+          <in>malloc.cc</in>
+          <in>malloc_test.cc</in>
+          <in>ostream.cc</in>
+          <in>ostream_test.cc</in>
+          <in>queue_test.cc</in>
+          <in>random.cc</in>
+          <in>srec.cc</in>
+          <in>string.cc</in>
+          <in>vector_test.cc</in>
+        </df>
+      </df>
+      <df name="tools">
+        <df name="eposmkbi">
+          <in>eposmkbi.cc</in>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+      <itemPath>makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+        <includeAdditional>true</includeAdditional>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f makefile</buildCommand>
+          <cleanCommand>${MAKE} -f makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>include</pElem>
+            </incDir>
+          </cTool>
+          <ccTool>
+            <standard>8</standard>
+            <incDir>
+              <pElem>include</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="app/philosophers_dinner.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="app/producer_consumer.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/alarm.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/alarm_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/alarm_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/chronometer_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/abstraction/condition.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/mutex.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/mutex_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/semaphore.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/semaphore_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/synchronizer_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/abstraction/system_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/thread.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/thread_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/abstraction/thread_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/cpu.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/cpu_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/cpu_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/ia32_crt0.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/ia32_crtbegin.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/ia32_crtend.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/memchr.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/memcmp.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/memcpy.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/memset.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/mmu.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/mmu_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/strchr.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/architecture/ia32/strlen.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/boot/pc_boot.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/boot/pc_boot.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="src/init/init_application.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/init/init_first.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/init/init_system.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/common/rtc_common.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/common/serial_display.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="src/machine/pc/display.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/ic.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/ic_entry.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/ic_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/info.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/machine.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/machine_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/pci.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/pci_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/pci_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/rtc.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/rtc_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/timer.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/timer_init.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/timer_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/machine/pc/uart_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/setup/pc_setup.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/system/application_scaffold.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/system/system_scaffold.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/elf.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/hash_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/heap.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/list_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/malloc.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/malloc_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/ostream.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/ostream_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/queue_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/random.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/srec.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/string.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utility/vector_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tools/eposmkbi/eposmkbi.cc" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
