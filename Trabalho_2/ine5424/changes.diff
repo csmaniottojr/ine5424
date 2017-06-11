@@ -1,0 +1,316 @@
+Index: include/synchronizer.h
+===================================================================
+--- include/synchronizer.h	(revisão 4537)
++++ include/synchronizer.h	(cópia de trabalho)
+@@ -12,6 +12,10 @@
+ {
+ protected:
+     Synchronizer_Common() {}
++    ~Synchronizer_Common(){
++        begin_atomic();
++        wakeup_all();
++    }
+ 
+     // Atomic operations
+     bool tsl(volatile bool & lock) { return CPU::tsl(lock); }
+@@ -22,12 +26,14 @@
+     void begin_atomic() { Thread::lock(); }
+     void end_atomic() { Thread::unlock(); }
+ 
+-    void sleep() { Thread::yield(); } // implicit unlock()
+-    void wakeup() { end_atomic(); }
+-    void wakeup_all() { end_atomic(); }
++    void sleep() { Thread::sleep(_queue); } // implicit unlock()
++    void wakeup() {Thread::wakeup(_queue); }// implicit unlock()
++    void wakeup_all() { Thread::wakeup_all(_queue); }// implicit unlock()
++
++    // Data structures
++    Thread::Queue _queue;
+ };
+ 
+ __END_SYS
+ 
+ #endif
+-
+Index: include/thread.h
+===================================================================
+--- include/thread.h	(revisão 4537)
++++ include/thread.h	(cópia de trabalho)
+@@ -78,6 +78,9 @@
+     void suspend();
+     void resume();
+ 
++    static void sleep(Queue &queue);
++    static void wakeup(Queue &queue);
++    static void wakeup_all(Queue &queue);
+     static Thread * volatile self() { return running(); }
+     static void yield();
+     static void exit(int status = 0);
+@@ -107,6 +110,8 @@
+     Context * volatile _context;
+     volatile State _state;
+     Queue::Element _link;
++    Queue * volatile _sync_queue;
++    Queue _joining;
+ 
+     static Scheduler_Timer * _timer;
+ 
+Index: src/abstraction/mutex.cc
+===================================================================
+--- src/abstraction/mutex.cc	(revisão 4537)
++++ src/abstraction/mutex.cc	(cópia de trabalho)
+@@ -22,8 +22,7 @@
+ 
+     begin_atomic();
+     if(tsl(_locked))
+-        while(tsl(_locked))
+-            sleep(); // implicit end_atomic()
++        sleep(); // implicit end_atomic()
+     else
+         end_atomic();
+ }
+Index: src/abstraction/semaphore.cc
+===================================================================
+--- src/abstraction/semaphore.cc	(revisão 4537)
++++ src/abstraction/semaphore.cc	(cópia de trabalho)
+@@ -20,9 +20,12 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::p(this=" << this << ",value=" << _value << ")" << endl;
+ 
++    begin_atomic();
+     fdec(_value);
+-    while(_value < 0)
++    if(_value < 0)
+         sleep();
++    else
++        end_atomic();
+ }
+ 
+ 
+@@ -30,9 +33,12 @@
+ {
+     db<Synchronizer>(TRC) << "Semaphore::v(this=" << this << ",value=" << _value << ")" << endl;
+ 
++    begin_atomic();
+     finc(_value);
+     if(_value < 1)
+         wakeup();
++    else
++        end_atomic();
+ }
+ 
+ __END_SYS
+Index: src/abstraction/semaphore_test.cc
+===================================================================
+--- src/abstraction/semaphore_test.cc	(revisão 4537)
++++ src/abstraction/semaphore_test.cc	(cópia de trabalho)
+@@ -11,7 +11,7 @@
+ 
+ const int iterations = 10;
+ 
+-Mutex table;
++Semaphore table;
+ 
+ Thread * phil[5];
+ Semaphore * chopstick[5];
+@@ -25,10 +25,10 @@
+ 
+     for(int i = iterations; i > 0; i--) {
+ 
+-        table.lock();
++        table.p();
+         Display::position(l, c);
+         cout << "thinking";
+-        table.unlock();
++        table.v();
+ 
+         Delay thinking(2000000);
+ 
+@@ -35,10 +35,10 @@
+         chopstick[first]->p();   // get first chopstick
+         chopstick[second]->p();   // get second chopstick
+ 
+-        table.lock();
++        table.p();
+         Display::position(l, c);
+         cout << " eating ";
+-        table.unlock();
++        table.v();
+ 
+         Delay eating(1000000);
+ 
+@@ -46,10 +46,10 @@
+         chopstick[second]->v();   // release second chopstick
+     }
+ 
+-    table.lock();
++    table.p();
+     Display::position(l, c);
+     cout << "  done  ";
+-    table.unlock();
++    table.v();
+ 
+     return iterations;
+ }
+@@ -56,7 +56,7 @@
+ 
+ int main()
+ {
+-    table.lock();
++    table.p();
+     Display::clear();
+     Display::position(0, 0);
+     cout << "The Philosopher's Dinner:" << endl;
+@@ -69,7 +69,8 @@
+     phil[2] = new Thread(&philosopher, 2, 16, 39);
+     phil[3] = new Thread(&philosopher, 3, 16, 24);
+     phil[4] = new Thread(&philosopher, 4, 10, 20);
+-
++    
++    Delay thinking(1000000);
+     cout << "Philosophers are alive and hungry!" << endl;
+ 
+     Display::position(7, 44);
+@@ -85,14 +86,14 @@
+     Display::position(19, 0);
+ 
+     cout << "The dinner is served ..." << endl;
+-    table.unlock();
++    table.v();
+ 
+     for(int i = 0; i < 5; i++) {
+         int ret = phil[i]->join();
+-        table.lock();
++        table.p();
+         Display::position(20 + i, 0);
+         cout << "Philosopher " << i << " ate " << ret << " times " << endl;
+-        table.unlock();
++        table.v();
+     }
+ 
+     for(int i = 0; i < 5; i++)
+Index: src/abstraction/thread.cc
+===================================================================
+--- src/abstraction/thread.cc	(revisão 4537)
++++ src/abstraction/thread.cc	(cópia de trabalho)
+@@ -60,6 +60,9 @@
+ 
+     _ready.remove(this);
+     _suspended.remove(this);
++    if(_sync_queue != 0)
++        _sync_queue->remove(this);
++    wakeup_all(_joining);
+ 
+     unlock();
+ 
+@@ -73,9 +76,11 @@
+ 
+     db<Thread>(TRC) << "Thread::join(this=" << this << ",state=" << _state << ")" << endl;
+ 
+-    while(_state != FINISHING)
+-        yield(); // implicit unlock()
++    assert(this != _running);//não deve dar join em si mesma
+ 
++    if(_state != FINISHING)
++        sleep(_joining);
++
+     unlock();
+ 
+     return *reinterpret_cast<int *>(_stack);
+@@ -139,7 +144,71 @@
+    unlock();
+ }
+ 
++void Thread::sleep(Queue & queue_wait) {
++    assert(locked()); //Must be locked.
+ 
++    Thread * prev = running();//get the running thread
++    prev->_sync_queue = &queue_wait;//set the waiting queue of a synchronizer;
++    prev->_state = WAITING;//Change the running thread state
++    Queue::Element * runing_link = &prev->_link;//Get the queue element for the running one.
++    queue_wait.insert(runing_link);//Insert the running thread into the queue
++
++    //Now, must schedule another thread to run!
++    if(_ready.empty()) {    //Check if there is someone to be executed
++        idle();
++    } else {    //And if there is someone...
++        Thread * next = _ready.remove()->object();//Get the next thread
++        _running = next;//Run!
++        _running->_state = RUNNING;//Change the actual thread state
++        dispatch(prev, next);//Change the context in CPU
++    }
++
++    unlock();
++}
++
++void Thread::wakeup(Queue & queue_wait) {
++    assert(locked());
++
++    if(queue_wait.empty()){
++        //Should never happen
++        return;
++    }
++
++    Thread * woken = queue_wait.remove()->object();
++    woken->_state = READY;
++    woken->_sync_queue = 0;
++    _ready.insert(&woken->_link);
++
++    unlock();
++
++    //The ready queue was changed
++    if(preemptive)
++        reschedule();
++}
++
++void Thread::wakeup_all(Queue &queue_wait){
++    assert(locked());
++
++    if(queue_wait.empty()){
++        //Should never happen
++        return;
++    }
++
++    Thread * woken = 0;
++    while(!queue_wait.empty()){
++        woken = queue_wait.remove()->object();
++        woken->_state = READY;
++        woken->_sync_queue = 0;
++        _ready.insert(&woken->_link);
++    }
++
++    unlock();
++
++    //The ready queue was changed
++    if(preemptive)
++        reschedule();
++}
++
+ // Class methods
+ void Thread::yield()
+ {
+@@ -169,6 +238,13 @@
+ 
+     db<Thread>(TRC) << "Thread::exit(status=" << status << ") [running=" << running() << "]" << endl;
+ 
++    Thread * prev = _running;
++    prev->_state = FINISHING;
++    *reinterpret_cast<int *>(prev->_stack) = status;
++
++    wakeup_all(_running->_joining);// implicit unlock();
++    lock();
++
+     while(_ready.empty() && !_suspended.empty())
+         idle(); // implicit unlock();
+ 
+@@ -175,10 +251,6 @@
+     lock();
+ 
+     if(!_ready.empty()) {
+-        Thread * prev = _running;
+-        prev->_state = FINISHING;
+-        *reinterpret_cast<int *>(prev->_stack) = status;
+-
+         _running = _ready.remove()->object();
+         _running->_state = RUNNING;
+ 
