@@ -1,0 +1,55 @@
+/*Alguns sistemas operacionais utilizam um timer periódico ligado a um contador
+de ticks para lidar com o tempo de maneira suave através do sistema. A versão 
+didática do epos segue esta estrategia
+*/
+
+void Alarm::handler(void){
+    _elapsed++;
+    ...
+}
+
+/*Para implementar o conceito de evento temporizado, o EPOS usa uma fila de 
+eventos que é manipulada pela rotina de tratamento de interrupção do timer da
+seguinte maneira:
+*/
+
+void Alarm::handler(void){
+    static Tick next;
+    static Handler * handler;
+    
+    __elapsed++;
+    
+    if ( next ){
+        next--;//Decrementa o tempo para o proximo alarme
+    }else{//caso o alarme seja agora
+        if(handler){//Se ja tem tratador associado
+            handler();//Executa o tratador
+        }
+        //Procura o proximo alarme
+        if( _request.empty() ){//Request é a lista de threads que pediram alarme
+            handler = 0; //Null pro handler (é um ponteiro)
+        }else{
+            Queue::Element * e = _request.remove(); //Pega a prox. req. 
+            Alarm * alarm = e->object();//Tira do elemento de fila
+            next = alarm->_ticks;//Pega o tempo até o prox alarme
+            handler = alarm->_handler;//Atualiza o tratador para  o prox. alrm.
+            if( alarm->_times !=-1 ){//Verifica se tem que executar o alarme
+                alarm->_times--;//Diminui o numero de vezes que tem que alarmar
+            }
+            if( alarm->_times ){//Se x que tm q exec. >0
+                r->rank( alarm->_ticks );//Atualiza o rank na fila
+                _request.insert(e);//Insere na fila de novo
+            
+            }
+        }
+    }
+}
+/*para evitar a procura na fila de requests a cada tick, esta fila é ordenada
+e seus elementos são ranqueados relativamente a cada um (o rank de cada elemento
+é um deslocamento do anterior).
+O maior problema nesta implementação é que o handler indicado pelo usuario para
+ser invocado quando dado tempo seja atingido é executado no contexto do tra-
+tador de interrupções, comprometendo o timing do sistema.
+*/
+
+
