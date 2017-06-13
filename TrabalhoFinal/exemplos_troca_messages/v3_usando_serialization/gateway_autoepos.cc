@@ -59,6 +59,18 @@ public:
             cout << "   Mandando ACK!" << endl;
             _rsResp.setId(message->id());
             _nic->send(b->frame()->src(), p, Serialization::serialize(&_rsResp), _rsResp.size()+2);
+        }else if(message->type() == RegisterMessage::REGISTER_INT_PARAM_REQUEST){
+            cout << "   Type: RegisterIntParameterRequest" << endl;
+
+            RegisterIntParameterRequest * request = 
+                reinterpret_cast<RegisterIntParameterRequest*>(message);
+
+            cout << "   Name: " << request->paramName() << endl;
+            cout << "   min: " << request->min() << endl;
+            cout << "   max: " << request->max() << endl;
+            cout << "   Mandando ACK!" << endl;
+            _rpResp.setId(message->id());
+            _nic->send(b->frame()->src(), p, Serialization::serialize(&_rpResp), _rpResp.size()+2);
         }
         cout << endl;
 
@@ -70,6 +82,7 @@ public:
 private:
     RegisterResponse _rResp;
     RegisterServiceResponse _rsResp;
+    RegisterParamResponse _rpResp;
 
     Protocol _prot;
     NIC * _nic;
@@ -91,4 +104,31 @@ int main(){
     cout << "Gateway esta esperando requests e esta enviando responses!" << endl << endl;
 
     while(1);
+
+    /*
+    //Testes...
+    RegisterFloatParameterRequest req("Temperatura", 1.11, 5.55);
+    auto msg = Serialization::serialize(&req);
+    RegisterFloatParameterRequest *req2 = 
+        reinterpret_cast<RegisterFloatParameterRequest*>(Serialization::deserialize(msg));
+    while(1){
+        cout << "Req normal:" << endl;
+        cout << "   name: " << req.paramName() << endl;
+        cout << "   min: " << req.min() << endl;
+        cout << "   max: " << req.max() << endl;
+
+        cout << "Message serialized:" << endl;
+        for(int i=0; i<req.size(); i++)
+            cout << " " << hex << (unsigned char) msg[i];
+        cout << dec << endl;
+
+        cout << "Req deserialized:" << endl;
+        cout << "   name: " << req2->paramName() << endl;
+        cout << "   min: " << req2->min() << endl;
+        cout << "   max: " << req2->max() << endl;
+        cout << endl;
+
+        Machine::delay(7000000);
+    }
+    */
 }
