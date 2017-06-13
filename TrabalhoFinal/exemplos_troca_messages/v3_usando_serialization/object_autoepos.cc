@@ -30,7 +30,7 @@ public:
         cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
         for(int i=0; i<b->size(); i++)
             cout << " " << hex << (unsigned char) msg[i];
-        cout << endl;
+        cout << dec << endl;
 
         RegisterMessage * message = Serialization::deserialize(msg);
 
@@ -38,7 +38,7 @@ public:
             if(message->type() == RegisterMessage::REGISTER_RESPONSE){
                 cout << "   Type: RegisterResponse!" << endl;
                 RegisterResponse *resp = reinterpret_cast<RegisterResponse*>(message);
-                cout << "   SendData: " << resp->sendData() << endl << endl;
+                cout << "   SendData: " << resp->sendData() << endl;
 
                 if(resp->sendData()){
                     cout << "Mandando servico de configuracao..." << endl;
@@ -49,6 +49,14 @@ public:
                 }
             }else if(message->type() == RegisterMessage::REGISTER_SERVICE_RESPONSE){
                 cout << "   Type: RegisterServiceResponse!" << endl;
+
+                cout << "Mandando parametro temperatura [valor inteiro]..." << endl;
+                RegisterIntParameterRequest request("Temperatura", 15, 25);
+
+                auto msg = Serialization::serialize(&request);
+                _nic->send(b->frame()->src(), IEEE802_15_4::ELP, msg, request.size()+2);
+            }else if(message->type() == RegisterMessage::REGISTER_PARAM_RESPONSE){
+                cout << "   Type: RegisterParamResponse!" << endl;
             }
             cout << endl;
         }
@@ -91,7 +99,7 @@ int main(){
         cout << endl;
         nic->send(nic->broadcast(), IEEE802_15_4::ELP, msg, rr.size()+2);
 
-        Machine::delay(7000000);
+        Machine::delay(10000000);
         delete msg;
     }
 }
