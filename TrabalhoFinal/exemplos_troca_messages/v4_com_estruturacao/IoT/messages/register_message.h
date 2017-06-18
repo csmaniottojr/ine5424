@@ -23,8 +23,10 @@ public:
         REGISTER_SERVICE_RESPONSE       = 6,
         REGISTER_PARAMETER_REQUEST      = 7,
         REGISTER_PARAMETER_RESPONSE     = 8,
-        REGISTER_END_OBJECT_REQUEST     = 9,
-        REGISTER_END_OBJECT_RESPONSE    = 10
+        REGISTER_OPTION_REQUEST         = 9,
+        REGISTER_OPTION_RESPONSE        = 10,
+        REGISTER_END_OBJECT_REQUEST     = 11,
+        REGISTER_END_OBJECT_RESPONSE    = 12
     };
     static const Size BASE_SIZE = sizeof(Size) + sizeof(ID) + sizeof(Type);
     static const Size MAX_SIZE = 100;//TODO fazer o calculo direito
@@ -88,7 +90,10 @@ public:
 
     const char * getObjectName(){ return _object->getName(); }
     SmartObject* getObject(){ return _object; }
-    void setObject(SmartObject * object){ _object = object; }
+    void setObject(SmartObject * object){ 
+        _object = object;
+        setSizeAddedWithBaseSize(strlen(object->getName())); 
+    }
 };
 
 class RegisterObjectResponse : public RegisterMessage {
@@ -108,7 +113,10 @@ public:
 
     const char * getServiceName(){ return _service->getName(); }
     Service* getService(){ return _service; }
-    void setService(Service * service){ _service = service; }
+    void setService(Service * service){ 
+        _service = service; 
+        setSizeAddedWithBaseSize(strlen(service->getName()));
+    }
 };
 
 class RegisterServiceResponse : public RegisterMessage {
@@ -129,7 +137,10 @@ public:
     }
     
     Parameter* getParameter(){ return _parameter; }
-    void setParameter(Parameter * parameter){ _parameter = parameter; }
+    void setParameter(Parameter * parameter){ 
+        _parameter = parameter; 
+        updateSize();
+    }
 
     const char * getParameterName(){ return _parameter->getName(); }
     unsigned short getRegisterId(){ return _parameter->getRegisterId(); }
@@ -159,6 +170,28 @@ protected:
 public:
     RegisterParameterResponse()
     : RegisterMessage(RegisterMessage::REGISTER_PARAMETER_RESPONSE){}
+};
+
+class RegisterOptionRequest : public RegisterMessage {
+protected:
+    const char * _option;
+public:
+    RegisterOptionRequest(const char * option)
+    : RegisterMessage(strlen(option), RegisterMessage::REGISTER_OPTION_REQUEST),
+      _option(option) {}
+
+    const char * getOption(){ return _option; }
+    void setOption(const char * option){ 
+        _option = option; 
+        setSizeAddedWithBaseSize(strlen(option));
+    }
+};
+
+class RegisterOptionResponse : public RegisterMessage {
+protected:
+public:
+    RegisterOptionResponse()
+    : RegisterMessage(RegisterMessage::REGISTER_OPTION_RESPONSE){}
 };
 
 class RegisterEndObjectRequest : public RegisterMessage {

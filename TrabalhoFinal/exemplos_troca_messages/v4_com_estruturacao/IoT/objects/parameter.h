@@ -23,6 +23,7 @@ public:
     const char * getMinValue(){ return _type->getMinValue(); }
     const char * getMaxValue(){ return _type->getMaxValue(); }
     const char * getOptions(){ return _type->getOptions(); }
+    ParameterType * getParameterType(){ return _type; }
 };
 
 };

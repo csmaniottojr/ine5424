@@ -21,9 +21,15 @@ int main(){
     IoT::ParameterBoolean _led;
     IoT::Parameter led("Led", 1, &_led);
         atuacao.addParameter(&led);
+    IoT::ParameterCombo _combo;//soh pra testar...
+        _combo.addOption("Baixa");
+        _combo.addOption("Media");
+        _combo.addOption("Alta");
+    IoT::Parameter temperatura1("Temperatura", 2, &_combo);
+        atuacao.addParameter(&temperatura1);
     IoT::ParameterFloat _temp(1, 2);
-    IoT::Parameter temperatura("Temperatura", 2, &_temp);
-        sensores.addParameter(&temperatura);
+    IoT::Parameter temperatura2("Temperatura", 3, &_temp);
+        sensores.addParameter(&temperatura2);
     
     NIC * nic = new NIC();
     IoT::IotManager manager(IEEE802_15_4::ELP, nic, &object);
@@ -53,6 +59,6 @@ int main(){
         manager.run();
 
         cout << endl;//end print
-        Alarm::delay(7000000);
+        Alarm::delay(10000000);
     }
 }

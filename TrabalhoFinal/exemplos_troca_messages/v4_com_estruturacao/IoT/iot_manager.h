@@ -6,6 +6,9 @@
 #include "messages/serialization_register.h"
 #include "messages/register_message.h"
 
+#include "objects/parametertype.h"
+#include "objects/parameter_combo.h"
+
 using namespace EPOS;
 
 namespace IoT {
@@ -20,25 +23,25 @@ public:
 protected:
     SmartObject * _object;
     NIC *_nic;
+    OStream cout;
 
     Service_List_Element * _currentService;
     Parameter_List_Element * _currentParameter;
+    Option_List_Element * _currentOption;
 public:
     IotManager(const Protocol & p, NIC * nic, SmartObject * object)
-    : _object(object), _nic(nic), _currentService(0) {
+    : _object(object), _nic(nic), 
+      _currentService(0), _currentParameter(0), _currentOption(0) {
         _nic->attach(this, p);
     }
 
     void run(){
-        OStream cout;
         cout << "Mandando RegisterRequest via broadcast!" << endl;
         RegisterRequest request;
         sendRequest(&request, _nic->broadcast(), IEEE802_15_4::ELP);
     }
 
     void update(Observed * o, Protocol p, Buffer * b) {
-        OStream cout;
-        
         auto data = b->frame()->data<char>();
 
         cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
@@ -64,57 +67,33 @@ public:
                 }
             }else if(message->getType() == RegisterMessage::REGISTER_OBJECT_RESPONSE){
                 cout << "   Type: RegisterObjectResponse!" << endl;
+                
                 _currentService = _object->getServices()->head();
-
-                if(_currentService){
-                    cout << "Mandando servico: " << 
-                        _currentService->object()->getName() << "..." << endl;
-                    RegisterServiceRequest request(_currentService->object());
-                    sendRequest(&request, b->frame()->src(), p);
-                }
+                sendService(b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_SERVICE_RESPONSE){
                 cout << "   Type: RegisterServiceResponse!" << endl;
+                
                 _currentParameter = _currentService->object()->getParameters()->head();
-
-                if(_currentParameter){
-                    cout << "Mandando parametro: " << 
-                        _currentParameter->object()->getName() << "..." << endl;
-                    RegisterParameterRequest request(_currentParameter->object());
-                    sendRequest(&request, b->frame()->src(), p);
-                }
+                sendParameter(b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_PARAMETER_RESPONSE){
                 cout << "   Type: RegisterParameterResponse!" << endl;
-                //TODO checar e mandar combo
+
+                // Verifica se não eh um combo...
                 if(_currentParameter->object()->getType() == ParameterType::COMBO){
+                    ParameterType * type = _currentParameter->object()->getParameterType();
+                    ParameterCombo * combo = reinterpret_cast<ParameterCombo*>(type);
 
-                }
-                
-                _currentParameter = _currentParameter->next();
-
-                if(_currentParameter){
-                    cout << "Mandando parametro: " << 
-                        _currentParameter->object()->getName() << "..." << endl;
-                    RegisterParameterRequest request(_currentParameter->object());
-                    sendRequest(&request, b->frame()->src(), p);
+                    _currentOption = combo->getOptionsList()->head();
+                    sendOption(b->frame()->src(), p);
                 }else{
-                    cout << "Fim dos parametros do servico: " 
-                        << _currentService->object()->getName() << "..." << endl;
-
-                    _currentService = _currentService->next();
-                    if(_currentService){
-                        cout << "Mandando servico: " << 
-                            _currentService->object()->getName() << "..." << endl;                        
-                        RegisterServiceRequest request(_currentService->object());
-                        sendRequest(&request, b->frame()->src(), p);
-                    }else{
-                        cout << "Fim dos servicos do object: " 
-                            << _object->getName() << "..." << endl;
-                        cout << "Encerrando cadastro..." << endl;
-
-                        RegisterEndObjectRequest request;
-                        sendRequest(&request, b->frame()->src(), p);
-                    }
+                    _currentParameter = _currentParameter->next();
+                    sendParameter(b->frame()->src(), p);
                 }
+            }else if(message->getType() == RegisterMessage::REGISTER_OPTION_RESPONSE){
+                cout << "   Type: RegisterOptionResponse!" << endl;
+                
+                _currentOption = _currentOption->next();
+                sendOption(b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_END_OBJECT_RESPONSE){
                 cout << "   Type: RegisterEndObjectResponse!" << endl;
                 cout << "Fase de cadastro terminada! Aguardando comandos..." << endl;
@@ -131,6 +110,55 @@ protected:
         auto msg = SerializationRegister::serialize(request);
         _nic->send(dst, prot, msg, request->getSize()+2);
         delete msg;
+    }
+
+    void sendService(const Address & dst, const Protocol & p){
+        if(_currentService){
+            cout << "Mandando servico: " << 
+                _currentService->object()->getName() << "..." << endl;                        
+            
+            RegisterServiceRequest request(_currentService->object());
+            sendRequest(&request, dst, p);
+        }else{
+            cout << "Fim dos servicos do object: " 
+                << _object->getName() << "..." << endl;
+            cout << "Encerrando cadastro..." << endl;
+
+            RegisterEndObjectRequest request;
+            sendRequest(&request, dst, p);
+        }
+    }
+
+    void sendParameter(const Address & dst, const Protocol & p){
+        if(_currentParameter){
+            cout << "Mandando parametro: " << 
+                _currentParameter->object()->getName() << "..." << endl;
+            
+            RegisterParameterRequest request(_currentParameter->object());
+            sendRequest(&request, dst, p);
+        }else{
+            cout << "Fim dos parametros do servico: " 
+                << _currentService->object()->getName() << "..." << endl;
+
+            _currentService = _currentService->next();
+            sendService(dst, p);
+        }
+    }
+
+    void sendOption(const Address & dst, const Protocol & p){
+        if(_currentOption){
+            cout << "Mandando option: " 
+                << _currentOption->object() << "..." << endl;
+                
+            RegisterOptionRequest request(_currentOption->object());
+            sendRequest(&request, dst, p);
+        }else{
+            cout << "Fim das options do parametro: "
+                << _currentParameter->object()->getName() << "..." << endl;
+
+            _currentParameter = _currentParameter->next();
+            sendParameter(dst, p);
+        }
     }
 };
 

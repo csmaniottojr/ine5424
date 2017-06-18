@@ -21,6 +21,7 @@ public:
 protected:
     Protocol _prot;
     NIC *_nic;
+    OStream cout;
 
     SmartObject * _currentObj;
     Service * _currentService;
@@ -30,11 +31,8 @@ public:
     : _prot(p), _nic(nic), _currentObj(0), _currentService(0), _currentParameter(0) {
         _nic->attach(this, _prot);
     }
-
-    //TODO botar estados!!
+    
     void update(Observed * o, Protocol p, Buffer * b) {
-        OStream cout;
-        
         auto data = b->frame()->data<char>();
 
         cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
@@ -44,100 +42,113 @@ public:
 
         RegisterMessage * message = SerializationRegister::deserialize(data);
 
-        if(message->getType() == RegisterMessage::REGISTER_REQUEST){
-            cout << "   Type: RegisterRequest" << endl;
-            cout << "   Recebido do ID:";
-            for(unsigned int i = 0; i<RegisterMessage::ID_SIZE; i++)
-                cout << " " << hex << message->getId()[i];
+        cout << "msg id:";
+        for(int i=0; i<RegisterMessage::ID_SIZE; i++)
+            cout << " " << hex << (unsigned char) message->getId()[i];
+        cout << dec << endl;
+        if(_currentObj != 0){
+            cout << "object id:";
+            for(int i=0; i<RegisterMessage::ID_SIZE; i++)
+                cout << " " << hex << (unsigned char) _currentObj->getId()[i];
             cout << dec << endl;
+        }
 
-            //verifica no banco de dados
-            cout << "   Preparando ACK..." << endl;
+        if(_currentObj == 0 || 
+                memcmp(message->getId(), _currentObj->getId(), RegisterMessage::ID_SIZE) == 0){
+            if(message->getType() == RegisterMessage::REGISTER_REQUEST){
+                cout << "   Type: RegisterRequest" << endl;
+                cout << "   Recebido do ID:";
+                for(unsigned int i = 0; i<RegisterMessage::ID_SIZE; i++)
+                    cout << " " << hex << message->getId()[i];
+                cout << dec << endl;
 
-            RegisterResponse resp;
-            resp.setId(message->getId());
-            resp.setIsRegistered(false);
-            auto msg = SerializationRegister::serialize(&resp);
-            _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
-            delete msg;
+                //TODO verificar no banco de dados
 
-            cout << "   ACK mandado!" << endl;
-        }else if(message->getType() == RegisterMessage::REGISTER_OBJECT_REQUEST){
-            cout << "   Type: RegisterObjectRequest" << endl;
+                RegisterResponse resp;
+                resp.setId(message->getId());
+                resp.setIsRegistered(false);
+                sendRequest(&resp, b->frame()->src(), p);
+            }else if(message->getType() == RegisterMessage::REGISTER_OBJECT_REQUEST){
+                cout << "   Type: RegisterObjectRequest" << endl;
 
-            RegisterObjectRequest * request = reinterpret_cast<RegisterObjectRequest*>(message);
-            _currentObj = request->getObject();
+                RegisterObjectRequest * request = reinterpret_cast<RegisterObjectRequest*>(message);
+                _currentObj = request->getObject();
 
-            cout << "   Name: " << _currentObj->getName() << endl;
-            cout << "   Preparando ACK!" << endl;
+                cout << "   Name: " << _currentObj->getName() << endl;
 
-            RegisterObjectResponse resp;
-            resp.setId(message->getId());
-            auto msg = SerializationRegister::serialize(&resp);
-            _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
-            delete msg;
+                RegisterObjectResponse resp;
+                resp.setId(message->getId());
+                sendRequest(&resp, b->frame()->src(), p);
+            }else if(message->getType() == RegisterMessage::REGISTER_SERVICE_REQUEST){
+                cout << "   Type: RegisterServiceRequest" << endl;
 
-            cout << "   ACK mandado!" << endl;
-        }else if(message->getType() == RegisterMessage::REGISTER_SERVICE_REQUEST){
-            cout << "   Type: RegisterServiceRequest" << endl;
+                RegisterServiceRequest * request = reinterpret_cast<RegisterServiceRequest*>(message);
+                _currentService = request->getService();
+                _currentObj->addService(_currentService);
 
-            RegisterServiceRequest * request = reinterpret_cast<RegisterServiceRequest*>(message);
-            _currentService = request->getService();
-            _currentObj->addService(_currentService);
+                cout << "   Name: " << _currentService->getName() << endl;
 
-            cout << "   Name: " << _currentService->getName() << endl;
-            cout << "   Preparando ACK!" << endl;
+                RegisterServiceResponse resp;
+                resp.setId(message->getId());
+                sendRequest(&resp, b->frame()->src(), p);
+            }else if(message->getType() == RegisterMessage::REGISTER_PARAMETER_REQUEST){
+                cout << "   Type: RegisterParameterRequest" << endl;
 
-            RegisterServiceResponse resp;
-            resp.setId(message->getId());
-            auto msg = SerializationRegister::serialize(&resp);
-            _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
-            delete msg;
+                RegisterParameterRequest * request = 
+                    reinterpret_cast<RegisterParameterRequest*>(message);
+                _currentParameter = request->getParameter();
+                _currentService->addParameter(_currentParameter);
 
-            cout << "   ACK mandado!" << endl;
-        }else if(message->getType() == RegisterMessage::REGISTER_PARAMETER_REQUEST){
-            cout << "   Type: RegisterParameterRequest" << endl;
+                cout << "   Name: " << _currentParameter->getName() << endl;
 
-            RegisterParameterRequest * request = 
-                reinterpret_cast<RegisterParameterRequest*>(message);
-            _currentParameter = request->getParameter();
-            _currentService->addParameter(_currentParameter);
+                RegisterParameterResponse resp;
+                resp.setId(message->getId());
+                sendRequest(&resp, b->frame()->src(), p);
+            }else if(message->getType() == RegisterMessage::REGISTER_OPTION_REQUEST){
+                cout << "   Type: RegisterOptionRequest" << endl;
 
-            cout << "   Name: " << _currentParameter->getName() << endl;
-            cout << "   Preparando ACK!" << endl;
+                RegisterOptionRequest * request = 
+                    reinterpret_cast<RegisterOptionRequest*>(message);
+                
+                ParameterType * type = _currentParameter->getParameterType();
+                ParameterCombo * combo = reinterpret_cast<ParameterCombo*>(type);
+                combo->addOption(request->getOption());
 
-            RegisterParameterResponse resp;
-            resp.setId(message->getId());
-            auto msg = SerializationRegister::serialize(&resp);
-            _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
-            delete msg;
+                cout << "   Option: " << request->getOption() << endl;
 
-            cout << "   ACK mandado!" << endl;
-        }else if(message->getType() == RegisterMessage::REGISTER_END_OBJECT_REQUEST){
-            cout << "   Type: RegisterEndObjectRequest" << endl;
+                RegisterOptionResponse resp;
+                resp.setId(message->getId());
+                sendRequest(&resp, b->frame()->src(), p);
+            }else if(message->getType() == RegisterMessage::REGISTER_END_OBJECT_REQUEST){
+                cout << "   Type: RegisterEndObjectRequest" << endl;
 
-            // Manda pro banco de dados...
-            cout << "   Preparando ACK..." << endl;
+                //TODO Mandar pro banco de dados...
 
-            RegisterEndObjectResponse resp;
-            resp.setId(message->getId());
-            auto msg = SerializationRegister::serialize(&resp);
-            _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
-            delete msg;
+                RegisterEndObjectResponse resp;
+                resp.setId(message->getId());
+                sendRequest(&resp, b->frame()->src(), p);
 
-            cout << "   ACK mandado!" << endl;
-            cout << "Encerrada a fase de cadastro do object: "
-                << _currentObj->getName() << ". Esperando pelo proximo cadastro..." << endl;
-            
-            delete _currentObj; _currentObj = 0;
-            delete _currentService; _currentService = 0;
-            delete _currentParameter; _currentParameter = 0;
+                cout << "Encerrada a fase de cadastro do object: "
+                    << _currentObj->getName() << ". Esperando pelo proximo cadastro..." << endl;
+                
+                delete _currentObj; _currentObj = 0;
+                delete _currentService; _currentService = 0;
+                delete _currentParameter; _currentParameter = 0;
+            }
         }
         cout << endl;
 
         _nic->free(b);
         if(message != 0)
             delete message;
+    }
+
+protected:
+    void sendRequest(RegisterMessage * request, const Address & dst, const Protocol & prot){
+        auto msg = SerializationRegister::serialize(request);
+        _nic->send(dst, prot, msg, request->getSize()+2);
+        delete msg;
+        cout << "   ACK mandado!" << endl;
     }
 };
 

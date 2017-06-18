@@ -35,7 +35,7 @@ public:
     const char * getOptions(){ return _options; };
 };
 
-/*
+/* Exemplo de leitura do min e max [byte 0 tem o tamanho do valor]
     cout << "\nFloat values: " << endl;
     cout << temp.getType() << endl;
 
