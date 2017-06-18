@@ -1,0 +1,26 @@
+t|idid|T > //Envia para o gateway seu id, e o tipo da mensagem (Oi, fui conectado)
+t|idid|T < //Recebe do gateway o seu id (pra saber que é com ele a conversa) e o tipo da mensagem (Eu (já|não) te conheço)
+
+t|idid|T
+
+H == t|idid|T
+
+T=CadastroServico
+H|"Configurar"
+    T=CadastroParametro
+    H|"Temperatura"|FLOAT|MIN|MAX
+    H|"Velocidade"|OPTIONS
+        T=CadastroOptions
+        H|"baixo"
+        H|"medio"
+        H|"alto"
+        T=FimCadastroOption
+        H
+    T=FimCadastroParametro
+    H
+T=FimCadastroServico    
+H
+T=FIM
+H  
+    
+
