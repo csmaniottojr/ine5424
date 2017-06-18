@@ -77,6 +77,13 @@ public:
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_RESPONSE:{
                 break;
+            }case RegisterMessage::REGISTER_OPTION_REQUEST:{
+                RegisterOptionRequest * req = reinterpret_cast<RegisterOptionRequest*>(message);
+                auto option = req->getOption();
+                strncpy(&result[BASE_SIZE], option, strlen(option));
+                break;
+            }case RegisterMessage::REGISTER_OPTION_RESPONSE:{
+                break;
             }case RegisterMessage::REGISTER_END_OBJECT_REQUEST:{
                 break;
             }case RegisterMessage::REGISTER_END_OBJECT_RESPONSE:{
@@ -113,6 +120,7 @@ public:
                 memcpy(name, &msg[BASE_SIZE], length);
 
                 SmartObject * object = new SmartObject(name);
+                object->setId(id);
                 RegisterObjectRequest *req = new RegisterObjectRequest(object);
                 result = req;
                 break;
@@ -159,6 +167,10 @@ public:
 
                         parameterType = pFloat;
                         break;
+                    }case ParameterType::COMBO:{
+                        ParameterCombo * pCombo = new ParameterCombo();
+                        parameterType = pCombo;
+                        break;
                     }default: break;
                 };
                 unsigned char length = (size - i);
@@ -173,6 +185,20 @@ public:
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_RESPONSE:{
                 RegisterParameterResponse * res = new RegisterParameterResponse();
+                result = res;
+                break;
+            }case RegisterMessage::REGISTER_OPTION_REQUEST:{
+                unsigned char length = (size - BASE_SIZE);
+
+                char * option = new char[length+1];
+                memset(option, '\0', length+1);
+                memcpy(option, &msg[BASE_SIZE], length);
+
+                RegisterOptionRequest *req = new RegisterOptionRequest(option);
+                result = req;
+                break;
+            }case RegisterMessage::REGISTER_OPTION_RESPONSE:{
+                RegisterOptionResponse * res = new RegisterOptionResponse();
                 result = res;
                 break;
             }case RegisterMessage::REGISTER_END_OBJECT_REQUEST:{

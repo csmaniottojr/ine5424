@@ -32,6 +32,7 @@ public:
 
     /* Setters */
     void setName(const char * name){ _name = name; }
+    void setId(const unsigned char * id){ memcpy(_id, id, ID_SIZE); }
 
     /* 'Adders' */
     void addService(Service *service){

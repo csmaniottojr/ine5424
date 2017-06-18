@@ -20,7 +20,7 @@ int main(){
     while(1){
         eMoteIII::led::blink(0.1, 1);
 
-        Alarm::delay(7000000);
+        Alarm::delay(10000000);
     }
 
     
