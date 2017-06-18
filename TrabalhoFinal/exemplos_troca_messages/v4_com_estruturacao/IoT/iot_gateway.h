@@ -3,7 +3,7 @@
 
 #include <machine.h>
 #include <alarm.h>
-#include "messages/serialization.h"
+#include "messages/serialization_register.h"
 #include "messages/register_message.h"
 #include "objects/smartobject.h"
 
@@ -42,7 +42,7 @@ public:
             cout << " " << hex << (unsigned char) data[i];
         cout << dec << endl;
 
-        RegisterMessage * message = Serialization::deserialize(data);
+        RegisterMessage * message = SerializationRegister::deserialize(data);
 
         if(message->getType() == RegisterMessage::REGISTER_REQUEST){
             cout << "   Type: RegisterRequest" << endl;
@@ -57,7 +57,7 @@ public:
             RegisterResponse resp;
             resp.setId(message->getId());
             resp.setIsRegistered(false);
-            auto msg = Serialization::serialize(&resp);
+            auto msg = SerializationRegister::serialize(&resp);
             _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
             delete msg;
 
@@ -73,7 +73,7 @@ public:
 
             RegisterObjectResponse resp;
             resp.setId(message->getId());
-            auto msg = Serialization::serialize(&resp);
+            auto msg = SerializationRegister::serialize(&resp);
             _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
             delete msg;
 
@@ -90,7 +90,7 @@ public:
 
             RegisterServiceResponse resp;
             resp.setId(message->getId());
-            auto msg = Serialization::serialize(&resp);
+            auto msg = SerializationRegister::serialize(&resp);
             _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
             delete msg;
 
@@ -108,7 +108,7 @@ public:
 
             RegisterParameterResponse resp;
             resp.setId(message->getId());
-            auto msg = Serialization::serialize(&resp);
+            auto msg = SerializationRegister::serialize(&resp);
             _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
             delete msg;
 
@@ -121,7 +121,7 @@ public:
 
             RegisterEndObjectResponse resp;
             resp.setId(message->getId());
-            auto msg = Serialization::serialize(&resp);
+            auto msg = SerializationRegister::serialize(&resp);
             _nic->send(b->frame()->src(), p, msg, resp.getSize()+2);
             delete msg;
 

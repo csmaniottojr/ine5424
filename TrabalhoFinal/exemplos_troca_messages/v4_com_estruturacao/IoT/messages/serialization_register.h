@@ -1,5 +1,5 @@
-#ifndef serialization_h__
-#define serialization_h__
+#ifndef serialization_register_h__
+#define serialization_register_h__
 
 #include "../objects/smartobject.h"
 #include "../objects/parametertype.h"
@@ -12,7 +12,7 @@ using namespace EPOS;
 
 namespace IoT {
 
-class Serialization {
+class SerializationRegister {
 public:
     static const unsigned char BASE_SIZE = RegisterMessage::BASE_SIZE;
     static const unsigned char ID_SIZE = RegisterMessage::ID_SIZE;

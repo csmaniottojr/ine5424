@@ -8,10 +8,8 @@ namespace IoT {
 class ParameterCombo : public ParameterType {
 protected:
 public:
-    ParameterCombo(const char * options)
-    : ParameterType() {
-        _options = options;
-    }
+    ParameterCombo()
+    : ParameterType() {}
 
     /* Getters */
     ParameterType::Type getType(){ return ParameterType::COMBO; };

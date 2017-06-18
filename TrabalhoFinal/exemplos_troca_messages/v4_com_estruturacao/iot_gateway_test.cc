@@ -3,6 +3,7 @@
 #include <alarm.h>
 #include "IoT/iot_gateway.h"
 
+#include "IoT/messages/serialization_register.h"
 #include "IoT/objects/smartobject.h"
 #include "IoT/objects/parameter_float.h"
 
@@ -21,4 +22,66 @@ int main(){
 
         Alarm::delay(7000000);
     }
+
+    
+    
+    
+    
+    /* Testes...
+    
+    ParameterFloat _temp(1, 2);
+    Parameter temp("Temperatura", 2, &_temp);
+
+    RegisterParameterRequest req(&temp);
+    auto msg = SerializationRegister::serialize(&req);
+    RegisterParameterRequest *req2 = 
+        reinterpret_cast<RegisterParameterRequest*>(SerializationRegister::deserialize(msg));
+    while(1){
+        cout << "Req normal:" << endl;
+        cout << "   name: " << req.getParameterName() << endl;
+        cout << "   regId: " << req.getRegisterId() << endl;
+
+        const char * value = req.getMinValue();
+        cout << "   min: ";
+        for(int i = 1; i<=((unsigned char)value[0]); i++)
+            cout << hex << (unsigned char) value[i] << " ";
+        cout << dec;
+        cout << "/ " << (*((float*) &value[1])) << endl;
+
+        value = req.getMaxValue();
+        cout << "   max: ";
+        for(int i = 1; i<=((unsigned char)value[0]); i++)
+            cout << hex << (unsigned char) value[i] << " ";
+        cout << dec;
+        cout << "/ " << (*((float*) &value[1])) << endl << endl;
+
+        //===============================================
+
+        cout << "Message serialized [" << ((unsigned char) msg[0]) << "]:";
+        for(int i=0; i<((unsigned char) msg[0]); i++)
+            cout << " " << hex << (unsigned char) msg[i];
+        cout << dec << endl;
+
+        cout << "Req deserialized:" << endl;
+        cout << "   name: " << req2->getParameterName() << endl;
+        cout << "   regId: " << req2->getRegisterId() << endl;
+
+        value = req2->getMinValue();
+        cout << "   min: ";
+        for(int i = 1; i<=((unsigned char)value[0]); i++)
+            cout << hex << (unsigned char) value[i] << " ";
+        cout << dec;
+        cout << "/ " << (*((float*) &value[1])) << endl;
+
+        value = req2->getMaxValue();
+        cout << "   max: ";
+        for(int i = 1; i<=((unsigned char)value[0]); i++)
+            cout << hex << (unsigned char) value[i] << " ";
+        cout << dec;
+        cout << "/ " << (*((float*) &value[1])) << endl << endl;
+
+        cout << endl;
+
+        Alarm::delay(7000000);
+    }*/
 }

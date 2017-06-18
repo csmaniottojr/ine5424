@@ -3,7 +3,7 @@
 
 #include <machine.h>
 #include "objects/smartobject.h"
-#include "messages/serialization.h"
+#include "messages/serialization_register.h"
 #include "messages/register_message.h"
 
 using namespace EPOS;
@@ -46,7 +46,7 @@ public:
             cout << " " << hex << (unsigned char) data[i];
         cout << dec << endl;
 
-        RegisterMessage * message = Serialization::deserialize(data);
+        RegisterMessage * message = SerializationRegister::deserialize(data);
         if(memcmp(message->getId(), _object->getId(), RegisterMessage::ID_SIZE) == 0){
             if(message->getType() == RegisterMessage::REGISTER_RESPONSE){
                 cout << "   Type: RegisterResponse!" << endl;
@@ -86,7 +86,7 @@ public:
                 cout << "   Type: RegisterParameterResponse!" << endl;
                 //TODO checar e mandar combo
                 if(_currentParameter->object()->getType() == ParameterType::COMBO){
-                    
+
                 }
                 
                 _currentParameter = _currentParameter->next();
@@ -128,7 +128,7 @@ public:
     }
 protected:
     void sendRequest(RegisterMessage * request, const Address & dst, const Protocol & prot){
-        auto msg = Serialization::serialize(request);
+        auto msg = SerializationRegister::serialize(request);
         _nic->send(dst, prot, msg, request->getSize()+2);
         delete msg;
     }
