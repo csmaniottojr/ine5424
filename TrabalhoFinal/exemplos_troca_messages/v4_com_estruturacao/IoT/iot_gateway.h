@@ -143,6 +143,10 @@ public:
             delete message;
     }
 
+    void receive(const char * msg, int lenght){
+        cout << "Mensagem recebida do USB: " << msg << endl;
+    }   
+
 protected:
     void sendRequest(RegisterMessage * request, const Address & dst, const Protocol & prot){
         auto msg = SerializationRegister::serialize(request);
