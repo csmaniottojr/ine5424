@@ -4,6 +4,7 @@
 #include <modbus_ascii.h>
 #include <usb.h>
 #include "iot_gateway.h"
+#include "../cheats/led.h"
 
 using namespace EPOS;
 
@@ -27,7 +28,6 @@ public:
 				len = 0;
 				_msg[len++] = usb.get();
 				_msg[len++] = usb.get();
-                cout << "Lido: " << _msg << endl;
 				while(!((_msg[len-2] == '\r') 
                     && (_msg[len-1] == '\n'))) {
 					_msg[len++] = usb.get();
@@ -37,7 +37,6 @@ public:
 					}
 				}
 			}
-
             if(_gateway != 0){
                 char * msg = new char[len+1];
                 memset(msg, '\0', len+1);

@@ -17,18 +17,18 @@ OStream cout;
 int main(){
     NIC * nic = new NIC();
     IoT::IotGateway gateway(IEEE802_15_4::ELP, nic);
-
-    //TODO Ta com problema... quando inicia soh o Gateway e tu manda msg por python
-    // tudo funciona, mas caso o Object tambem esteja ativo o Gateway para
-    // de reconhecer as msgs vindas do codigo python...
-    Thread * thread = new Thread(&USBManager::run, &gateway);
-
     cout << "Inicializando o IoT Gateway..." << endl << endl;
-    while(1){
-        eMoteIII::led::blink(0.1, 1);
 
+    //PS: da problema quando ta esperando o USB::get e envia msg
+    // pelo cout, por isso tirei todos... isso provavelmente vai 
+    // da problema tb  quando tiver que retornar os dados dos 
+    // comandos por USB... ;x
+    Thread * thread = new Thread(&USBManager::run, &gateway);
+    while(1){
         Alarm::delay(10000000);
     }
+
+    // USBManager::run(&gateway);
 
     
     
