@@ -1,45 +1,282 @@
-make --print-directory APPLICATION=hydro_tstp_station clean1 all1; make --print-directory APPLICATION=hydro_hu_gateway clean1 all1; make --print-directory APPLICATION=producer_consumer clean1 all1; make --print-directory APPLICATION=testeID clean1 all1; make --print-directory APPLICATION=gateway_testbed clean1 all1; make --print-directory APPLICATION=lux_sensor clean1 all1; make --print-directory APPLICATION=temperature_sensor clean1 all1; make --print-directory APPLICATION=water_flow_sensor clean1 all1; make --print-directory APPLICATION=smart_plug clean1 all1; make --print-directory APPLICATION=pluviometer clean1 all1; make --print-directory APPLICATION=gateway_ssb clean1 all1; make --print-directory APPLICATION=flash_logger_test clean1 all1; make --print-directory APPLICATION=hello clean1 all1; make --print-directory APPLICATION=gateway_os2 clean1 all1; make --print-directory APPLICATION=tstp_sensor clean1 all1; make --print-directory APPLICATION=emote3_sleep_test clean1 all1; make --print-directory APPLICATION=emote3_radio clean1 all1; make --print-directory APPLICATION=emote3_sensors_test clean1 all1; make --print-directory APPLICATION=emote3_w400_test clean1 all1; make --print-directory APPLICATION=emote3_pwm_test clean1 all1; make --print-directory APPLICATION=emote3_gprs_uart_bypass clean1 all1; make --print-directory APPLICATION=emote3_gps_test clean1 all1; make --print-directory APPLICATION=emote3_mfrc522_test clean1 all1; make --print-directory APPLICATION=emote3_test clean1 all1; make --print-directory APPLICATION=emote3_gpio_interrupt_test clean1 all1; make --print-directory APPLICATION=emote3_gprs_tcp_test clean1 all1; make --print-directory APPLICATION=emote3_gprs_http_test clean1 all1; make --print-directory APPLICATION=emote3_spi_test clean1 all1; make --print-directory APPLICATION=led_blink clean1 all1; make --print-directory APPLICATION=outlet_b0 clean1 all1; make --print-directory APPLICATION=gateway_no_security clean1 all1; make --print-directory APPLICATION=outlet_b1 clean1 all1; make --print-directory APPLICATION=outlet_b9 clean1 all1; make --print-directory APPLICATION=lights_a4 clean1 all1; make --print-directory APPLICATION=lights_a6 clean1 all1; make --print-directory APPLICATION=lights_a5 clean1 all1; make --print-directory APPLICATION=outlet_b3 clean1 all1; make --print-directory APPLICATION=outlet_c0 clean1 all1; make --print-directory APPLICATION=power_meter_test clean1 all1; make --print-directory APPLICATION=presence_d0 clean1 all1; make --print-directory APPLICATION=outlet_bd clean1 all1; make --print-directory APPLICATION=lights_a7 clean1 all1; make --print-directory APPLICATION=lights_a0 clean1 all1; make --print-directory APPLICATION=lights_a3 clean1 all1; make --print-directory APPLICATION=lights_a2 clean1 all1; make --print-directory APPLICATION=outlet_c1 clean1 all1; make --print-directory APPLICATION=sensors_a2 clean1 all1; make --print-directory APPLICATION=outlet_b4 clean1 all1; make --print-directory APPLICATION=lights_a1 clean1 all1; make --print-directory APPLICATION=outlet_b8 clean1 all1; make --print-directory APPLICATION=sht11_test clean1 all1; make --print-directory APPLICATION=cm1101_test clean1 all1; make --print-directory APPLICATION=outlet_b2 clean1 all1; make --print-directory APPLICATION=gateway clean1 all1; make --print-directory APPLICATION=outlet_b5 clean1 all1; make --print-directory APPLICATION=outlet_bb clean1 all1; make --print-directory APPLICATION=luminosity_d5 clean1 all1; make --print-directory APPLICATION=outlet_bc clean1 all1; make --print-directory APPLICATION=outlet_b7 clean1 all1; make --print-directory APPLICATION=outlet_ba clean1 all1; make --print-directory APPLICATION=outlet_bf clean1 all1; make --print-directory APPLICATION=sensors_a3 clean1 all1; make --print-directory APPLICATION=lights_a8 clean1 all1; make --print-directory APPLICATION=temperature_da clean1 all1; make --print-directory APPLICATION=outlet_b6 clean1 all1; make --print-directory APPLICATION=outlet_be clean1 all1; make --print-directory APPLICATION=gpio_sensor clean1 all1; make --print-directory APPLICATION=sensor_os2 clean1 all1; make --print-directory APPLICATION=tstp_gateway clean1 all1; make --print-directory APPLICATION=ultrasonic_logger clean1 all1; make --print-directory APPLICATION=ultrasonic_distance_meter clean1 all1; make --print-directory APPLICATION=id_sender clean1 all1; make --print-directory APPLICATION=radioTeste clean1 all1; make --print-directory APPLICATION=hydro_tstp_gprs_gateway clean1 all1; make --print-directory APPLICATION=messages clean1 all1; make --print-directory APPLICATION=interface clean1 all1; make --print-directory APPLICATION=sensors clean1 all1; make --print-directory APPLICATION=sender clean1 all1; make --print-directory APPLICATION=flash clean1 all1; make --print-directory APPLICATION=id_commander clean1 all1; make --print-directory APPLICATION=emote3_nic_programmer clean1 all1; make --print-directory APPLICATION=emote3_bootloader clean1 all1; make --print-directory APPLICATION=hydro_station_app clean1 all1; make --print-directory APPLICATION=tst_sink clean1 all1; make --print-directory APPLICATION=tstp_mac_test clean1 all1; make --print-directory APPLICATION=USB clean1 all1; make --print-directory APPLICATION=concurrent_philosophers_dinner clean1 all1; make --print-directory APPLICATION=send_receive clean1 all1; make --print-directory APPLICATION=samsung_ac_sender clean1 all1; make --print-directory APPLICATION=outlet_b0 clean1 all1; make --print-directory APPLICATION=outlet_b1 clean1 all1; make --print-directory APPLICATION=lights_a0 clean1 all1; make --print-directory APPLICATION=lights_a2 clean1 all1; make --print-directory APPLICATION=lights_a1 clean1 all1; make --print-directory APPLICATION=gateway clean1 all1; make --print-directory APPLICATION=accontrol_a9 clean1 all1; make --print-directory APPLICATION=samsung_ac_receiver clean1 all1; make --print-directory APPLICATION=smart_door clean1 all1; make --print-directory APPLICATION=smart_plug clean1 all1; make --print-directory APPLICATION=hydrology_sender_with_flash clean1 all1; make --print-directory APPLICATION=hydrology_sender clean1 all1; make --print-directory APPLICATION=hydrology_logger clean1 all1; make --print-directory APPLICATION=hydrology_collector clean1 all1; make --print-directory APPLICATION=hydrology_flash_eraser clean1 all1; make --print-directory APPLICATION=adc_test clean1 all1;
-make[1]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal'
-(cd etc && make -i clean)
-make[2]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/etc'
-sed -e 's/^#define MODE.*$/#define MODE xxx/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define ARCH.*$/#define ARCH xxx/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define MACH.*$/#define MACH xxx/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define MMOD.*$/#define MMOD xxx/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define APPL.*$/#define APPL xxx/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define __mode_.*__$/#define __mode_xxx__/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define __arch_.*__$/#define __arch_xxx__/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define __mach_.*__$/#define __mach_xxx__/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-sed -e 's/^#define __mmod_.*__$/#define __mmod_xxx__/' -i /home/decker/Documents/SOII/TrabalhoFinal/include/system/config.h
-rm -f *.conf
-make[2]: Leaving directory '/home/decker/Documents/SOII/TrabalhoFinal/etc'
-(cd app && make -i clean)
-make[2]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/app'
-rm -f *.o hydro_tstp_station
-make[2]: Leaving directory '/home/decker/Documents/SOII/TrabalhoFinal/app'
-(cd img && make -i clean)
-make[2]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/img'
-rm -f  hydro_tstp_station
-make[2]: Leaving directory '/home/decker/Documents/SOII/TrabalhoFinal/img'
-(cd src && make -i clean)
-make[2]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src'
-make MAKE:="make -i clean" utility architecture machine component setup boot system init
-make[3]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src'
-(cd utility && make -i clean)
-make[4]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src/utility'
-rm -f *.o *_test
-make[4]: Leaving directory '/home/decker/Documents/SOII/TrabalhoFinal/src/utility'
-(cd architecture && make -i clean)
-make[4]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src/architecture'
-make MAKE:="make -i clean" armv7 ia32
-make[5]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src/architecture'
-(cd armv7 && make -i clean)
-make[6]: Entering directory '/home/decker/Documents/SOII/TrabalhoFinal/src/architecture/armv7'
-make[1]: *** [makefile:78: clean1] Terminated
-make[5]: *** wait: No child processes.  Stop.
-make[5]: *** Waiting for unfinished jobs....
-make[5]: *** wait: No child processes.  Stop.
-make[3]: [makefile:10: architecture] Terminated (ignored)
-make[4]: [makefile:17: clean] Error 2 (ignored)
-make[2]: [makefile:13: clean] Terminated (ignored)
-make: *** [makefile:9: all] Terminated
+make --print-directory all1
+make[1]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal'
+(cd etc && make --print-directory)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/etc'
+sed -e 's/^#define MODE.*$/#define MODE library/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define ARCH.*$/#define ARCH armv7/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH cortex/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define MMOD.*$/#define MMOD emote3/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define APPL.*$/#define APPL testeIoT/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define __mode_.*__$/#define __mode_library__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define __arch_.*__$/#define __arch_armv7__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define __mach_.*__$/#define __mach_cortex__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+sed -e 's/^#define __mmod_.*__$/#define __mmod_emote3__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/system/config.h
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/etc'
+(cd tools && make --print-directory)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools'
+(cd eposcc && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposcc'
+install -m 775 eposcc /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin
+sed -e 's/^EPOS=.*$/EPOS=\/home\/decker\/Documents\/SOII\/gitCesar\/ine5424\/TrabalhoFinal\/exemplos_troca_messages\/Standalone\/TrabalhoFinal/' -i /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin/eposcc
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposcc'
+(cd eposflash && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposflash'
+chmod +x eposflash-emote3 eposflash-zynq
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposflash'
+(cd eposiotgw && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposiotgw'
+chmod +x eposiotgw
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposiotgw'
+(cd eposmkbi && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposmkbi'
+install -m 775 eposmkbi /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/eposmkbi'
+(cd epossectst && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/epossectst'
+chmod +x eposbignumtst.py
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools/epossectst'
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/tools'
+(cd src && make --print-directory)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src'
+(cd utility && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/utility'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include aes.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a aes.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include bignum.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a bignum.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include elf.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a elf.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include heap.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a heap.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include malloc.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a malloc.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include ostream.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a ostream.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include poly1305.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a poly1305.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include random.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a random.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include srec.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a srec.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include string.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libutil_armv7.a string.o
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/utility'
+(cd architecture && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/architecture'
+(cd armv7 && make --print-directory)
+make[4]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/architecture/armv7'
+/usr/local/arm/gcc-4.4.4/bin/arm-gcc -E -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include armv7_crt0.S -o armv7_crt0.s
+/usr/local/arm/gcc-4.4.4/bin/arm-as -mcpu=cortex-m3 -mthumb -mfpu=fpa armv7_crt0.s -o armv7_crt0.o
+/usr/local/arm/gcc-4.4.4/bin/arm-gcc -ansi -c -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include armv7_crtbegin.c
+/usr/local/arm/gcc-4.4.4/bin/arm-gcc -ansi -c -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include armv7_crtend.c
+install armv7_crt0.o armv7_crtbegin.o armv7_crtend.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include cpu.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libarch_armv7.a cpu.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include mmu.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libarch_armv7.a mmu.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include pmu.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libarch_armv7.a pmu.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include tsc.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libarch_armv7.a tsc.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include cpu_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a cpu_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include mmu_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a mmu_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include pmu_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a pmu_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include tsc_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a tsc_init.o
+rm armv7_crt0.s
+make[4]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/architecture/armv7'
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/architecture'
+(cd machine && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine'
+(cd common && make --print-directory)
+make[4]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine/common'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include modbus_ascii.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a modbus_ascii.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include rtc_common.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a rtc_common.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include scratchpad_common.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a scratchpad_common.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include serial_display.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a serial_display.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include serial_keyboard.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a serial_keyboard.o
+make[4]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine/common'
+(cd cortex && make --print-directory)
+make[4]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine/cortex'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include cc2538.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a cc2538.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include gpio.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a gpio.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include hydro_board.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a hydro_board.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include ic.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a ic.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include m95.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a m95.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include machine.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a machine.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include persistent_storage.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a persistent_storage.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include rfid_reader.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a rfid_reader.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include sht11.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a sht11.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include smart_plug.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a smart_plug.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include timer.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a timer.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include usb.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libmach_armv7.a usb.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include cc2538_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a cc2538_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include emote3_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a emote3_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include hydro_board_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a hydro_board_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include ic_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a ic_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include lm3s811_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a lm3s811_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include m95_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a m95_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include machine_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a machine_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include nic_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a nic_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include persistent_storage_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a persistent_storage_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include smart_plug_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a smart_plug_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include timer_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a timer_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include usb_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a usb_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include zynq_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a zynq_init.o
+make[4]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine/cortex'
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/machine'
+(cd component && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/component'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include address_space.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a address_space.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include alarm.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a alarm.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include condition.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a condition.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include dhcp.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a dhcp.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include diffie_hellman.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a diffie_hellman.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include http.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a http.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include icmp.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a icmp.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include ip.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a ip.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include mutex.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a mutex.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include page_coloring.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a page_coloring.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include scheduling_criteria.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a scheduling_criteria.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include segment.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a segment.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include semaphore.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a semaphore.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include task.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a task.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include tcp.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a tcp.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include thread.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a thread.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include tstp.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a tstp.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include udp.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libsys_armv7.a udp.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include alarm_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a alarm_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include http_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a http_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include ip_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a ip_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include network_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a network_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include page_coloring_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a page_coloring_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include system_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a system_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include thread_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a thread_init.o
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include tstp_init.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ar rcs /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib/libinit_armv7.a tstp_init.o
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/component'
+(cd setup && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/setup'
+/usr/local/arm/gcc-4.4.4/bin/arm-gcc -E -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include -D emote3 cortex_setup.S -o cortex_setup.s
+sed -e 's/MEM_TOP/0x20007ff7/' -i cortex_setup.s
+/usr/local/arm/gcc-4.4.4/bin/arm-as -mcpu=cortex-m3 -mthumb -mfpu=fpa -o cortex_setup.o cortex_setup.s
+install cortex_setup.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/setup'
+(cd boot && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/boot'
+make[3]: Nothing to be done for 'all'.
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/boot'
+(cd system && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/system'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include system_scaffold.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include system_binding.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include application_scaffold.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-ld  -nostdlib -L/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib -Bstatic -i system_scaffold.o system_binding.o -o cortex_system.o
+install application_scaffold.o cortex_application.o
+install cortex_system.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+install cortex_application.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/system'
+(cd init && make --print-directory)
+make[3]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/init'
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include init_application.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include init_first.cc
+/usr/local/arm/gcc-4.4.4/bin/arm-g++ -c --no-exceptions --no-rtti --no-use-cxa-atexit -std=c++0x -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -O2 -nostdinc -Wall -Werror -fdata-sections -ffunction-sections -I/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include init_system.cc
+install init_first.o cortex_init_first.o
+install init_system.o cortex_init_system.o
+install init_application.o cortex_init_application.o
+install cortex_init_first.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+install cortex_init_system.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+install cortex_init_application.o /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/lib
+make[3]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/init'
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src'
+(cd app && make --print-directory)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app'
+/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin/eposcc -mcpu=cortex-m3 -mthumb -mno-thumb-interwork -mfpu=fpa -c -ansi -O2  -o testeIoT.o testeIoT.cc
+testeIoT.cc: In function 'int main()':
+testeIoT.cc:40: warning: deprecated conversion from string constant to 'char*'
+testeIoT.cc:40: warning: deprecated conversion from string constant to 'char*'
+testeIoT.cc:40: warning: deprecated conversion from string constant to 'char*'
+/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin/eposcc --library --gc-sections --omagic -o testeIoT testeIoT.o
+install testeIoT /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/img
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app'
+(cd img && make --print-directory)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/img'
+/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/bin/eposmkbi /home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal testeIoT.img testeIoT
+
+EPOS bootable image tool
+
+  EPOS mode: library
+  Machine: cortex
+  Model: emote3
+  Processor: armv7 (32 bits, little-endian)
+  Memory: 31 KBytes
+  Boot Length: 0 - 0 (min - max) KBytes
+  Node id: will get from the network
+  EPOS Image UUID: 0264d3e3f8d18906
+  Creating EPOS bootable image in "testeIoT.img":
+    Adding application "testeIoT": done.
+
+  Adding specific boot features of "cortex": done.
+
+  Image successfully generated (22256 bytes)!
+
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/img'
+make[1]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal'

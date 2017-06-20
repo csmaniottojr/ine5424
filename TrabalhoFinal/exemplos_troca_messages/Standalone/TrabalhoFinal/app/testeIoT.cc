@@ -1,17 +1,21 @@
 #include <utility/ostream.h>
+//REMOVE THIS AFTER DEBUG FOR GOD SAKE!
+#define DEBUG_BUILD
 #include "so2/objects.h"
 #include <gpio.h>
 #include <alarm.h>
 #include "cheats/led.h"
-#include "framework/main.h"
 
-//REMOVE THIS AFTER DEBUG FOR GOD SAKE!
-#define DEBUG_BUILD
+
+
 
 using namespace EPOS;
 
 
 EPOS::OStream cout;
+
+void * aHandler( void* ) {
+}
 
 int main( ) {
 
@@ -22,7 +26,7 @@ int main( ) {
     cout << "=====BOOL PARAMETER TEST!=====\n";
     EPOS::Alarm::delay( 2000000 );
     Parameter new_parameter
-            ( ( char* ) "ParTeste1", Parameter::Param_Type::BOOLEAN );
+            ( ( char* ) "ParTeste1", Parameter::Param_Type::BOOLEAN, aHandler );
 
     cout << "Created a parameter called " << new_parameter.name( ) << "\n";
     new_parameter.bool_data( true );
@@ -36,7 +40,7 @@ int main( ) {
     EPOS::Alarm::delay( 2000000 );
     //Testing combo insertion
     Parameter combo_parameter
-            ( ( char* ) "ParCombo", Parameter::Param_Type::COMBO );
+            ( ( char* ) "ParCombo", Parameter::Param_Type::COMBO, aHandler );
     char* combo_list[] = { "Ligado", "Desligado", "StandBy" };
     int combo_id[3];
     for ( int i = 0; i < 3; i++ ) {

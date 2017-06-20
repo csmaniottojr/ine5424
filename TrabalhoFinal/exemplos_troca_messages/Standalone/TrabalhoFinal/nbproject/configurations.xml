@@ -6,6 +6,93 @@
         <df name="cheats">
           <in>led.h</in>
         </df>
+        <df name="IoT">
+          <df name="objects">
+            <in>callback.h</in>
+            <in>parametized_callback.h</in>
+          </df>
+        </df>
+        <df name="so2">
+          <in>objects.h</in>
+        </df>
+        <in>callback_test.cc</in>
+        <in>testeIoT.cc</in>
+        <in>testeIoT_traits.h</in>
+      </df>
+      <df name="doc">
+        <df name="templates">
+          <df name="include">
+            <df name="architecture">
+              <df name="xxxx">
+                <in>cpu.h</in>
+                <in>mmu.h</in>
+                <in>traits.h</in>
+                <in>tsc.h</in>
+              </df>
+            </df>
+            <df name="machine">
+              <df name="yyyy">
+                <in>bus.h</in>
+                <in>config.h</in>
+                <in>display.h</in>
+                <in>eeprom.h</in>
+                <in>ic.h</in>
+                <in>info.h</in>
+                <in>machine.h</in>
+                <in>memory_map.h</in>
+                <in>rtc.h</in>
+                <in>scratchpad.h</in>
+                <in>timer.h</in>
+                <in>traits.h</in>
+                <in>uart.h</in>
+              </df>
+            </df>
+          </df>
+          <df name="src">
+            <df name="architecture">
+              <df name="xxxx">
+                <in>cpu.cc</in>
+                <in>cpu_init.cc</in>
+                <in>cpu_test.cc</in>
+                <in>ia32_crt1.S</in>
+                <in>ia32_crtbegin.S</in>
+                <in>ia32_crtend.S</in>
+                <in>ia32_crti.S</in>
+                <in>ia32_crtn.S</in>
+                <in>memchr.S</in>
+                <in>memcmp.S</in>
+                <in>memcpy.S</in>
+                <in>memset.S</in>
+                <in>mmu.cc</in>
+                <in>mmu_init.cc</in>
+                <in>strchr.S</in>
+                <in>strlen.S</in>
+              </df>
+            </df>
+            <df name="machine">
+              <df name="yyyy">
+                <in>bus.cc</in>
+                <in>bus_init.cc</in>
+                <in>bus_test.cc</in>
+                <in>display.cc</in>
+                <in>ic.cc</in>
+                <in>ic_init.cc</in>
+                <in>machine.cc</in>
+                <in>machine_init.cc</in>
+                <in>rtc.cc</in>
+                <in>rtc_test.cc</in>
+                <in>scratchpad_init.cc</in>
+                <in>timer.cc</in>
+                <in>timer_init.cc</in>
+                <in>timer_test.cc</in>
+                <in>uart.cc</in>
+                <in>uart_test.cc</in>
+              </df>
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="exemplos">
         <df name="CIPES">
           <in>ac_control.h</in>
           <in>cm1101_test.cc</in>
@@ -173,7 +260,6 @@
         <in>smart_plug.cc</in>
         <in>smart_plug_traits.h</in>
         <in>testeID.cc</in>
-        <in>testeIoT.cc</in>
         <in>tst_sink.cc</in>
         <in>tst_sink_traits.h</in>
         <in>tstp_gateway.cc</in>
@@ -182,79 +268,6 @@
         <in>tstp_mac_test_traits.h</in>
         <in>tstp_sensor.cc</in>
         <in>tstp_sensor_traits.h</in>
-      </df>
-      <df name="doc">
-        <df name="templates">
-          <df name="include">
-            <df name="architecture">
-              <df name="xxxx">
-                <in>cpu.h</in>
-                <in>mmu.h</in>
-                <in>traits.h</in>
-                <in>tsc.h</in>
-              </df>
-            </df>
-            <df name="machine">
-              <df name="yyyy">
-                <in>bus.h</in>
-                <in>config.h</in>
-                <in>display.h</in>
-                <in>eeprom.h</in>
-                <in>ic.h</in>
-                <in>info.h</in>
-                <in>machine.h</in>
-                <in>memory_map.h</in>
-                <in>rtc.h</in>
-                <in>scratchpad.h</in>
-                <in>timer.h</in>
-                <in>traits.h</in>
-                <in>uart.h</in>
-              </df>
-            </df>
-          </df>
-          <df name="src">
-            <df name="architecture">
-              <df name="xxxx">
-                <in>cpu.cc</in>
-                <in>cpu_init.cc</in>
-                <in>cpu_test.cc</in>
-                <in>ia32_crt1.S</in>
-                <in>ia32_crtbegin.S</in>
-                <in>ia32_crtend.S</in>
-                <in>ia32_crti.S</in>
-                <in>ia32_crtn.S</in>
-                <in>memchr.S</in>
-                <in>memcmp.S</in>
-                <in>memcpy.S</in>
-                <in>memset.S</in>
-                <in>mmu.cc</in>
-                <in>mmu_init.cc</in>
-                <in>strchr.S</in>
-                <in>strlen.S</in>
-              </df>
-            </df>
-            <df name="machine">
-              <df name="yyyy">
-                <in>bus.cc</in>
-                <in>bus_init.cc</in>
-                <in>bus_test.cc</in>
-                <in>display.cc</in>
-                <in>ic.cc</in>
-                <in>ic_init.cc</in>
-                <in>machine.cc</in>
-                <in>machine_init.cc</in>
-                <in>rtc.cc</in>
-                <in>rtc_test.cc</in>
-                <in>scratchpad_init.cc</in>
-                <in>timer.cc</in>
-                <in>timer_init.cc</in>
-                <in>timer_test.cc</in>
-                <in>uart.cc</in>
-                <in>uart_test.cc</in>
-              </df>
-            </df>
-          </df>
-        </df>
       </df>
       <df name="include">
         <df name="architecture">
@@ -288,9 +301,6 @@
           <in>proxy.h</in>
           <in>scenario.h</in>
           <in>stub.h</in>
-        </df>
-        <df name="iot">
-          <in>objects.h</in>
         </df>
         <df name="machine">
           <df name="common">
@@ -571,9 +581,6 @@
           <in>init_first.cc</in>
           <in>init_system.cc</in>
         </df>
-        <df name="iot">
-          <in>objects.cc</in>
-        </df>
         <df name="machine">
           <df name="common">
             <in>modbus_ascii.cc</in>
@@ -710,7 +717,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} APPLICATION=testeIoT </buildCommand>
+          <buildCommand>${MAKE} APPLICATION=callback_test</buildCommand>
           <cleanCommand>${MAKE} veryclean</cleanCommand>
           <executablePath></executablePath>
           <cTool>
@@ -719,7 +726,6 @@
             </incDir>
           </cTool>
           <ccTool>
-            <standard>8</standard>
             <incDir>
               <pElem>include</pElem>
             </incDir>
@@ -730,383 +736,22 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
-      <item path="app/CIPES/ac_control.h" ex="false" tool="3" flavor2="0">
+      <item path="app/IoT/objects/callback.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="app/CIPES/cm1101_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/gateway.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/gateway_no_security.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/home_thing.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a1.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a3.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a4.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a5.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a6.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a7.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/lights_a8.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/luminosity_d5.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b1.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b3.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b4.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b5.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b6.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b7.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b8.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_b9.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_ba.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_bb.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_bc.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_bd.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_be.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_bf.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_c0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/outlet_c1.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/power_meter_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/presence_d0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/sensors_a2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/sensors_a3.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/sht11_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/CIPES/temperature_da.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/Data/TestMessage.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/SSB/gateway_ssb.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/gateway_ssb_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/SSB/lux_sensor.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/lux_sensor_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/SSB/pluviometer.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/pluviometer_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/SSB/smart_plug.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/smart_plug_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/SSB/temperature_sensor.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/temperature_sensor_traits.h"
+      <item path="app/IoT/objects/parametized_callback.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
-      <item path="app/SSB/water_flow_sensor.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/SSB/water_flow_sensor_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/USB.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/USB_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/adc_test.cc" ex="false" tool="1" flavor2="0">
+      <item path="app/callback_test.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="app/cheats/led.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="app/concurrent_philosophers_dinner.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/concurrent_philosophers_dinner_traits.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_gpio_interrupt_test.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_gprs_http_test.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_gprs_tcp_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_gprs_uart_bypass.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_gps_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_mfrc522_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_pwm_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_radio.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_radio_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_sensors_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_sensors_test_traits.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_sleep_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_spi_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3/emote3_w400_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/emote3_bootloader_app/emote3_bootloader.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/emote3_bootloader_app/emote3_bootloader_traits.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/emote3_bootloader_app/emote3_nic_programmer.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/emote3_bootloader_app/emote3_nic_programmer_traits.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/flash_logger_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/gateway_os2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/gateway_os2_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/gateway_testbed.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/gateway_testbed_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/gpio_sensor.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/gpio_sensor_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hello.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro/hydrology_collector.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro/hydrology_flash_eraser.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/hydro/hydrology_logger.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro/hydrology_sender.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro/hydrology_sender_with_flash.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_hu_gateway.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_hu_gateway_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/LedSignal.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/defines.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/flash.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/index.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/interface.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/messages.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/sender.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/sensors.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/include/watchdog.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_station/src/flash.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station/src/interface.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station/src/messages.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station/src/sender.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station/src/sensors.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station_app.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_station_app_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/hydro_tstp_gprs_gateway.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_tstp_gprs_gateway_traits.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/hydro_tstp_station.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/hydro_tstp_station_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/id_commander.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/id_commander_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/id_sender.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/id_sender_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/led_blink.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/led_blink_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/producer_consumer.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/radioTeste.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/radioTeste_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/samsung_ac_message.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/samsung_ac_receiver.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/samsung_ac_sender.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/send_receive.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/sensor_os2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/sensor_os2_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/smart_door.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_door_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/smart_plug.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_plug_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/smart_room/accontrol_a9.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/gateway.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/home_thing.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/smart_room/lights_a0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/lights_a1.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/lights_a2.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/outlet_b0.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/smart_room/outlet_b1.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/testeID.cc" ex="false" tool="1" flavor2="0">
+      <item path="app/so2/objects.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="app/testeIoT.cc" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="app/tst_sink.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/tst_sink_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/tstp_gateway.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/tstp_gateway_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/tstp_mac_test.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/tstp_mac_test_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/tstp_sensor.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="app/tstp_sensor_traits.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/ultrasonic_sensor/sensor/ultrasonic_sensor_controller.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/ultrasonic_sensor/sensor/ultrasonic_sensor_hcsr04.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="app/ultrasonic_sensor/ultrasonic_distance_meter.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
-      </item>
-      <item path="app/ultrasonic_sensor/ultrasonic_logger.cc"
-            ex="false"
-            tool="1"
-            flavor2="0">
+      <item path="app/testeIoT_traits.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="doc/templates/include/architecture/xxxx/cpu.h"
             ex="false"
@@ -1353,6 +998,443 @@
             tool="1"
             flavor2="0">
       </item>
+      <item path="exemplos/CIPES/ac_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/cm1101_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/gateway.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/gateway_no_security.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/home_thing.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a1.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a3.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a4.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a5.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a6.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a7.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/lights_a8.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/luminosity_d5.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b1.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b3.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b4.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b5.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b6.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b7.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b8.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_b9.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_ba.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_bb.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_bc.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_bd.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_be.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_bf.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_c0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/outlet_c1.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/power_meter_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/presence_d0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/sensors_a2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/sensors_a3.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/sht11_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/CIPES/temperature_da.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/Data/TestMessage.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/gateway_ssb.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/gateway_ssb_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/lux_sensor.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/lux_sensor_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/pluviometer.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/pluviometer_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/smart_plug.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/smart_plug_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/temperature_sensor.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/temperature_sensor_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/SSB/water_flow_sensor.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/SSB/water_flow_sensor_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/USB.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/USB_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/adc_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/concurrent_philosophers_dinner.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/concurrent_philosophers_dinner_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_gpio_interrupt_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_gprs_http_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_gprs_tcp_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_gprs_uart_bypass.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_gps_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_mfrc522_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_pwm_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_radio.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_radio_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_sensors_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_sensors_test_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_sleep_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_spi_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/emote3/emote3_w400_test.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3_bootloader_app/emote3_bootloader.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3_bootloader_app/emote3_bootloader_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3_bootloader_app/emote3_nic_programmer.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/emote3_bootloader_app/emote3_nic_programmer_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/flash_logger_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/gateway_os2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/gateway_os2_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/gateway_testbed.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/gateway_testbed_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/gpio_sensor.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/gpio_sensor_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/hello.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro/hydrology_collector.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro/hydrology_flash_eraser.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro/hydrology_logger.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro/hydrology_sender.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro/hydrology_sender_with_flash.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_hu_gateway.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro_hu_gateway_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/LedSignal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/defines.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/flash.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/index.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/interface.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/messages.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/sender.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/sensors.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/include/watchdog.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/src/flash.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/src/interface.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/src/messages.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/src/sender.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station/src/sensors.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station_app.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro_station_app_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_tstp_gprs_gateway.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_tstp_gprs_gateway_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/hydro_tstp_station.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/hydro_tstp_station_traits.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/id_commander.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/id_commander_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/id_sender.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/id_sender_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/led_blink.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/led_blink_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/producer_consumer.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/radioTeste.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/radioTeste_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/samsung_ac_message.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/samsung_ac_receiver.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/samsung_ac_sender.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/send_receive.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/sensor_os2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/sensor_os2_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/smart_door.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_door_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/smart_plug.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_plug_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/accontrol_a9.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/gateway.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/home_thing.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/lights_a0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/lights_a1.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/lights_a2.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/outlet_b0.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/smart_room/outlet_b1.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/testeID.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/tst_sink.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/tst_sink_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_gateway.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_gateway_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_mac_test.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_mac_test_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_sensor.cc" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="exemplos/tstp_sensor_traits.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="exemplos/ultrasonic_sensor/sensor/ultrasonic_sensor_controller.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/ultrasonic_sensor/sensor/ultrasonic_sensor_hcsr04.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="exemplos/ultrasonic_sensor/ultrasonic_distance_meter.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="exemplos/ultrasonic_sensor/ultrasonic_logger.cc"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
       <item path="include/IoTManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/active.h" ex="false" tool="3" flavor2="0">
@@ -1455,8 +1537,6 @@
       <item path="include/icmp.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/ieee802_15_4.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="include/iot/objects.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/ip.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -2045,8 +2125,6 @@
       <item path="src/init/init_first.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/init/init_system.cc" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/iot/objects.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/machine/common/modbus_ascii.cc" ex="false" tool="1" flavor2="0">
       </item>

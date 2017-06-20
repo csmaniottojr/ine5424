@@ -11,7 +11,7 @@
 #define ARCH armv7
 #define MACH cortex
 #define MMOD emote3
-#define APPL testeIoT
+#define APPL callback_test
 #define __mode_library__
 #define __arch_armv7__
 #define __mach_cortex__

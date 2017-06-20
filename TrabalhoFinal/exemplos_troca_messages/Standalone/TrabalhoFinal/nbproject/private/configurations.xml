@@ -8,186 +8,42 @@
         <df name="cheats">
           <in>led.h</in>
         </df>
-        <df name="CIPES">
-          <in>ac_control.h</in>
-          <in>cm1101_test.cc</in>
-          <in>gateway.cc</in>
-          <in>gateway_no_security.cc</in>
-          <in>home_thing.h</in>
-          <in>lights_a0.cc</in>
-          <in>lights_a1.cc</in>
-          <in>lights_a2.cc</in>
-          <in>lights_a3.cc</in>
-          <in>lights_a4.cc</in>
-          <in>lights_a5.cc</in>
-          <in>lights_a6.cc</in>
-          <in>lights_a7.cc</in>
-          <in>lights_a8.cc</in>
-          <in>luminosity_d5.cc</in>
-          <in>outlet_b0.cc</in>
-          <in>outlet_b1.cc</in>
-          <in>outlet_b2.cc</in>
-          <in>outlet_b3.cc</in>
-          <in>outlet_b4.cc</in>
-          <in>outlet_b5.cc</in>
-          <in>outlet_b6.cc</in>
-          <in>outlet_b7.cc</in>
-          <in>outlet_b8.cc</in>
-          <in>outlet_b9.cc</in>
-          <in>outlet_ba.cc</in>
-          <in>outlet_bb.cc</in>
-          <in>outlet_bc.cc</in>
-          <in>outlet_bd.cc</in>
-          <in>outlet_be.cc</in>
-          <in>outlet_bf.cc</in>
-          <in>outlet_c0.cc</in>
-          <in>outlet_c1.cc</in>
-          <in>power_meter_test.cc</in>
-          <in>presence_d0.cc</in>
-          <in>sensors_a2.cc</in>
-          <in>sensors_a3.cc</in>
-          <in>sht11_test.cc</in>
-          <in>temperature_da.cc</in>
-        </df>
-        <df name="Data">
-          <in>TestMessage.h</in>
-        </df>
-        <df name="emote3">
-          <in>emote3_gpio_interrupt_test.cc</in>
-          <in>emote3_gprs_http_test.cc</in>
-          <in>emote3_gprs_tcp_test.cc</in>
-          <in>emote3_gprs_uart_bypass.cc</in>
-          <in>emote3_gps_test.cc</in>
-          <in>emote3_mfrc522_test.cc</in>
-          <in>emote3_pwm_test.cc</in>
-          <in>emote3_radio.cc</in>
-          <in>emote3_radio_traits.h</in>
-          <in>emote3_sensors_test.cc</in>
-          <in>emote3_sensors_test_traits.h</in>
-          <in>emote3_sleep_test.cc</in>
-          <in>emote3_spi_test.cc</in>
-          <in>emote3_test.cc</in>
-          <in>emote3_w400_test.cc</in>
-        </df>
-        <df name="emote3_bootloader_app">
-          <in>emote3_bootloader.cc</in>
-          <in>emote3_bootloader_traits.h</in>
-          <in>emote3_nic_programmer.cc</in>
-          <in>emote3_nic_programmer_traits.h</in>
-        </df>
-        <df name="hydro">
-          <in>hydrology_collector.cc</in>
-          <in>hydrology_flash_eraser.cc</in>
-          <in>hydrology_logger.cc</in>
-          <in>hydrology_sender.cc</in>
-          <in>hydrology_sender_with_flash.cc</in>
-        </df>
-        <df name="hydro_station">
-          <df name="include">
-            <in>LedSignal.h</in>
-            <in>defines.h</in>
-            <in>flash.h</in>
-            <in>index.h</in>
-            <in>interface.h</in>
-            <in>messages.h</in>
-            <in>sender.h</in>
-            <in>sensors.h</in>
-            <in>watchdog.h</in>
+        <df name="IoT">
+          <df name="messages">
+            <in>modbus_message.h</in>
+            <in>register_message.h</in>
+            <in>serialization_modbus.h</in>
+            <in>serialization_register.h</in>
           </df>
-          <df name="src">
-            <in>flash.cc</in>
-            <in>interface.cc</in>
-            <in>messages.cc</in>
-            <in>sender.cc</in>
-            <in>sensors.cc</in>
+          <df name="modbus">
+            <in>modbus.h</in>
           </df>
-        </df>
-        <df name="smart_room">
-          <in>accontrol_a9.cc</in>
-          <in>gateway.cc</in>
-          <in>home_thing.h</in>
-          <in>lights_a0.cc</in>
-          <in>lights_a1.cc</in>
-          <in>lights_a2.cc</in>
-          <in>outlet_b0.cc</in>
-          <in>outlet_b1.cc</in>
+          <df name="objects">
+            <in>callback.h</in>
+            <in>parameter.h</in>
+            <in>parameter_boolean.h</in>
+            <in>parameter_combo.h</in>
+            <in>parameter_float.h</in>
+            <in>parametertype.h</in>
+            <in>parametized_callback.h</in>
+            <in>service.h</in>
+            <in>smartobject.h</in>
+          </df>
+          <in>iot_gateway.h</in>
+          <in>iot_manager.h</in>
+          <in>usb_manager.h</in>
         </df>
         <df name="so2">
           <in>objects.h</in>
         </df>
-        <df name="SSB">
-          <in>gateway_ssb.cc</in>
-          <in>gateway_ssb_traits.h</in>
-          <in>lux_sensor.cc</in>
-          <in>lux_sensor_traits.h</in>
-          <in>pluviometer.cc</in>
-          <in>pluviometer_traits.h</in>
-          <in>smart_plug.cc</in>
-          <in>smart_plug_traits.h</in>
-          <in>temperature_sensor.cc</in>
-          <in>temperature_sensor_traits.h</in>
-          <in>water_flow_sensor.cc</in>
-          <in>water_flow_sensor_traits.h</in>
-        </df>
-        <df name="ultrasonic_sensor">
-          <df name="sensor">
-            <in>ultrasonic_sensor_controller.h</in>
-            <in>ultrasonic_sensor_hcsr04.h</in>
-          </df>
-          <in>ultrasonic_distance_meter.cc</in>
-          <in>ultrasonic_logger.cc</in>
-        </df>
-        <in>USB.cc</in>
-        <in>USB_traits.h</in>
-        <in>adc_test.cc</in>
-        <in>concurrent_philosophers_dinner.cc</in>
-        <in>concurrent_philosophers_dinner_traits.h</in>
-        <in>flash_logger_test.cc</in>
-        <in>gateway_os2.cc</in>
-        <in>gateway_os2_traits.h</in>
-        <in>gateway_testbed.cc</in>
-        <in>gateway_testbed_traits.h</in>
-        <in>gpio_sensor.cc</in>
-        <in>gpio_sensor_traits.h</in>
-        <in>hello.cc</in>
-        <in>hydro_hu_gateway.cc</in>
-        <in>hydro_hu_gateway_traits.h</in>
-        <in>hydro_station_app.cc</in>
-        <in>hydro_station_app_traits.h</in>
-        <in>hydro_tstp_gprs_gateway.cc</in>
-        <in>hydro_tstp_gprs_gateway_traits.h</in>
-        <in>hydro_tstp_station.cc</in>
-        <in>hydro_tstp_station_traits.h</in>
-        <in>id_commander.cc</in>
-        <in>id_commander_traits.h</in>
-        <in>id_sender.cc</in>
-        <in>id_sender_traits.h</in>
-        <in>led_blink.cc</in>
-        <in>led_blink_traits.h</in>
-        <in>producer_consumer.cc</in>
-        <in>radioTeste.cc</in>
-        <in>radioTeste_traits.h</in>
-        <in>samsung_ac_message.h</in>
-        <in>samsung_ac_receiver.cc</in>
-        <in>samsung_ac_sender.cc</in>
-        <in>send_receive.cc</in>
-        <in>sensor_os2.cc</in>
-        <in>sensor_os2_traits.h</in>
-        <in>smart_door.cc</in>
-        <in>smart_door_traits.h</in>
-        <in>smart_plug.cc</in>
-        <in>smart_plug_traits.h</in>
-        <in>testeID.cc</in>
+        <in>callback_test.cc</in>
+        <in>callback_test_traits.h</in>
+        <in>iot_gateway_test.cc</in>
+        <in>iot_gateway_test_traits.h</in>
+        <in>iot_test.cc</in>
+        <in>iot_test_traits.h</in>
         <in>testeIoT.cc</in>
         <in>testeIoT_traits.h</in>
-        <in>tst_sink.cc</in>
-        <in>tst_sink_traits.h</in>
-        <in>tstp_gateway.cc</in>
-        <in>tstp_gateway_traits.h</in>
-        <in>tstp_mac_test.cc</in>
-        <in>tstp_mac_test_traits.h</in>
-        <in>tstp_sensor.cc</in>
-        <in>tstp_sensor_traits.h</in>
       </df>
       <df name="bin">
       </df>
@@ -489,7 +345,6 @@
           <in>stub.h</in>
         </df>
         <df name="iot">
-          <in>objects.h</in>
         </df>
         <df name="machine">
           <df name="common">
@@ -771,9 +626,6 @@
           <in>init_application.cc</in>
           <in>init_first.cc</in>
           <in>init_system.cc</in>
-        </df>
-        <df name="iot">
-          <in>objects.cc</in>
         </df>
         <df name="machine">
           <df name="common">

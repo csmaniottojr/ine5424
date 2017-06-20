@@ -2,15 +2,15 @@
 #define OBJECTS_H
 #include <utility/list.h>
 #include <utility/string.h>
-
-//REMOVE THIS AFTER DEBUG FOR GOD SAKE!
-#define DEBUG_BUILD
-
+//DEBUG_________________________________________________________________________
 #ifdef DEBUG_BUILD
 #define DEBUG(x) debug << x << "\n"
 #else
 #define DEBUG(x) do {} while (0)
 #endif
+//DEBUG_________________________________________________________________________
+
+
 __BEGIN_SYS
 //==============================================================================
 //      Types   
@@ -89,8 +89,8 @@ public:
     };
     //Constructor
 
-    Parameter ( string name, Param_Type type )
-    : _name ( name ), _type ( type ) { }
+    Parameter ( string name, Param_Type type, void* ( *f )( void* ), bool ro = false )
+    : _name ( name ), _type ( type ), _handling_function ( f ), _ro ( ro ) { }
 
     //Get Parameter type
 
@@ -132,9 +132,12 @@ public:
     bool bool_data ( ) {
         return _bool_data;
     }
+    //Set bool format data
 
     void bool_data ( bool data ) {
-        _bool_data = data;
+        if ( !_ro && _type == Param_Type::BOOLEAN ) {
+            _bool_data = data;
+        }
     }
 
     //Get double format data
@@ -142,16 +145,40 @@ public:
     double double_data ( ) {
         return _double_data;
     }
+    //Set double format data
+
+    void double_data ( double data ) {
+        if ( !_ro && _type == Param_Type::DOUBLE ) {
+            _double_data = data;
+        }
+    }
 
     //Get combo_data[combo_number]
 
     string combo ( int combo_number ) {
+
         String_List_Element * x = this->_combo_values.head ( );
         for ( unsigned char i = 0; ( int ) i < combo_number; ( int ) i++ ) {
             x = x->next ( );
         }
-        return ( x->object ( ) );
+        return ( x->object ( ) ); //x tem object, acredite!
     }
+
+    //get current combo index value
+
+    int combo_index ( ) {
+
+        return _combo_index;
+    }
+    //Set current combo index
+
+    int combo_index ( int index ) {
+        if ( !_ro && _type == Param_Type::COMBO ) {
+            _combo_index = index;
+        }
+    }
+
+
 private:
 
     union
@@ -168,7 +195,8 @@ private:
     double _min; //Minimum for double parameters
     double _max; //Maximum for double parameters
     String_List _combo_values; //combo_values
-
+    bool _ro; //Read Only
+    void * ( *_handling_function )( void* );
 
 };
 #endif
