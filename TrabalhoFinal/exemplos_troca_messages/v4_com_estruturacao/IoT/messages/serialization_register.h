@@ -26,32 +26,66 @@ public:
         char * result = new char[length+1];
         memset(result, '\0', length+1);
 
+        // Formato das mensagens de Register:
+        // Bit 0           1        5          6        x   
+        //     +-----------+--------+----------+--- ~ --+
+        //     | msg size  | msg id | msg type |  data  |
+        //     +-----------+--------+----------+--- ~ --+
+        // PS: data se refere aos dados especificos de cada tipo de mensagem
+
         result[0] = message->getSize();
         memcpy(&result[1], message->getId(), ID_SIZE);
         result[ID_SIZE+1] = message->getType();
 
         switch(message->getType()){
             case RegisterMessage::REGISTER_REQUEST:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_RESPONSE:{
+                // Formato do data:
+                // Bit 0              1
+                //     +------ ~ -----+
+                //     | isRegistered |
+                //     +------ ~ -----+
                 RegisterResponse * res = reinterpret_cast<RegisterResponse*>(message);
                 result[BASE_SIZE] = res->isRegistered();
                 break;
             }case RegisterMessage::REGISTER_OBJECT_REQUEST:{
+                // Formato do data:
+                // Bit 0          x
+                //     +---- ~ ---+
+                //     | obj name |
+                //     +---- ~ ---+
+                // PS: x depende do tamanho do nome [strlen]
                 RegisterObjectRequest * req = reinterpret_cast<RegisterObjectRequest*>(message);
                 auto objectName = req->getObjectName();
                 strncpy(&result[BASE_SIZE], objectName, strlen(objectName));
                 break;
             }case RegisterMessage::REGISTER_OBJECT_RESPONSE:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_SERVICE_REQUEST:{
+                // Formato do data:
+                // Bit 0              x
+                //     +------ ~ -----+
+                //     | service name |
+                //     +------ ~ -----+
+                // PS: x depende do tamanho do nome [strlen]
                 RegisterServiceRequest * req = reinterpret_cast<RegisterServiceRequest*>(message);
                 auto serviceName = req->getServiceName();
                 strncpy(&result[BASE_SIZE], serviceName, strlen(serviceName));
                 break;
             }case RegisterMessage::REGISTER_SERVICE_RESPONSE:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_REQUEST:{
+                // Formato do data:
+                // Bit 0            1        3           x           y          z
+                //     +------------+--------+---- ~ ----+---- ~ ----+----- ~ ----+
+                //     | param type | reg id | min value | max value | param name |
+                //     +------------+--------+---- ~ ----+---- ~ ----+----- ~ ----+
+                // PS: x e y dependem do tipo do parametro [float=4, bool=1]
+                //     z depende do tamanho do nome [strlen]
                 RegisterParameterRequest * req = 
                     reinterpret_cast<RegisterParameterRequest*>(message);
 
@@ -76,17 +110,27 @@ public:
                 strncpy(&result[i], parameterName, strlen(parameterName));
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_RESPONSE:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_OPTION_REQUEST:{
+                // Formato do data:
+                // Bit 0        x
+                //     +--- ~ --+
+                //     | option |
+                //     +--- ~ --+
+                // PS: x depende do tamanho da option [strlen]
                 RegisterOptionRequest * req = reinterpret_cast<RegisterOptionRequest*>(message);
                 auto option = req->getOption();
                 strncpy(&result[BASE_SIZE], option, strlen(option));
                 break;
             }case RegisterMessage::REGISTER_OPTION_RESPONSE:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_END_OBJECT_REQUEST:{
+                // Não possui data
                 break;
             }case RegisterMessage::REGISTER_END_OBJECT_RESPONSE:{
+                // Não possui data
                 break;
             }default: break;
         }
