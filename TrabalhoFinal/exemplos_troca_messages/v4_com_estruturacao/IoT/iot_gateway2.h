@@ -6,7 +6,9 @@
 
 #include "../cheats/led.h"
 #include "messages/register_serialization.h"
+#include "messages/command_serialization.h"
 #include "messages/register_message.h"
+#include "messages/command_message.h"
 #include "objects/smartobject.h"
 
 using namespace EPOS;
@@ -34,24 +36,36 @@ public:
         auto data = b->frame()->data<char>();
 
         eMoteIII::led::blink(0.1, 1);
+        cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
+        for(int i=0; i<b->size(); i++)
+            cout << " " << hex << (unsigned char) data[i];
+        cout << dec << endl;
 
         switch(data[0]){
-            case ';': {//RegisterMessage
+            case RegisterMessage::START_CHAR: {
                 RegisterMessage * message = RegisterSerialization::simpleDeserialize(msg);
                 //Verifica se eh uma mensagem valida
-                if(message->getType() >= RegisterMessage::REGISTER_REQUEST &&
-                    message->getType() <= RegisterMessage::REGISTER_END_OBJECT_RESPONSE){
+                if(message->getType() >= RegisterMessage::FIRST_TYPE &&
+                    message->getType() <= RegisterMessage::LAST_TYPE){
                     //Envia a mensagem pra ser tratada no PC
                     USBManager::send(data, message->getSize());
                 }
                 delete message;
                 break;
-            }case ':': {//CommandMessage
-
+            }case CommandMessage::START_CHAR: {
+                CommandMessage * message = CommandSerialization::simpleDeserialize(msg);
+                //Verifica se eh uma mensagem valida
+                if(message->getType() >= CommandMessage::FIRST_TYPE &&
+                    message->getType() <= CommandMessage::LAST_TYPE){
+                    //Envia a mensagem pra ser tratada no PC
+                    USBManager::send(data, message->getSize());
+                }
+                delete message;
                 break;
             }default: break;
         }
 
+        cout << endl;
         _nic->free(b);
     }
 
@@ -59,18 +73,25 @@ public:
         cout << "Mensagem recebida do USB: " << msg << endl;
 
         switch(msg[0]){
-            case ';':{//RegisterMessage
+            case RegisterMessage::START_CHAR:{
                 RegisterMessage * message = RegisterSerialization::simpleDeserialize(msg);
                 //Verifica se eh uma mensagem valida
-                if(message->getType() >= RegisterMessage::REGISTER_REQUEST &&
-                    message->getType() <= RegisterMessage::REGISTER_END_OBJECT_RESPONSE){
+                if(message->getType() >= RegisterMessage::FIRST_TYPE &&
+                    message->getType() <= RegisterMessage::LAST_TYPE){
                     //Envia a mensagem por broadcast para ser interpretada pelo object
                     _nic->send(_nic->broadcast(), prot, msg, message->getSize()+2);
                 }
                 delete message;
                 break;
-            }case ':':{//CommandMessage
-
+            }case CommandMessage::START_CHAR:{
+                CommandMessage * message = CommandSerialization::simpleDeserialize(msg);
+                //Verifica se eh uma mensagem valida
+                if(message->getType() >= CommandMessage::FIRST_TYPE &&
+                    message->getType() <= CommandMessage::LAST_TYPE){
+                    //Envia a mensagem por broadcast para ser interpretada pelo object
+                    _nic->send(_nic->broadcast(), prot, msg, message->getSize()+2);
+                }
+                delete message;
                 break;
             }default: break;
         }

@@ -17,14 +17,16 @@ using namespace IoT;
 OStream cout;
 
 int main(){
-    /*NIC * nic = new NIC();
+    NIC * nic = new NIC();
     IoT::IotGateway gateway(IEEE802_15_4::ELP, nic);
     cout << "Inicializando o IoT Gateway..." << endl << endl;
 
     Thread * thread = new Thread(&USBManager::run, &gateway);
     while(1){
         Alarm::delay(10000000);
-    }*/
+    }
+
+    /* Testes ...
 
     // Converte o dado pra Data*
     float value = 15.00;
@@ -64,4 +66,6 @@ int main(){
 
         Alarm::delay(10000000);
     }
+
+    */
 }

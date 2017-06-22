@@ -14,7 +14,9 @@ public:
     typedef unsigned char Type;
     enum {
         UNKNOWN_MESSAGE                 = 0,
-        REGISTER_REQUEST                = 1,
+        FIRST_TYPE                      = 1,
+
+        REGISTER_REQUEST                = FIRST_TYPE,
         REGISTER_RESPONSE               = 2,
         REGISTER_OBJECT_REQUEST         = 3,
         REGISTER_OBJECT_RESPONSE        = 4,
@@ -25,7 +27,9 @@ public:
         REGISTER_OPTION_REQUEST         = 9,
         REGISTER_OPTION_RESPONSE        = 10,
         REGISTER_END_OBJECT_REQUEST     = 11,
-        REGISTER_END_OBJECT_RESPONSE    = 12
+        REGISTER_END_OBJECT_RESPONSE    = 12,
+
+        LAST_TYPE                       = REGISTER_END_OBJECT_RESPONSE
     };
     static const char START_CHAR = ';';
     static const Size BASE_SIZE = sizeof(Size) + sizeof(ID) + sizeof(Type);

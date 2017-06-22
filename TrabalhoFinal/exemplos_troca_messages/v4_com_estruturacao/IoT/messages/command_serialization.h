@@ -28,7 +28,11 @@ public:
         char * result = new char[length+1];
         memset(result, '\0', length+1);
 
-        //  | start char | msg size | SO id | msg type | reg id | data | 
+        // Formato das mensagens de Register:
+        // Bit 0            1          2       6          7        x   
+        //     +------------+----------+-------+----------+--- ~ --+
+        //     | START_CHAR | msg size | SO id | msg type |  data  |
+        //     +------------+----------+-------+----------+--- ~ --+
 
         result[index++] = CommandMessage::START_CHAR;
 
@@ -53,12 +57,13 @@ public:
     }
 
     static CommandMessage* deserialize(const char * msg){
-        CommandMessage *result = new CommandMessage();
+        CommandMessage *result = 0; 
 
         if(msg[0] != CommandMessage::START_CHAR){
             return result;
         }
 
+        result = new CommandMessage();
         msg = &msg[1];//ignora o START_CHAR
         Size index = 0;
 
@@ -82,6 +87,34 @@ public:
             auto data = ((CommandMessage::Data*) &msg[index]);
             result->setData(data, length);
         }
+        return result;
+    }
+
+    /**
+     * Deserializa apenas as informações basicas de uma mensagem
+     * (size, id e type).
+     */
+    static CommandMessage* simpleDeserialize(const char * msg){
+        CommandMessage *result = 0; 
+
+        if(msg[0] != CommandMessage::START_CHAR){
+            return result;
+        }
+
+        result = new CommandMessage();
+        msg = &msg[1];//ignora o START_CHAR
+        Size index = 0;
+
+        Size size = (Size) msg[index++];
+        result->setSize(size);
+
+        ID id = *((ID*) &msg[index]);
+        result->setId(id);
+        index += sizeof(ID);
+
+        Type type = (Type) msg[index++];
+        result->setType(type);
+
         return result;
     }
 };

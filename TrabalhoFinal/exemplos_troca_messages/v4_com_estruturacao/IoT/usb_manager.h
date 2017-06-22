@@ -1,9 +1,8 @@
 #ifndef usb_manager_h__
 #define usb_manager_h__
 
-#include <modbus_ascii.h>
-// #include <usb.h>
-#include <uart.h>
+#include <ieee802_15_4.h>
+#include <usb.h>
 #include "iot_gateway.h"
 #include "../cheats/led.h"
 
@@ -13,15 +12,16 @@ namespace IoT {
 
 class USBManager {
 protected:
+    static const unsigned int MAX_LENGHT = IEEE802_15_4::Frame::MTU;
 public:
     static int run(IotGateway * _gateway){
         OStream cout;
-        char _msg[Modbus_ASCII::MSG_LEN];
-        memset(_msg, '\0', Modbus_ASCII::MSG_LEN);
+        char _msg[MAX_LENGHT];
+
         while(true){
             int len;
 			bool ok_message = false;
-            memset(_msg, '\0', Modbus_ASCII::MSG_LEN);
+            memset(_msg, '\0', MAX_LENGHT);
 			while(!ok_message) {
 				ok_message = true;
 				len = 0;
@@ -30,7 +30,7 @@ public:
                 while(!((_msg[len-2] == '\r') 
                     && (_msg[len-1] == '\n'))) {
 					_msg[len++] = USB::get();
-					if(len >= Modbus_ASCII::MSG_LEN) {
+					if(len > MAX_LENGHT) {
 						ok_message = false;
 						break;
 					}

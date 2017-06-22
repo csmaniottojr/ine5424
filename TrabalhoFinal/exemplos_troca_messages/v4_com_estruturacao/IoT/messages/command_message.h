@@ -12,10 +12,14 @@ public:
     typedef unsigned char Type;
     enum {
         UNKNOWN_MESSAGE                 = 0,
-        COMMAND_READ_REQUEST            = 1,
+        FIRST_TYPE                      = 1,
+
+        COMMAND_READ_REQUEST            = FIRST_TYPE,
         COMMAND_READ_RESPONSE           = 2,
         COMMAND_WRITE_REQUEST           = 3,
-        COMMAND_WRITE_RESPONSE          = 4
+        COMMAND_WRITE_RESPONSE          = 4,
+
+        LAST_TYPE                       = COMMAND_WRITE_RESPONSE
     };
     typedef Parameter::RegisterIdValue RegisterIdValue;
     typedef unsigned char Data;
