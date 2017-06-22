@@ -33,15 +33,14 @@
           <in>iot_manager.h</in>
           <in>usb_manager.h</in>
         </df>
-        <df name="so2">
-          <in>objects.h</in>
-        </df>
         <in>callback_test.cc</in>
         <in>callback_test_traits.h</in>
         <in>iot_gateway_test.cc</in>
         <in>iot_gateway_test_traits.h</in>
         <in>iot_test.cc</in>
         <in>iot_test_traits.h</in>
+        <in>parameter_test.cc</in>
+        <in>parameter_test_traits.h</in>
         <in>testeIoT.cc</in>
         <in>testeIoT_traits.h</in>
       </df>

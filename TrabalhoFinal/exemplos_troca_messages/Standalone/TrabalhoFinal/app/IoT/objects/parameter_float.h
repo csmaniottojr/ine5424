@@ -1,34 +1,39 @@
 #ifndef parameter_float_h__
 #define parameter_float_h__
 
+#include "callback.h"
+#include "parametertype.h"
+
+
 using namespace EPOS;
 
 namespace IoT {
 
-    class ParameterFloat : public ParameterType
+    class Parameter_Float : public Parameter_Type
     {
     public:
         static const unsigned char VALUE_SIZE = sizeof (float );
-    protected:
+    private:
+        float * _data;
 
     public:
 
-        ParameterFloat ( )
-        : ParameterType ( ) { }
-
-        ParameterFloat ( float min, float max )
-        : ParameterType ( ) {
-            setMinValue ( min );
-            setMaxValue ( max );
+        Parameter_Float ( )
+        : Parameter_Type ( ) {
+            this->_type = FLOAT;
+            this->_update = new Callback ( ); //Does nothing!
         }
 
-        /* Getters */
-        ParameterType::Type getType ( ) {
-            return ParameterType::FLOAT;
-        };
+        Parameter_Float ( Callback * update ,  float * data, float max_, float min_ )
+        : Parameter_Type ( ) , _data ( data ) {
+            min ( min_ );
+            max ( max_ );
+            this-> _update  = ( update );
+            this->_type = FLOAT;
+        }
 
         /* Setters */
-        void setMinValue ( float min ) {
+        void min ( float min ) {
             if ( _min != 0 )
                 delete _min;
 
@@ -40,7 +45,7 @@ namespace IoT {
             _min = value;
         }
 
-        void setMaxValue ( float max ) {
+        void max ( float max ) {
             if ( _max != 0 )
                 delete _max;
 
@@ -50,7 +55,15 @@ namespace IoT {
             value[0] = VALUE_SIZE;
             ( ( float* ) &value[1] )[0] = max;
             _max = value;
-        };
+        }
+
+        void update ( float  data ) {
+            *_data = data;
+            _update->operator () ( );
+
+
+        }
+
     } ;
 
 };

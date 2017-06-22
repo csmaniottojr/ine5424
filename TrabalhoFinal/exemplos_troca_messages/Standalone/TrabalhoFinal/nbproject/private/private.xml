@@ -10,11 +10,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/messages/register_message.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_boolean.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_float.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parametertype.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_combo.h</file>
             <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/callback.h</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/iot_gateway.h</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/callback_test.cc</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parametized_callback.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/parameter_test.cc</file>
         </group>
     </open-files>
 </project-private>

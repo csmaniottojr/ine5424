@@ -31,7 +31,7 @@ __BEGIN_SYS
         UNSIGNED_FLOAT = 6,
         UNSIGNED_CHAR = 7,
         CHAR = 8
-    };
+    } ;
 
     class IoT_Manager
     {
@@ -40,13 +40,13 @@ __BEGIN_SYS
         IoTList _elements;
     public:
 
-        IoT_Manager () { }
+        IoT_Manager ( ) { }
 
-        void addElement (IoT_Service & newElement);
-        void removeElement (IoT_Service & removalElement);
+        void add_element ( IoT_Service & newElement );
+        void remove_element ( IoT_Service & removalElement );
 
 
-    };
+    } ;
 };
 __END_SYS
 #endif /* IOTMANAGER_H */
@@ -75,12 +75,12 @@ __BEGIN_SYS
     {
     public:
 
-        IoT_Service () { }
+        IoT_Service ( ) { }
 
     protected:
 
         char * _description; //Element description (to be sent to IoT server)
-    };
+    } ;
 }
 
 __END_SYS
@@ -101,7 +101,7 @@ __BEGIN_SYS
         unsigned char _id;
         char* _nome;
         data_type _data_type;
-    };
+    } ;
 };
 __END_SYS
 #endif //IOTPARAMETER_H

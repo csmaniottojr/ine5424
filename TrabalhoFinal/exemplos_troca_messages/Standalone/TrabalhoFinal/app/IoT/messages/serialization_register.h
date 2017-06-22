@@ -119,8 +119,8 @@ public:
                 memset(name, '\0', length+1);
                 memcpy(name, &msg[BASE_SIZE], length);
 
-                SmartObject * object = new SmartObject(name);
-                object->setId(id);
+                Smart_Object * object = new Smart_Object(name);
+                object->id(id);
                 RegisterObjectRequest *req = new RegisterObjectRequest(object);
                 result = req;
                 break;
@@ -145,29 +145,29 @@ public:
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_REQUEST:{
                 int i = BASE_SIZE;
-                ParameterType::Type pType = (ParameterType::Type) msg[i];
+                Parameter_Type::Type pType = (Parameter_Type::Type) msg[i];
                 i += 1;
                 unsigned short registerId = *((unsigned short*) &msg[i]);
                 i += 2;
 
-                ParameterType * parameterType = 0;
+                Parameter_Type * parameterType = 0;
                 switch(pType){
-                    case ParameterType::BOOLEAN:{
-                        ParameterBoolean * pBool = new ParameterBoolean();
+                    case Parameter_Type::BOOLEAN:{
+                        Parameter_Boolean * pBool = new Parameter_Boolean();
                         i += 2;
                         parameterType = pBool;
                         break;
-                    }case ParameterType::FLOAT:{
-                        ParameterFloat * pFloat = new ParameterFloat();
+                    }case Parameter_Type::FLOAT:{
+                        Parameter_Float * pFloat = new Parameter_Float();
 
                         pFloat->setMinValue( *((float*) &msg[i]) );
-                        i += ParameterFloat::VALUE_SIZE;
-                        pFloat->setMaxValue( *((float*) &msg[i]) );
-                        i += ParameterFloat::VALUE_SIZE;
+                        i += Parameter_Float::VALUE_SIZE;
+                        pFloat->max( *((float*) &msg[i]) );
+                        i += Parameter_Float::VALUE_SIZE;
 
                         parameterType = pFloat;
                         break;
-                    }case ParameterType::COMBO:{
+                    }case Parameter_Type::COMBO:{
                         ParameterCombo * pCombo = new ParameterCombo();
                         parameterType = pCombo;
                         break;

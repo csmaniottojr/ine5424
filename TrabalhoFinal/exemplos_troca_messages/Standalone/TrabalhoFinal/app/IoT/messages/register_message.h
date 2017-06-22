@@ -11,7 +11,7 @@ namespace IoT {
     {
     public:
         typedef unsigned char Size;
-        static const Size ID_SIZE = SmartObject::ID_SIZE;
+        static const Size ID_SIZE = Smart_Object::ID_SIZE;
         typedef unsigned char ID[ID_SIZE];
         typedef unsigned char Type;
 
@@ -116,24 +116,24 @@ namespace IoT {
     class RegisterObjectRequest : public RegisterMessage
     {
     protected:
-        SmartObject * _object;
+        Smart_Object * _object;
     public:
 
-        RegisterObjectRequest ( SmartObject * object )
-        : RegisterMessage ( strlen ( object->getName ( ) ), RegisterMessage::REGISTER_OBJECT_REQUEST ),
+        RegisterObjectRequest ( Smart_Object * object )
+        : RegisterMessage ( strlen ( object->name ( ) ), RegisterMessage::REGISTER_OBJECT_REQUEST ),
         _object ( object ) { }
 
         const char * getObjectName ( ) {
-            return _object->getName ( );
+            return _object->name ( );
         }
 
-        SmartObject* getObject ( ) {
+        Smart_Object* getObject ( ) {
             return _object;
         }
 
-        void setObject ( SmartObject * object ) {
+        void setObject ( Smart_Object * object ) {
             _object = object;
-            setSizeAddedWithBaseSize ( strlen ( object->getName ( ) ) );
+            setSizeAddedWithBaseSize ( strlen ( object->name ( ) ) );
         }
     } ;
 
@@ -201,14 +201,14 @@ namespace IoT {
         }
 
         const char * getParameterName ( ) {
-            return _parameter->getName ( );
+            return _parameter->name ( );
         }
 
         unsigned short getRegisterId ( ) {
             return _parameter->getRegisterId ( );
         }
 
-        ParameterType::Type getType ( ) {
+        Parameter_Type::Type getType ( ) {
             return _parameter->getType ( );
         }
 
@@ -226,7 +226,7 @@ namespace IoT {
     protected:
 
         void updateSize ( ) {
-            Size size = sizeof (ParameterType::Type );
+            Size size = sizeof (Parameter_Type::Type );
             size += sizeof (_parameter->getRegisterId ( ) );
 
             const char * tmp = _parameter->getMinValue ( );
@@ -236,7 +236,7 @@ namespace IoT {
             tmp = _parameter->getOptions ( );
             size += strlen ( tmp );
 
-            size += strlen ( _parameter->getName ( ) );
+            size += strlen ( _parameter->name ( ) );
             setSizeAddedWithBaseSize ( size );
         }
     } ;

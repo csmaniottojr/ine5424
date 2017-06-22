@@ -23,7 +23,7 @@ protected:
     NIC *_nic;
     OStream cout;
 
-    SmartObject * _currentObj;
+    Smart_Object * _currentObj;
     Service * _currentService;
     Parameter * _currentParameter;
 public:
@@ -49,12 +49,12 @@ public:
         if(_currentObj != 0){
             cout << "object id:";
             for(int i=0; i<RegisterMessage::ID_SIZE; i++)
-                cout << " " << hex << (unsigned char) _currentObj->getId()[i];
+                cout << " " << hex << (unsigned char) _currentObj->id()[i];
             cout << dec << endl;
         }
 
         if(_currentObj == 0 || 
-                memcmp(message->getId(), _currentObj->getId(), RegisterMessage::ID_SIZE) == 0){
+                memcmp(message->getId(), _currentObj->id(), RegisterMessage::ID_SIZE) == 0){
             if(message->getType() == RegisterMessage::REGISTER_REQUEST){
                 cout << "   Type: RegisterRequest" << endl;
                 cout << "   Recebido do ID:";
@@ -84,7 +84,7 @@ public:
 
                 RegisterServiceRequest * request = reinterpret_cast<RegisterServiceRequest*>(message);
                 _currentService = request->getService();
-                _currentObj->addService(_currentService);
+                _currentObj->add_service(_currentService);
 
                 cout << "   Name: " << _currentService->getName() << endl;
 
@@ -99,7 +99,7 @@ public:
                 _currentParameter = request->getParameter();
                 _currentService->addParameter(_currentParameter);
 
-                cout << "   Name: " << _currentParameter->getName() << endl;
+                cout << "   Name: " << _currentParameter->name() << endl;
 
                 RegisterParameterResponse resp;
                 resp.setId(message->getId());
@@ -110,9 +110,9 @@ public:
                 RegisterOptionRequest * request = 
                     reinterpret_cast<RegisterOptionRequest*>(message);
                 
-                ParameterType * type = _currentParameter->getParameterType();
-                ParameterCombo * combo = reinterpret_cast<ParameterCombo*>(type);
-                combo->addOption(request->getOption());
+                Parameter_Type * type = _currentParameter->getParameterType();
+                Parameter_Combo * combo = reinterpret_cast<Parameter_Combo*>(type);
+                combo->add_option(request->getOption());
 
                 cout << "   Option: " << request->getOption() << endl;
 

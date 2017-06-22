@@ -1,36 +1,70 @@
 #ifndef parameter_combo_h__
 #define parameter_combo_h__
 
-using namespace EPOS;
+#include "callback.h"
+#include "parametertype.h"
 
+
+using namespace EPOS;
+EPOS::OStream debug;
 namespace IoT {
-    
+
     typedef Simple_List<char> Option_List;
     typedef List_Elements::Singly_Linked<char> Option_List_Element;
 
-class ParameterCombo : public ParameterType {
-protected:
-    Option_List _options;
-public:
-    ParameterCombo()
-    : ParameterType() {}
+    class Parameter_Combo : public Parameter_Type
+    {
+    protected:
+        Option_List _options;
+        int * _current_option_index;
+    public:
 
-    /* Getters */
-    ParameterType::Type getType(){ return ParameterType::COMBO; };
-    Option_List * getOptionsList(){ return &_options; }
+        Parameter_Combo ( Callback * update , int* data )
+        : Parameter_Type ( ) , _current_option_index ( data ) {
+            this->_update = update;
+            this->_type = COMBO;
+        }
 
-    /* Adders */
-    void addOption(const char * option){
-        unsigned int length = strlen(option);
-        char * copy = new char[length+1];
-        memset(copy, '\0', length+1);
-        memcpy(copy, option, length);
+        Parameter_Combo ( )
+        : Parameter_Type ( ) {
+            this->_update = new Callback ( );
+            this->_type = COMBO;
+        }
 
-        Option_List_Element *new_option = 
-            new Option_List_Element(copy);
-        _options.insert(new_option);
-    }
-};
+        Option_List * get_options_list ( ) {
+            return &_options;
+        }
+
+        const char* get_option ( int index ) {
+            auto i = _options.begin ( );
+            for ( ; index > 0; index-- ) {
+                i++;
+            }
+            Option_List_Element * requested_element = i;
+            return requested_element->object ( );
+        }
+
+        /* Adders */
+        int add_option ( const char * option ) {
+            unsigned int length = strlen ( option );
+            char * copy = new char[length + 1];
+            strcpy ( copy, option );
+            Option_List_Element *new_option =
+                    new Option_List_Element ( copy );
+            _options.insert ( new_option );
+            return _options.size ( ) - 1;
+        }
+
+        void update ( int index ) {
+            debug << "update combo called " << index << " " << _options.size ( ) - 1 << "\n" ;
+            if ( index < _options.size ( ) ) {
+                *_current_option_index = index;
+                _update->operator () ( );
+            }
+        }
+
+
+    } ;
 
 };
 

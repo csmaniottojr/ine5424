@@ -12,9 +12,6 @@
             <in>parametized_callback.h</in>
           </df>
         </df>
-        <df name="so2">
-          <in>objects.h</in>
-        </df>
         <in>callback_test.cc</in>
         <in>testeIoT.cc</in>
         <in>testeIoT_traits.h</in>
@@ -717,7 +714,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} APPLICATION=callback_test</buildCommand>
+          <buildCommand>${MAKE} APPLICATION=parameter_test </buildCommand>
           <cleanCommand>${MAKE} veryclean</cleanCommand>
           <executablePath></executablePath>
           <cTool>
@@ -746,8 +743,6 @@
       <item path="app/callback_test.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="app/cheats/led.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="app/so2/objects.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="app/testeIoT.cc" ex="false" tool="1" flavor2="0">
       </item>
