@@ -50,7 +50,7 @@ public:
         cout << dec << endl;
 
         RegisterMessage * message = SerializationRegister::deserialize(data);
-        if(memcmp(message->getId(), _object->getId(), RegisterMessage::ID_SIZE) == 0){
+        if(message->getId() == _object->getId()){
             if(message->getType() == RegisterMessage::REGISTER_RESPONSE){
                 cout << "   Type: RegisterResponse!" << endl;
                 RegisterResponse *resp = reinterpret_cast<RegisterResponse*>(message);

@@ -13,8 +13,7 @@ namespace IoT {
     
 class SmartObject {
 public:
-    static const unsigned char ID_SIZE = 4;
-    typedef unsigned char ID[ID_SIZE];
+    typedef unsigned int ID;
 protected:
     ID _id;
     const char * _name;
@@ -22,17 +21,17 @@ protected:
 public:
     SmartObject(const char * name)
     : _name(name) {
-        memcpy(_id, &Machine::id()[ID_SIZE], ID_SIZE);
+        _id = *((ID*) &Machine::id()[4]);
     }
 
     /* Getters */
-    const unsigned char * getId(){ return _id; }
+    ID getId(){ return _id; }
     const char * getName(){ return _name; }
     Service_List * getServices(){ return &_services; }
 
     /* Setters */
     void setName(const char * name){ _name = name; }
-    void setId(const unsigned char * id){ memcpy(_id, id, ID_SIZE); }
+    void setId(ID id){ _id = id; }
 
     /* 'Adders' */
     void addService(Service *service){

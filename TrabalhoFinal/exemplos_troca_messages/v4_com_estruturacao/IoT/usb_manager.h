@@ -2,7 +2,8 @@
 #define usb_manager_h__
 
 #include <modbus_ascii.h>
-#include <usb.h>
+// #include <usb.h>
+#include <uart.h>
 #include "iot_gateway.h"
 #include "../cheats/led.h"
 
@@ -15,8 +16,6 @@ protected:
 public:
     static int run(IotGateway * _gateway){
         OStream cout;
-        USB usb;
-
         char _msg[Modbus_ASCII::MSG_LEN];
         memset(_msg, '\0', Modbus_ASCII::MSG_LEN);
         while(true){
@@ -26,11 +25,11 @@ public:
 			while(!ok_message) {
 				ok_message = true;
 				len = 0;
-				_msg[len++] = usb.get();
-				_msg[len++] = usb.get();
-				while(!((_msg[len-2] == '\r') 
+				_msg[len++] = USB::get();
+				_msg[len++] = USB::get();
+                while(!((_msg[len-2] == '\r') 
                     && (_msg[len-1] == '\n'))) {
-					_msg[len++] = usb.get();
+					_msg[len++] = USB::get();
 					if(len >= Modbus_ASCII::MSG_LEN) {
 						ok_message = false;
 						break;
@@ -45,6 +44,10 @@ public:
                 delete msg;
             }
         }
+    }
+
+    static void send(const char * msg, unsigned int size){
+        USB::put(msg, size);
     }
 };
 

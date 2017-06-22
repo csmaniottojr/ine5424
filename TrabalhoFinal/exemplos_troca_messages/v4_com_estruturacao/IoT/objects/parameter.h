@@ -8,17 +8,19 @@ using namespace EPOS;
 namespace IoT {
     
 class Parameter {
+public:
+    typedef unsigned short RegisterIdValue;
 protected:
     const char * _name;
-    unsigned short _registerId;
+    RegisterIdValue _registerId;
     ParameterType *_type;
 public:
-    Parameter(const char * name, unsigned short registerId, ParameterType * type)
+    Parameter(const char * name, RegisterIdValue registerId, ParameterType * type)
     : _name(name), _registerId(registerId), _type(type) {}
 
     /* Getters */
     const char * getName(){ return _name; }
-    unsigned short getRegisterId(){ return _registerId; }
+    RegisterIdValue getRegisterId(){ return _registerId; }
     ParameterType::Type getType(){ return _type->getType(); }
     const char * getMinValue(){ return _type->getMinValue(); }
     const char * getMaxValue(){ return _type->getMaxValue(); }

@@ -1,5 +1,5 @@
-#ifndef iot_manager_h__
-#define iot_manager_h__
+#ifndef iot_gateway_h__
+#define iot_gateway_h__
 
 #include <machine.h>
 #include <alarm.h>
@@ -39,32 +39,17 @@ public:
 
         eMoteIII::led::blink(0.1, 1);
 
-        //cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
-        // for(int i=0; i<b->size(); i++)
-        //     cout << " " << hex << (unsigned char) data[i];
-        // cout << dec << endl;
+        cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
+        for(int i=0; i<b->size(); i++)
+            cout << " " << hex << (unsigned char) data[i];
+        cout << dec << endl;
 
         RegisterMessage * message = SerializationRegister::deserialize(data);
 
-        // cout << "msg id:";
-        // for(int i=0; i<RegisterMessage::ID_SIZE; i++)
-        //     cout << " " << hex << (unsigned char) message->getId()[i];
-        // cout << dec << endl;
-        // if(_currentObj != 0){
-        //     cout << "object id:";
-        //     for(int i=0; i<RegisterMessage::ID_SIZE; i++)
-        //         cout << " " << hex << (unsigned char) _currentObj->getId()[i];
-        //     cout << dec << endl;
-        // }
-
-        if(_currentObj == 0 || 
-                memcmp(message->getId(), _currentObj->getId(), RegisterMessage::ID_SIZE) == 0){
+        if(_currentObj == 0 || message->getId() == _currentObj->getId()){
             if(message->getType() == RegisterMessage::REGISTER_REQUEST){
-                // cout << "   Type: RegisterRequest" << endl;
-                // cout << "   Recebido do ID:";
-                // for(unsigned int i = 0; i<RegisterMessage::ID_SIZE; i++)
-                //     cout << " " << hex << message->getId()[i];
-                // cout << dec << endl;
+                cout << "   Type: RegisterRequest" << endl;
+                cout << "   Recebido do ID: " << message->getId() << endl;
 
                 //TODO verificar no banco de dados
 
@@ -73,43 +58,43 @@ public:
                 resp.setIsRegistered(false);
                 sendRequest(&resp, b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_OBJECT_REQUEST){
-                // cout << "   Type: RegisterObjectRequest" << endl;
+                cout << "   Type: RegisterObjectRequest" << endl;
 
                 RegisterObjectRequest * request = reinterpret_cast<RegisterObjectRequest*>(message);
                 _currentObj = request->getObject();
 
-                // cout << "   Name: " << _currentObj->getName() << endl;
+                cout << "   Name: " << _currentObj->getName() << endl;
 
                 RegisterObjectResponse resp;
                 resp.setId(message->getId());
                 sendRequest(&resp, b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_SERVICE_REQUEST){
-                // cout << "   Type: RegisterServiceRequest" << endl;
+                cout << "   Type: RegisterServiceRequest" << endl;
 
                 RegisterServiceRequest * request = reinterpret_cast<RegisterServiceRequest*>(message);
                 _currentService = request->getService();
                 _currentObj->addService(_currentService);
 
-                // cout << "   Name: " << _currentService->getName() << endl;
+                cout << "   Name: " << _currentService->getName() << endl;
 
                 RegisterServiceResponse resp;
                 resp.setId(message->getId());
                 sendRequest(&resp, b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_PARAMETER_REQUEST){
-                // cout << "   Type: RegisterParameterRequest" << endl;
+                cout << "   Type: RegisterParameterRequest" << endl;
 
                 RegisterParameterRequest * request = 
                     reinterpret_cast<RegisterParameterRequest*>(message);
                 _currentParameter = request->getParameter();
                 _currentService->addParameter(_currentParameter);
 
-                // cout << "   Name: " << _currentParameter->getName() << endl;
+                cout << "   Name: " << _currentParameter->getName() << endl;
 
                 RegisterParameterResponse resp;
                 resp.setId(message->getId());
                 sendRequest(&resp, b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_OPTION_REQUEST){
-                // cout << "   Type: RegisterOptionRequest" << endl;
+                cout << "   Type: RegisterOptionRequest" << endl;
 
                 RegisterOptionRequest * request = 
                     reinterpret_cast<RegisterOptionRequest*>(message);
@@ -118,13 +103,13 @@ public:
                 ParameterCombo * combo = reinterpret_cast<ParameterCombo*>(type);
                 combo->addOption(request->getOption());
 
-                // cout << "   Option: " << request->getOption() << endl;
+                cout << "   Option: " << request->getOption() << endl;
 
                 RegisterOptionResponse resp;
                 resp.setId(message->getId());
                 sendRequest(&resp, b->frame()->src(), p);
             }else if(message->getType() == RegisterMessage::REGISTER_END_OBJECT_REQUEST){
-                // cout << "   Type: RegisterEndObjectRequest" << endl;
+                cout << "   Type: RegisterEndObjectRequest" << endl;
 
                 //TODO Mandar pro banco de dados...
 
@@ -132,15 +117,15 @@ public:
                 resp.setId(message->getId());
                 sendRequest(&resp, b->frame()->src(), p);
 
-                // cout << "Encerrada a fase de cadastro do object: "
-                //     << _currentObj->getName() << ". Esperando pelo proximo cadastro..." << endl;
+                cout << "Encerrada a fase de cadastro do object: "
+                    << _currentObj->getName() << ". Esperando pelo proximo cadastro..." << endl;
                 
                 delete _currentObj; _currentObj = 0;
                 delete _currentService; _currentService = 0;
                 delete _currentParameter; _currentParameter = 0;
             }
         }
-        //cout << endl;
+        cout << endl;
 
         _nic->free(b);
         if(message != 0)
@@ -156,7 +141,7 @@ protected:
         auto msg = SerializationRegister::serialize(request);
         _nic->send(dst, prot, msg, request->getSize()+2);
         delete msg;
-        // cout << "   ACK mandado!" << endl;
+        cout << "   ACK mandado!" << endl;
     }
 };
 

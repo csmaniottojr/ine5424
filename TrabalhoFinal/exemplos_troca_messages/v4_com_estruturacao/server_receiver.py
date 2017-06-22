@@ -16,7 +16,7 @@ ser.flushInput()
 ser.flushOutput()
 
 print(ser.get_settings())
-print('Lendo da porta...')
+print('Lendo da porta por 60s...')
 
 t_end = time.time() + 60
 while time.time() < t_end:

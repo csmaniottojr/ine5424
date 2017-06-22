@@ -10,8 +10,7 @@ namespace IoT {
 class RegisterMessage {
 public:
     typedef unsigned char Size;
-    static const Size ID_SIZE = SmartObject::ID_SIZE;
-    typedef unsigned char ID[ID_SIZE];
+    typedef SmartObject::ID ID;
     typedef unsigned char Type;
     enum {
         UNKNOWN_MESSAGE                 = 0,
@@ -28,8 +27,9 @@ public:
         REGISTER_END_OBJECT_REQUEST     = 11,
         REGISTER_END_OBJECT_RESPONSE    = 12
     };
+    static const char START_CHAR = ';';
     static const Size BASE_SIZE = sizeof(Size) + sizeof(ID) + sizeof(Type);
-    static const Size MAX_SIZE = 100;//TODO fazer o calculo direito
+    static const Size MTU = IEEE802_15_4::Frame::MTU - BASE_SIZE;
 protected:
     Size _size;
     ID _id;
@@ -37,25 +37,31 @@ protected:
 public:
     RegisterMessage()
     : _size(BASE_SIZE), _type(UNKNOWN_MESSAGE){
-        memcpy(_id, &Machine::id()[ID_SIZE], ID_SIZE);
+        _id = *((ID*) &Machine::id()[4]);
     }
 
     RegisterMessage(Type type)
     : _size(BASE_SIZE), _type(type){
-        memcpy(_id, &Machine::id()[ID_SIZE], ID_SIZE);
+        _id = *((ID*) &Machine::id()[4]);
     }
     
     RegisterMessage(Size messageSize, Type type)
     : _size(BASE_SIZE+messageSize), _type(type){
-        assert(_size <= MAX_SIZE);
-        memcpy(_id, &Machine::id()[ID_SIZE], ID_SIZE);
+        assert(_size <= MTU);
+        _id = *((ID*) &Machine::id()[4]);
     }
 
     Size getSize(){ return _size; }
-    void setSize(Size size){ _size = size; }
-    void setSizeAddedWithBaseSize(Size value){ _size = BASE_SIZE + value; }
-    const unsigned char * getId(){ return _id; }
-    void setId(const unsigned char * id){ memcpy(_id, id, ID_SIZE); }
+    void setSize(Size size){ 
+        _size = size;
+        assert(_size <= MTU); 
+    }
+    void setSizeAddedWithBaseSize(Size value){ 
+        _size = BASE_SIZE + value;
+        assert(_size <= MTU);
+    }
+    ID getId(){ return _id; }
+    void setId(ID id){ _id = id; }
     Type getType(){ return _type; }
     void setType(Type type){ _type = type; }
 };
@@ -127,6 +133,8 @@ public:
 };
 
 class RegisterParameterRequest : public RegisterMessage {
+public:
+    typedef Parameter::RegisterIdValue RegisterIdValue;
 protected:
     Parameter * _parameter;
 public:
@@ -143,7 +151,7 @@ public:
     }
 
     const char * getParameterName(){ return _parameter->getName(); }
-    unsigned short getRegisterId(){ return _parameter->getRegisterId(); }
+    RegisterIdValue getRegisterId(){ return _parameter->getRegisterId(); }
     ParameterType::Type getType(){ return _parameter->getType(); }
     const char * getMinValue(){ return _parameter->getMinValue(); }
     const char * getMaxValue(){ return _parameter->getMaxValue(); }
@@ -151,7 +159,7 @@ public:
 protected:
     void updateSize(){
         Size size = sizeof(ParameterType::Type);
-        size += sizeof(_parameter->getRegisterId());
+        size += sizeof(RegisterIdValue);
 
         const char * tmp = _parameter->getMinValue();
         size += (unsigned char) tmp[0];
