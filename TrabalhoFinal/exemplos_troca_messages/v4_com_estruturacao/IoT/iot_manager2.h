@@ -42,7 +42,7 @@ public:
     }
 
     void run(){
-        cout << "Mandando RegisterRequest via broadcast!" << endl;
+        cout << "# Mandando RegisterRequest via broadcast!" << endl;
         RegisterRequest request;
         sendRequest(&request, _nic->broadcast(), IEEE802_15_4::ELP);
     }
@@ -51,17 +51,17 @@ public:
         auto data = b->frame()->data<char>();
 
         // Verifica se a mensagem é para mim...
-        ID id = *((ID*) &data[1]);
+        ID id = *((ID*) &data[2]);
         if(id != _object->getId()){
-            cout << "Messagem ignorada..." << endl << endl;
+            cout << "# Messagem ignorada..." << endl << endl;
             _nic->free(b);
             return;
         }
 
-        cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
+        cout << "# Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
         for(int i=0; i<b->size(); i++)
-            cout << " " << hex << (unsigned char) data[i];
-        cout << dec << endl;
+            cout << " " << (unsigned char) data[i];
+        cout << endl;
 
         switch(data[0]){
             case RegisterMessage::START_CHAR:{
@@ -80,34 +80,34 @@ public:
     }
 protected:
     void processRegisterMessage(const char * msg){
-        RegisterMessage * message = SerializationRegister::deserialize(msg);
+        RegisterMessage * message = RegisterSerialization::deserialize(msg);
         if(message->getType() == RegisterMessage::REGISTER_RESPONSE){
-            cout << "   Type: RegisterResponse!" << endl;
+            cout << "#   Type: RegisterResponse!" << endl;
             RegisterResponse *resp = reinterpret_cast<RegisterResponse*>(message);
-            cout << "   isRegistered: " << resp->isRegistered() << endl;
+            cout << "#   isRegistered: " << resp->isRegistered() << endl;
 
             if(!resp->isRegistered()){
-                cout << "Mandando object: " << 
+                cout << "# Mandando object: " << 
                     _object->getName() << "..." << endl;
 
                 RegisterObjectRequest request(_object);
                 sendRequest(&request, b->frame()->src(), p);
             }else{
-                cout << "Object ja cadastrado, aguardando por comandos..." << endl << endl;
+                cout << "# Object ja cadastrado, aguardando por comandos..." << endl << endl;
                 _registered = true;
             }
         }else if(message->getType() == RegisterMessage::REGISTER_OBJECT_RESPONSE){
-            cout << "   Type: RegisterObjectResponse!" << endl;
+            cout << "#   Type: RegisterObjectResponse!" << endl;
             
             _currentService = _object->getServices()->head();
             sendService(b->frame()->src(), p);
         }else if(message->getType() == RegisterMessage::REGISTER_SERVICE_RESPONSE){
-            cout << "   Type: RegisterServiceResponse!" << endl;
+            cout << "#   Type: RegisterServiceResponse!" << endl;
             
             _currentParameter = _currentService->object()->getParameters()->head();
             sendParameter(b->frame()->src(), p);
         }else if(message->getType() == RegisterMessage::REGISTER_PARAMETER_RESPONSE){
-            cout << "   Type: RegisterParameterResponse!" << endl;
+            cout << "#   Type: RegisterParameterResponse!" << endl;
 
             // Verifica se não eh um combo...
             if(_currentParameter->object()->getType() == ParameterType::COMBO){
@@ -121,13 +121,13 @@ protected:
                 sendParameter(b->frame()->src(), p);
             }
         }else if(message->getType() == RegisterMessage::REGISTER_OPTION_RESPONSE){
-            cout << "   Type: RegisterOptionResponse!" << endl;
+            cout << "#   Type: RegisterOptionResponse!" << endl;
             
             _currentOption = _currentOption->next();
             sendOption(b->frame()->src(), p);
         }else if(message->getType() == RegisterMessage::REGISTER_END_OBJECT_RESPONSE){
-            cout << "   Type: RegisterEndObjectResponse!" << endl;
-            cout << "Fase de cadastro terminada! Aguardando comandos..." << endl;
+            cout << "#   Type: RegisterEndObjectResponse!" << endl;
+            cout << "# Fase de cadastro terminada! Aguardando comandos..." << endl;
             _registered = true;
         }
         delete message;
@@ -136,31 +136,31 @@ protected:
     void processCommandMessage(const char * msg){
         CommandMessage * message = CommandSerialization::deserialize(msg);
         if(message->getType() == CommandMessage::COMMAND_READ_REQUEST){
-            cout << "   Type: CommandReadRequest!" << endl;
+            cout << "#   Type: CommandReadRequest!" << endl;
         }else if(message->getType() == CommandMessage::COMMAND_WRITE_REQUEST){
-            cout << "   Type: CommandWriteRequest!" << endl;
+            cout << "#   Type: CommandWriteRequest!" << endl;
         }
         delete message;
     }
 
 protected:
     void sendRequest(RegisterMessage * request, const Address & dst, const Protocol & prot){
-        auto msg = SerializationRegister::serialize(request);
+        auto msg = RegisterSerialization::serialize(request);
         _nic->send(dst, prot, msg, request->getSize()+2);
         delete msg;
     }
 
     void sendService(const Address & dst, const Protocol & p){
         if(_currentService){
-            cout << "Mandando servico: " << 
+            cout << "# Mandando servico: " << 
                 _currentService->object()->getName() << "..." << endl;                        
             
             RegisterServiceRequest request(_currentService->object());
             sendRequest(&request, dst, p);
         }else{
-            cout << "Fim dos servicos do object: " 
+            cout << "# Fim dos servicos do object: " 
                 << _object->getName() << "..." << endl;
-            cout << "Encerrando cadastro..." << endl;
+            cout << "# Encerrando cadastro..." << endl;
 
             RegisterEndObjectRequest request;
             sendRequest(&request, dst, p);
@@ -169,13 +169,13 @@ protected:
 
     void sendParameter(const Address & dst, const Protocol & p){
         if(_currentParameter){
-            cout << "Mandando parametro: " << 
+            cout << "# Mandando parametro: " << 
                 _currentParameter->object()->getName() << "..." << endl;
             
             RegisterParameterRequest request(_currentParameter->object());
             sendRequest(&request, dst, p);
         }else{
-            cout << "Fim dos parametros do servico: " 
+            cout << "# Fim dos parametros do servico: " 
                 << _currentService->object()->getName() << "..." << endl;
 
             _currentService = _currentService->next();
@@ -185,13 +185,13 @@ protected:
 
     void sendOption(const Address & dst, const Protocol & p){
         if(_currentOption){
-            cout << "Mandando option: " 
+            cout << "# Mandando option: " 
                 << _currentOption->object() << "..." << endl;
                 
             RegisterOptionRequest request(_currentOption->object());
             sendRequest(&request, dst, p);
         }else{
-            cout << "Fim das options do parametro: "
+            cout << "# Fim das options do parametro: "
                 << _currentParameter->object()->getName() << "..." << endl;
 
             _currentParameter = _currentParameter->next();

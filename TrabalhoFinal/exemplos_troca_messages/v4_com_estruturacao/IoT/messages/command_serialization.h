@@ -25,8 +25,8 @@ public:
     static const char * serialize(CommandMessage * message){
         Size index = 0;
         Size length = message->getSize();
-        char * result = new char[length+1];
-        memset(result, '\0', length+1);
+        char * result = new char[length];
+        memset(result, '\0', length);
 
         // Formato das mensagens de Register:
         // Bit 0            1          2       6          7        x   

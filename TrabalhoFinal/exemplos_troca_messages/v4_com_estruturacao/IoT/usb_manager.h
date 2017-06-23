@@ -15,15 +15,15 @@ namespace IoT {
 
 class USBManager {
 protected:
-    static const unsigned int MAX_LENGHT = IEEE802_15_4::Frame::MTU;
+    static const unsigned int MAX_LENGTH = IEEE802_15_4::Frame::MTU;
 public:
     static int run(IotGateway * _gateway){
         OStream cout;
-        char _msg[MAX_LENGHT];
+        char _msg[MAX_LENGTH];
 
         while(true){
             int len = 0;
-            memset(_msg, '\0', MAX_LENGHT);
+            memset(_msg, '\0', MAX_LENGTH);
             _msg[len++] = USB::get();
             _msg[len++] = USB::get();
             if(!isValidMsg(_msg[0], _msg[1]))
@@ -32,10 +32,10 @@ public:
                 _msg[len++] = USB::get();
             }
             if(_gateway != 0){
-                char * msg = new char[len+1];
-                memset(msg, '\0', len+1);
+                char * msg = new char[len];
+                memset(msg, '\0', len);
                 memcpy(msg, _msg, len);
-                _gateway->receive(msg, len+1);
+                _gateway->receive(msg, len);
                 delete msg;
             }
         }
@@ -51,7 +51,7 @@ protected:
             size >= RegisterMessage::BASE_SIZE) ||
                 (start_char == CommandMessage::START_CHAR && 
             size >= CommandMessage::BASE_SIZE)) &&
-            size <= MAX_LENGHT;
+            size <= MAX_LENGTH;
     }
 };
 

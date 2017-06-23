@@ -32,7 +32,8 @@ public:
         LAST_TYPE                       = REGISTER_END_OBJECT_RESPONSE
     };
     static const char START_CHAR = ';';
-    static const Size BASE_SIZE = sizeof(Size) + sizeof(ID) + sizeof(Type);
+    static const Size BASE_SIZE = sizeof(START_CHAR) + sizeof(Size) + sizeof(ID) 
+                                + sizeof(Type);
     static const Size MTU = IEEE802_15_4::Frame::MTU - BASE_SIZE;
 protected:
     Size _size;

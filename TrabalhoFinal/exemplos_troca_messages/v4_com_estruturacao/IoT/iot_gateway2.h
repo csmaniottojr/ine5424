@@ -36,10 +36,10 @@ public:
         auto data = b->frame()->data<char>();
 
         eMoteIII::led::blink(0.1, 1);
-        cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
+        cout << "# Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
         for(int i=0; i<b->size(); i++)
-            cout << " " << hex << (unsigned char) data[i];
-        cout << dec << endl;
+            cout << " " << (unsigned char) data[i];
+        cout << endl;
 
         switch(data[0]){
             case RegisterMessage::START_CHAR: {
@@ -69,8 +69,11 @@ public:
         _nic->free(b);
     }
 
-    void receive(const char * msg, int lenght){
-        cout << "Mensagem recebida do USB: " << msg << endl;
+    void receive(const char * msg, int length){
+        cout << "# Mensagem recebida do USB:"; 
+        for(int i=0; i<length; i++)
+            cout << " " << (unsigned char) msg[i];
+        cout << endl;
 
         switch(msg[0]){
             case RegisterMessage::START_CHAR:{

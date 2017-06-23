@@ -10,6 +10,7 @@ using namespace EPOS;
 
 OStream cout;
 
+//IDs: 101560330 e 101559240
 int main(){
     IoT::SmartObject object("Epos");
     
@@ -39,17 +40,18 @@ int main(){
 
         cout << endl;//start print
 
-        cout << "Obj Name: " << object.getName() << endl;
+        cout << "# Obj ID: " << object.getId() << endl;
+        cout << "# Obj Name: " << object.getName() << endl;
         auto services = object.getServices();
         for(auto e = services->head(); e; e = e->next()){
-            cout << "   Service Name: " << e->object()->getName() << endl;
+            cout << "#   Service Name: " << e->object()->getName() << endl;
 
             auto params = e->object()->getParameters();
             for(auto e2 = params->head(); e2; e2 = e2->next()){
-                cout << "      Param Name: " << e2->object()->getName() << endl;
-                cout << "      Param RegId: " << e2->object()->getRegisterId() << endl;
+                cout << "#      Param Name: " << e2->object()->getName() << endl;
+                cout << "#      Param RegId: " << e2->object()->getRegisterId() << endl;
                 auto max = e2->object()->getMaxValue();
-                cout << "      Param maxValue: ";
+                cout << "#      Param maxValue: ";
                 for(int i = 1; i<=((unsigned char)max[0]); i++)
                     cout << (unsigned char) max[i] << " ";
                 cout << endl;
