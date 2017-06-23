@@ -41,7 +41,7 @@ public:
 
         cout << "Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
         for(int i=0; i<b->size(); i++)
-            cout << " " << hex << (unsigned char) data[i];
+            cout << " " << (unsigned char) data[i];
         cout << dec << endl;
 
         RegisterMessage * message = SerializationRegister::deserialize(data);

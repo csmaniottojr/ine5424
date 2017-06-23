@@ -17,12 +17,21 @@ using namespace IoT;
 OStream cout;
 
 int main(){
-    NIC * nic = new NIC();
+    /*NIC * nic = new NIC();
     IoT::IotGateway gateway(IEEE802_15_4::ELP, nic);
     cout << "Inicializando o IoT Gateway..." << endl << endl;
 
     Thread * thread = new Thread(&USBManager::run, &gateway);
     while(1){
+        Alarm::delay(10000000);
+    }*/
+
+    Alarm::delay(2000000);
+    char msg[] = {59,28,200,171,13,6,7,5,3,0,0,0,128,63,0,0,0,64,84,101,109,112,101,114,97,116,117,114,97,15,236,125,253,186,248,247,220,199,237,239};
+
+    while(1){
+        eMoteIII::led::blink(0.1, 1);
+        USBManager::send(msg, ((unsigned char)msg[1])+1);
         Alarm::delay(10000000);
     }
 
