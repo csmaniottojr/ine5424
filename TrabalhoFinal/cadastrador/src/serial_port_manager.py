@@ -29,7 +29,7 @@ class SerialPortManager(object):
                     print (line)
                     line += bytearray(_byte)
                 else:
-                    self.msg_responser.response(line)
+                    ser.write(self.msg_responser.response(line))
                     lines.append(line)
             else:
                 self.process_lines(lines)
@@ -50,4 +50,4 @@ class SerialPortManager(object):
 
     def process_lines(self, lines):
         msg_deserializer = MessageDeserializer()
-        msg_deserializer.serialize(lines)
+        msg_deserializer.deserialize(lines)

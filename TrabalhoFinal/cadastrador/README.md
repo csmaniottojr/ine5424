@@ -16,8 +16,6 @@ $ sudo apt install python3-pip
 $ sudo pip3 install virtualenv
 $ virtualenv -p python3 venv
 $ pip3 install -r requirements.txt
-$ cd src
-$ python3 main.py
 ```
 
 ##### Execução
