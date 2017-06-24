@@ -5,3 +5,6 @@
 /Trabalho_1/ine5424/.project
 /Trabalho_1/ine5424/CMakeLists.txt
 *.o
+
+venv
+*.pyc
