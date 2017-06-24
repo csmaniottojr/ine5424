@@ -15,10 +15,12 @@ namespace IoT {
     protected:
         const char * _name;
         Parameter_List _parameters;
+
+        Callback * _service_function;
     public:
 
-        Service ( const char * name )
-        : _name ( name ) { }
+        Service ( const char * name, Callback * actuating_function )
+        : _name ( name ), _service_function ( actuating_function ) { }
 
         /* Getters */
         const char * getName ( ) {
@@ -39,6 +41,10 @@ namespace IoT {
             Parameter_List_Element *new_param =
                     new Parameter_List_Element ( param );
             _parameters.insert ( new_param );
+        }
+
+        void actuate ( ) {
+            _service_function->operator () ( );
         }
     } ;
 

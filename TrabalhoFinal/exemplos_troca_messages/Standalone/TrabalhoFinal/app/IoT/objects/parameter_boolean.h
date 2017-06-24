@@ -63,6 +63,8 @@ namespace IoT {
             *this->_data = data;
             _update->operator () ( );
         }
+
+        
     } ;
 }
 

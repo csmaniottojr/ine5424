@@ -10,6 +10,7 @@ using namespace IoT;
 EPOS::OStream cout;
 
 void func( ) {
+    cout << "My bool is " << *myBool << endl;
     cout << "Func called!\n";
 }
 //Data variables
@@ -21,7 +22,7 @@ int main( ) {
     cout << "Initializing boolean tests\n";
     eMoteIII::led::blink( 0.1, 10 );
     EPOS::Alarm::delay( 2 * 1000000 );
-    //BOOLEAN TESTS
+    //BOOLEAN TESTS-------------------------------------------------------------
     Callback update( &func );
     Parameter_Boolean * x = new Parameter_Boolean( &update, myBool );
     cout << "Created a bool paramType" << "\n";
@@ -36,7 +37,7 @@ int main( ) {
     cout << ligado->name( ) << " is " << *myBool << "\n";
     eMoteIII::led::blink( 2 );
 
-    //FLOAT TESTS
+    //FLOAT TESTS---------------------------------------------------------------
     cout << "Initializing float tests\n";
     eMoteIII::led::blink( 0.1, 10 );
     EPOS::Alarm::delay( 2 * 1000000 );
@@ -54,7 +55,7 @@ int main( ) {
     cout << temp->name( ) << "is" << *myFloat << "\n";
     eMoteIII::led::blink( 2 );
 
-    //COMBO TEST
+    //COMBO TEST----------------------------------------------------------------
     cout << "Initializing combo tests\n";
     eMoteIII::led::blink( 0.1, 10 );
     EPOS::Alarm::delay( 2 * 1000000 );
@@ -78,7 +79,7 @@ int main( ) {
     cout << "updating current option index with " << indexes[2] << endl;
     mode->update( indexes[2] );
     cout << "Current option is " << *current_combo << " - " << mode->get_combo( *current_combo ) << endl;
-    
+
     eMoteIII::led::blink( 2 );
 
 

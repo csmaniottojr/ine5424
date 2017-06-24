@@ -16,6 +16,14 @@ namespace IoT {
         const char * _name;
         unsigned short _register_id;
         Parameter_Type *_type;
+
+        union
+        {
+            int _index;
+            float _value;
+            bool _flag;
+        } ;
+
     public:
 
         Parameter ( const char * name, unsigned short registerId, Parameter_Type * type )
@@ -41,18 +49,27 @@ namespace IoT {
         void update ( bool value ) {
             if ( _type->type ( ) == Parameter_Type::BOOLEAN ) {
                 static_cast < Parameter_Boolean * > ( _type )->update ( value );
+                _flag = value;
             }
         }
 
         void update ( float value ) {
             if ( _type->type ( ) == Parameter_Type::FLOAT ) {
                 static_cast < Parameter_Float * > ( _type )->update ( value );
+                float max, min;
+                max = ( float* ) ( _type->max ( )[1] )[0];
+                min = ( float* ) ( _type->min ( )[1] )[0];
+
+                if ( value <= max && value >= min ) {
+                    _value = value;
+                }
             }
         }
 
         void update ( int value ) {
             if ( _type->type ( ) == Parameter_Type::COMBO ) {
                 static_cast < Parameter_Combo * > ( _type )->update ( value );
+                _index = value;
             }
         }
 
@@ -65,13 +82,35 @@ namespace IoT {
 
         char * get_combo ( int index ) {
             if ( getType ( ) == Parameter_Type::COMBO ) {
-                return (char*)static_cast < Parameter_Combo* > ( _type )->get_option ( index );
+                return ( char* ) static_cast < Parameter_Combo* > ( _type )->get_option ( index );
             }
             return 0;
         }
 
+        int combo_value ( ) {
+            if ( getType ( ) == Parameter_Type::COMBO ) {
+                _type->update ( )->operator () ( );
+                return _index;
+            }
+        }
+
+        float float_value ( ) {
+            if ( getType ( ) == Parameter_Type::FLOAT ) {
+                _type->update ( )->operator () ( );
+                return _value;
+            }
+        }
+
+        bool bool_value ( ) {
+            if ( getType ( ) == Parameter_Type::BOOLEAN ) {
+                _type->update ( )->operator () ( );
+                return _flag;
+            }
+        }
+
+
     } ;
 
-};
+} ;
 
 #endif

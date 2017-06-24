@@ -60,9 +60,9 @@ namespace IoT {
         void update ( float  data ) {
             *_data = data;
             _update->operator () ( );
-
-
         }
+
+
 
     } ;
 

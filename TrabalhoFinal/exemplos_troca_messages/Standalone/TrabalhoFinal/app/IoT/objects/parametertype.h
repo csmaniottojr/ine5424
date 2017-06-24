@@ -49,6 +49,9 @@ namespace IoT {
             return _max;
         }
 
+        Callback* update ( ) {
+            return _update;
+        }
 
     } ;
 
