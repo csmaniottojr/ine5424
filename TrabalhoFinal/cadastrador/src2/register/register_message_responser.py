@@ -1,3 +1,4 @@
+import sys
 from .register_serialization import RegisterSerialization
 from .register_message_type import RegisterMessageType
 
@@ -11,7 +12,8 @@ class RegisterMessageResponser(object):
 
         barray.append(int(msg[0]))
         barray.append(RegisterSerialization.BASE_SIZE)
-        barray.extend(msg[2:6])
+        emote_id = msg[2:6]
+        barray.extend(emote_id)
 
         msg_type = RegisterSerialization.deserialize_message_type(msg)
         print("msg type: ", msg_type)
@@ -20,9 +22,8 @@ class RegisterMessageResponser(object):
             id = int.from_bytes(emote_id, byteorder=sys.byteorder)
             barray.append(RegisterMessageType.REGISTER_RESPONSE.value)
             
-            #TODO dar um jeito nisso
-            #barray.append(int(self.model_controller.check_if_exists(id)))
-            barray.append(0x00)
+            barray.append(int(self.model_controller.check_if_exists(id)))
+            
             barray[1] = int(barray[1]) + 1
 
         elif msg_type == RegisterMessageType.REGISTER_OBJECT_REQUEST:

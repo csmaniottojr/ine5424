@@ -5,11 +5,11 @@ from utils.message_validator import MessageValidator
 from register.register_message_responser import RegisterMessageResponser
 
 class RegisterManager(Observer):
-    def __init__(self):
+    def __init__(self, model_controller):
         Observer.__init__(self)
         self.registers = defaultdict(lambda: [])
-        self.responder = RegisterMessageResponser(None)#TODO dar jeito nisso
-        self.serialization = RegisterSerialization(None)#TODO dar jeito nisso
+        self.responder = RegisterMessageResponser(model_controller)
+        self.serialization = RegisterSerialization(model_controller)
     
     def update(self, observable, data):
         if chr(data[0]) == RegisterSerialization.START_CHAR:
