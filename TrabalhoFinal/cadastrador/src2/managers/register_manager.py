@@ -23,5 +23,5 @@ class RegisterManager(Observer):
             observable.write(self.responder.response(data))
 
             if MessageValidator.check_if_is_end_of_register(self.registers[emote_id]):
-                #TODO save in bd
+                self.serialization.deserialize(self.registers[emote_id])
                 del self.registers[emote_id]

@@ -19,5 +19,5 @@ class RegisterMessageType(Enum):
     def end_messages(cls):
         return [
             cls.REGISTER_REQUEST,
-            cls.REGISTER_END_OBJECT_RESPONSE
+            cls.REGISTER_END_OBJECT_REQUEST
             ]
