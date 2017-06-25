@@ -17,7 +17,7 @@ namespace IoT {
     protected:
         Option_List _options;
         int * _current_option_index;
-        int & _data = _current_option_index;
+        //        int & _data = _current_option_index;
     public:
 
         Parameter_Combo ( Callback * update , int* data )

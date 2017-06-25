@@ -13,6 +13,7 @@
           </df>
         </df>
         <in>callback_test.cc</in>
+        <in>exemplo_geladeira.cc</in>
         <in>testeIoT.cc</in>
         <in>testeIoT_traits.h</in>
       </df>
@@ -395,7 +396,6 @@
           <in>string.h</in>
           <in>vector.h</in>
         </df>
-        <in>IoTManager.h</in>
         <in>active.h</in>
         <in>adc.h</in>
         <in>address_space.h</in>
@@ -714,7 +714,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} APPLICATION=parameter_test </buildCommand>
+          <buildCommand>${MAKE} APPLICATION=exemplo_geladeira </buildCommand>
           <cleanCommand>${MAKE} veryclean</cleanCommand>
           <executablePath></executablePath>
           <cTool>
@@ -743,6 +743,8 @@
       <item path="app/callback_test.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="app/cheats/led.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="app/exemplo_geladeira.cc" ex="false" tool="1" flavor2="0">
       </item>
       <item path="app/testeIoT.cc" ex="false" tool="1" flavor2="0">
       </item>
@@ -1429,8 +1431,6 @@
             ex="false"
             tool="1"
             flavor2="0">
-      </item>
-      <item path="include/IoTManager.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="include/active.h" ex="false" tool="3" flavor2="0">
       </item>

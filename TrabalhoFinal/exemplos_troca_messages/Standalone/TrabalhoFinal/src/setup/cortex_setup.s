@@ -9,7 +9,7 @@
         .section .init
         .type _vector_table, object
 _vector_table:
-        .word 0x20007ff7 + 1
+        .word 0x20001fff + 1
         .word _start + 1
         .word _int_entry + 1
         .word _int_entry + 1

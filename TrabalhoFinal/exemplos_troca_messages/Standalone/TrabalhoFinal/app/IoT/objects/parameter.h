@@ -57,8 +57,8 @@ namespace IoT {
             if ( _type->type ( ) == Parameter_Type::FLOAT ) {
                 static_cast < Parameter_Float * > ( _type )->update ( value );
                 float max, min;
-                max = ( float* ) ( _type->max ( )[1] )[0];
-                min = ( float* ) ( _type->min ( )[1] )[0];
+                max = *( float* ) ( _type->max ( ) + 1 );
+                min = *( float* ) ( _type->min ( ) + 1 );
 
                 if ( value <= max && value >= min ) {
                     _value = value;

@@ -35,6 +35,8 @@
         </df>
         <in>callback_test.cc</in>
         <in>callback_test_traits.h</in>
+        <in>exemplo_geladeira.cc</in>
+        <in>exemplo_geladeira_traits.h</in>
         <in>iot_gateway_test.cc</in>
         <in>iot_gateway_test_traits.h</in>
         <in>iot_test.cc</in>
@@ -441,7 +443,6 @@
           <in>string.h</in>
           <in>vector.h</in>
         </df>
-        <in>IoTManager.h</in>
         <in>active.h</in>
         <in>adc.h</in>
         <in>address_space.h</in>
