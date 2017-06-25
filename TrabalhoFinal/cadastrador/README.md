@@ -5,7 +5,19 @@
 ##### Configuração do banco de dados
 
 ```sh
+$ mysql -u <username> -p
+create database sodb_novo;
+exit
 $ mysql -u <username> -p sodb_novo < dump_model.sql
+```
+
+###### Na aplicação, no arquivo config_bd.py:
+
+```python
+DB_USER = ''
+DB_PASSWORD = ''
+HOST = ''
+DB_NAME = 'sodb_novo'
 ```
 
 ##### Instalação das dependências
