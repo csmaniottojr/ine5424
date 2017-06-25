@@ -1,6 +1,7 @@
+from collections import defaultdict
+
 from utils.observer import Observer
 from register.register_serialization import RegisterSerialization
-from collections import defaultdict
 from utils.message_validator import MessageValidator
 from register.register_message_responser import RegisterMessageResponser
 

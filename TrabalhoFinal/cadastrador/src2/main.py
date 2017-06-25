@@ -23,13 +23,13 @@ if __name__ == '__main__':
 
     serial_manager = SerialPortManager('/dev/ttyACM0', 115200, 2.0)
 
-    register_manager = RegisterManager(smart_object_controller)
-    serial_manager.register(register_manager)
+    debug_manager = DebugManager()
+    serial_manager.register(debug_manager)
 
     command_manager = CommandManager()
     serial_manager.register(command_manager)
-
-    debug_manager = DebugManager()
-    serial_manager.register(debug_manager)
+    
+    register_manager = RegisterManager(smart_object_controller)
+    serial_manager.register(register_manager)
 
     serial_manager.run()

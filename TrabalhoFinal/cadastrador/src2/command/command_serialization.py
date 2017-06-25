@@ -3,14 +3,14 @@ from .command_message_type import CommandMessageType
 
 class CommandSerialization(object):
     
-    # Formato das mensagens de Register:
-    # Bit 0            1          2       6          7        x   
-    #     +------------+----------+-------+----------+--- ~ --+
-    #     | START_CHAR | msg size | SO id | msg type |  data  |
-    #     +------------+----------+-------+----------+--- ~ --+
-    # PS: data se refere aos dados especificos de cada tipo de mensagem
+    # Formato das mensagens de Command:
+    # Bit 0            1          2       6          7        9        x   
+    #     +------------+----------+-------+----------+--------+--- ~ --+
+    #     | START_CHAR | msg size | SO id | msg type | reg id |  data  |
+    #     +------------+----------+-------+----------+--------+--- ~ --+
 
     START_CHAR = ':'
+    BASE_SIZE = 9
 
     @staticmethod
     def is_valid_message(message, length):
@@ -30,9 +30,17 @@ class CommandSerialization(object):
         return CommandMessageType(int(barray[6]))
     
     @staticmethod
-    def serialize(params):
-        pass
-
+    def deserialize_register_id(barray):
+        return Utils.unpack_with_byte_order("H", barray[7:9])
+    
+    def deserialize_data(barray):
+        size = deserialize_size(barray)
+        length = size - CommandSerialization.BASE_SIZE
+        if length > 0:
+            return barray[9:(9+length)]
+        else:
+            return bytearray()
+    
     @staticmethod
-    def deserialize(barray):
+    def serialize(params):
         pass
