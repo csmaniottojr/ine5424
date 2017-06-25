@@ -2,8 +2,7 @@ from enum import Enum
 
 class MessageType(Enum):
     UNKNOWN_MESSAGE = 0
-    FIRST_TYPE = 1
-    REGISTER_REQUEST = FIRST_TYPE
+    REGISTER_REQUEST = 1
     REGISTER_RESPONSE = 2
     REGISTER_OBJECT_REQUEST = 3
     REGISTER_OBJECT_RESPONSE = 4
@@ -15,7 +14,6 @@ class MessageType(Enum):
     REGISTER_OPTION_RESPONSE = 10
     REGISTER_END_OBJECT_REQUEST = 11
     REGISTER_END_OBJECT_RESPONSE = 12
-    LAST_TYPE = REGISTER_END_OBJECT_RESPONSE
 
     @classmethod
     def end_messages(cls):

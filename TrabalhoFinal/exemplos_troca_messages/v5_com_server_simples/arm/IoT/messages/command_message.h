@@ -1,6 +1,8 @@
 #ifndef command_message_h__
 #define command_message_h__
 
+#include "../objects/smartobject.h"
+
 using namespace EPOS;
 
 namespace IoT {

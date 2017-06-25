@@ -2,17 +2,9 @@
 #include <machine.h>
 #include <alarm.h>
 #include <thread.h>
-#include <usb.h>
-
-#include <tstp.h>
 
 #include "IoT/usb_manager.h"
 #include "IoT/iot_gateway.h"
-#include "IoT/messages/register_message.h"
-#include "IoT/messages/register_serialization.h"
-#include "IoT/messages/command_serialization.h"
-#include "IoT/objects/smartobject.h"
-#include "IoT/objects/parameter_float.h"
 
 using namespace EPOS;
 using namespace IoT;
@@ -22,9 +14,9 @@ OStream cout;
 //IDs: 101559240 e 101560330 
 int main(){
     NIC * nic = new NIC();
-    IoT::IotGateway gateway(IEEE802_15_4::ELP, nic);
-    cout << "# Inicializando o IoT Gateway..." << endl;
-    cout << "# My ID: " << *((SmartObject::ID*) &Machine::id()[4]) << endl << endl;
+    IotGateway gateway(IEEE802_15_4::ELP, nic);
+    // cout << "# Inicializando o IoT Gateway..." << endl;
+    // cout << "# My ID: " << *((SmartObject::ID*) &Machine::id()[4]) << endl << endl;
 
     Thread * thread = new Thread(&USBManager::run, &gateway);
     while(1){

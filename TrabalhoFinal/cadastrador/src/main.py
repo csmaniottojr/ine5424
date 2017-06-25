@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 import config_bd
 
 if __name__ == '__main__':
-
+    print("Iniciando o app...")
     engine = create_engine('mysql+pymysql://{}:{}@{}/{}'.format(
         config_bd.DB_USER,
         config_bd.DB_PASSWORD,

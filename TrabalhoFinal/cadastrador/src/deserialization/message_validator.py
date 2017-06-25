@@ -3,8 +3,13 @@ from deserialization.message_type import MessageType
 class MessageValidator(object):
 
     def check_if_message_is_complete(self, barray):
+        length = len(barray)
+        if length < 2:
+            return False
+        if chr(barray[0]) == '#' and chr(barray[-1]) == '\n':
+            return True
         size = barray[1]
-        return size == len(barray)
+        return size == length
 
 
     def check_if_is_end_message(self, barray_list):

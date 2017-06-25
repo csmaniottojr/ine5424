@@ -3,11 +3,12 @@
 
 #include <ieee802_15_4.h>
 #include <usb.h>
-#include "iot_gateway.h"
 #include "../cheats/led.h"
 
 #include "messages/command_message.h"
 #include "messages/register_message.h"
+#include "objects/smartobject.h"
+#include "iot_gateway.h"
 
 using namespace EPOS;
 

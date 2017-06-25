@@ -18,13 +18,15 @@ class MessageDeserializer(object):
         first_msg_type = MessageType(first_barray[6])
 
         if first_msg_type == MessageType.REGISTER_REQUEST:
-            print (self.model_controller.check_if_exists(emote_id))
+            print ('exists: ', self.model_controller.check_if_exists(emote_id))
             return self.model_controller.check_if_exists(emote_id)
 
         elif first_msg_type == MessageType.REGISTER_OBJECT_REQUEST:
 
             so_name = first_barray[7:size].decode('utf-8')
             smart_object = SmartObject(so_name, emote_id)
+
+            print('so name: ', so_name)
 
             i_line = 0
             while i_line < len(lines) - 1:

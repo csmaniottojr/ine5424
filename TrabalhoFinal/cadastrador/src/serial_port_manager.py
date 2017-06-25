@@ -26,11 +26,14 @@ class SerialPortManager(object):
                 while not self.is_end_of_line(line):
                     _byte = ser.read()
                     print (_byte)
-                    print (line)
                     line += bytearray(_byte)
                 else:
-                    ser.write(self.msg_responser.response(line))
-                    lines.append(line)
+                    if chr(line[0]) == '#':
+                        print(line)
+                    else:
+                        n = ser.write(self.msg_responser.response(line))
+                        print('escritos %d bytes!' % n)
+                        lines.append(line)
             else:
                 self.process_lines(lines)
 
@@ -49,5 +52,5 @@ class SerialPortManager(object):
 
 
     def process_lines(self, lines):
-        msg_deserializer = MessageDeserializer()
+        msg_deserializer = MessageDeserializer(self.model_controller)
         msg_deserializer.deserialize(lines)
