@@ -62,6 +62,9 @@ namespace IoT {
             _update->operator () ( );
         }
 
+        const float * data ( ) {
+            return _data;
+        }
 
 
     } ;

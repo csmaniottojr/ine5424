@@ -64,7 +64,10 @@ namespace IoT {
             _update->operator () ( );
         }
 
-        
+        const bool * data ( ) {
+            return _data;
+        }
+
     } ;
 }
 

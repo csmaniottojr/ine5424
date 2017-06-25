@@ -90,6 +90,7 @@ namespace IoT {
         int combo_value ( ) {
             if ( getType ( ) == Parameter_Type::COMBO ) {
                 _type->update ( )->operator () ( );
+                update ( * ( static_cast < Parameter_Combo* > ( _type )->data ( ) ) );
                 return _index;
             }
         }
@@ -97,6 +98,7 @@ namespace IoT {
         float float_value ( ) {
             if ( getType ( ) == Parameter_Type::FLOAT ) {
                 _type->update ( )->operator () ( );
+                update ( * ( static_cast < Parameter_Float* > ( _type )->data ( ) ) );
                 return _value;
             }
         }
@@ -104,6 +106,7 @@ namespace IoT {
         bool bool_value ( ) {
             if ( getType ( ) == Parameter_Type::BOOLEAN ) {
                 _type->update ( )->operator () ( );
+                update ( * ( static_cast < Parameter_Boolean* > ( _type )->data ( ) ) );
                 return _flag;
             }
         }

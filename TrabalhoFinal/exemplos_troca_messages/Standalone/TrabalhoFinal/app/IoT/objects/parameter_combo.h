@@ -64,6 +64,10 @@ namespace IoT {
             }
         }
 
+        const int * data ( ) {
+            return _current_option_index;
+        }
+
     } ;
 
 };
