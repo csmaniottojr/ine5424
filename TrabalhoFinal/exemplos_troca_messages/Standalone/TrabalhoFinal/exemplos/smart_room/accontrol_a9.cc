@@ -21,7 +21,7 @@ OStream cout;
 //UART uart;
 
 // FIXME: These guys shouldn't be global
-GPIO *ir_sig,*led;
+GPIO *ir_sig,*led_data;
 bool coil0_state = false;
 bool led_state = false;
 
@@ -112,7 +112,7 @@ public:
                     _ac.turn_ac_on();
                 else
                     _ac.turn_ac_off();
-                led->set(led_state);
+                led_data->set(led_state);
                 break;
             default:
                 break;
@@ -130,7 +130,7 @@ int main()
     cout << "Pins:" << endl << "   ir_sig: PC3" << endl;
 
     ir_sig = new GPIO('b', 0, GPIO::OUTPUT);
-    led = new GPIO('c',3, GPIO::OUTPUT);
+    led_data = new GPIO('c',3, GPIO::OUTPUT);
 
     // FIXME: Useless shit below
     //AC_Control ac(ir_sig);

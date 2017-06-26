@@ -16,7 +16,7 @@ const char Traits<Build>::ID[Traits<Build>::ID_SIZE] = {'B','0'};
 const unsigned char MODBUS_ID = 0xB0;
 
 OStream cout;
-GPIO * led, * coil0, * coil1;
+GPIO * led_data, * coil0, * coil1;
 bool led_state = false;
 bool coil0_state = false;
 bool coil1_state = false;
@@ -121,7 +121,7 @@ public:
 
                 coil0->set(coil0_state);
                 coil1->set(coil1_state);
-                led->set(led_state);
+                led_data->set(led_state);
                 break;
 
             case READ_HOLDING_REGISTER:
@@ -164,7 +164,7 @@ int main()
     pm0 = new Power_Meter(ADC::SINGLE_ENDED_ADC7, ADC::SINGLE_ENDED_ADC5, ADC::GND);
     pm1 = new Power_Meter(ADC::SINGLE_ENDED_ADC7, ADC::SINGLE_ENDED_ADC6, ADC::GND);
 
-    led->set(led_state);
+    led_data->set(led_state);
     coil0->set(coil0_state);
     coil1->set(coil1_state);
 

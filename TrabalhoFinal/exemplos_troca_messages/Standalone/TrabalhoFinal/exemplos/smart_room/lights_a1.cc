@@ -18,7 +18,7 @@ const unsigned char MODBUS_ID = 0xA1;
 const unsigned int PWM_FREQUENCY = 10000; // 10 KHz
 
 OStream cout;
-GPIO * led, * coil;
+GPIO * led_data, * coil;
 eMote3_PWM * pwm;
 bool led_state = false;
 bool coil_state = false;
@@ -148,7 +148,7 @@ public:
                 led_state = output_value;
 
                 coil->set(coil_state);
-                led->set(led_state);
+                led_data->set(led_state);
                 break;
             default:
                 break;
@@ -167,10 +167,10 @@ int main()
          << "    Power meter: PA7 and PA5" << endl;
 
     pm = new Power_Meter(ADC::SINGLE_ENDED_ADC7, ADC::SINGLE_ENDED_ADC5, ADC::GND);
-    led = new GPIO('c',3, GPIO::OUTPUT);
+    led_data = new GPIO('c',3, GPIO::OUTPUT);
     coil = new GPIO('d',3, GPIO::OUTPUT);
 
-    led->set(led_state);
+    led_data->set(led_state);
     coil->set(coil_state);
 
     NIC * nic = new NIC();

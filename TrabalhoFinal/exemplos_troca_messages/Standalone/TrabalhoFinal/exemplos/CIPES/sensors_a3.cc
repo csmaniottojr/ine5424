@@ -36,7 +36,7 @@ sensor_data_type sense_humidity()
 }
 
 
-GPIO * led;
+GPIO * led_data;
 bool led_state = false;
 
 // These two should be the same

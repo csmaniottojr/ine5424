@@ -9,7 +9,7 @@ using namespace EPOS;
 
 namespace IoT {
 
-    class Parameter_Float : public Parameter_Type
+    class ParameterFloat : public ParameterType
     {
     public:
         static const unsigned char VALUE_SIZE = sizeof (float );
@@ -18,22 +18,22 @@ namespace IoT {
 
     public:
 
-        Parameter_Float ( )
-        : Parameter_Type ( ) {
+        ParameterFloat ( )
+        : ParameterType ( ) {
             this->_type = FLOAT;
             this->_update = new Callback ( ); //Does nothing!
         }
 
-        Parameter_Float ( Callback * update ,  float * data, float max_, float min_ )
-        : Parameter_Type ( ) , _data ( data ) {
-            min ( min_ );
-            max ( max_ );
+        ParameterFloat ( Callback * update ,  float * data, float max_, float min_ )
+        : ParameterType ( ) , _data ( data ) {
+            setMinValue ( min_ );
+            setMaxValue ( max_ );
             this-> _update  = ( update );
             this->_type = FLOAT;
         }
 
         /* Setters */
-        void min ( float min ) {
+        void setMinValue ( float min ) {
             if ( _min != 0 )
                 delete _min;
 
@@ -45,7 +45,7 @@ namespace IoT {
             _min = value;
         }
 
-        void max ( float max ) {
+        void setMaxValue ( float max ) {
             if ( _max != 0 )
                 delete _max;
 
@@ -62,7 +62,7 @@ namespace IoT {
             _update->operator () ( );
         }
 
-        const float * data ( ) {
+        const float * getData ( ) {
             return _data;
         }
 

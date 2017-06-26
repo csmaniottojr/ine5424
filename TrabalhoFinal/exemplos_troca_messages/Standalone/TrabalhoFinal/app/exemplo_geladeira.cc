@@ -72,23 +72,23 @@ void configurar_geladeira( ) {
 
 int main( ) {
     //Cria o objeto inteligente
-    Smart_Object geladeira( "Geladeira" );
+    SmartObject geladeira( "Geladeira" );
     //Cria um servico
     Service configura_geladeira( "Configurar Geladeira", new Callback( &configurar_geladeira ) );
-    geladeira.add_service( &configura_geladeira );
+    geladeira.addService( &configura_geladeira );
     //Cria o parâmetro Turbo
-    Parameter_Boolean ptTurbo( new Callback( &atualizar_turbo ), turbo );
+    ParameterBoolean ptTurbo( new Callback( &atualizar_turbo ), turbo );
     Parameter pTurbo ( "Turbo", 1, &ptTurbo );
     configura_geladeira.addParameter( &pTurbo );
     //Cria o parametro temperatura
-    Parameter_Float ptTemperatura ( new Callback( &atualizar_temperatura ), temperatura_atual, -20, 40 );
+    ParameterFloat ptTemperatura ( new Callback( &atualizar_temperatura ), temperatura_atual, -20, 40 );
     Parameter pTemperatura ( "Temperatura Atual", 2, &ptTemperatura );
     configura_geladeira.addParameter( &pTemperatura );
     //Cria o parametro potencia
-    Parameter_Combo ptPotencia ( new Callback( &atualizar_potencia ), potencia_atual );
-    indexes_potencia[Potencias::BAIXA] = ptPotencia.add_option( "Baixa" );
-    indexes_potencia[Potencias::MEDIA] = ptPotencia.add_option( "Média" );
-    indexes_potencia[Potencias::ALTA] = ptPotencia.add_option( "Alta" );
+    ParameterCombo ptPotencia ( new Callback( &atualizar_potencia ), potencia_atual );
+    indexes_potencia[Potencias::BAIXA] = ptPotencia.addOption( "Baixa" );
+    indexes_potencia[Potencias::MEDIA] = ptPotencia.addOption( "Média" );
+    indexes_potencia[Potencias::ALTA] = ptPotencia.addOption( "Alta" );
     Parameter pPotencia ( "Potencia", 3, &ptPotencia );
     configura_geladeira.addParameter( &pPotencia );
     //ETAPA DE CONFIGURAÇÃO COMPLETA
@@ -102,9 +102,9 @@ int main( ) {
     pPotencia.update( ( int ) 2 );
     configura_geladeira.actuate( );
     //Simulando que deu um "get" na temperatura atual
-    float temp = pTemperatura.float_value( );
+    float temp = pTemperatura.floatValue( );
     //Agora digamos que por alguma razão eu queira verificar se a geladeira está em turbo
-    bool turbo = pTurbo.bool_value( );
+    bool turbo = pTurbo.boolValue( );
 
 
 

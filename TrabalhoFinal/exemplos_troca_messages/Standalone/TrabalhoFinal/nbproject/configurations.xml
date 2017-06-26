@@ -714,7 +714,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE} APPLICATION=exemplo_geladeira </buildCommand>
+          <buildCommand>${MAKE} APPLICATION=iot_test </buildCommand>
           <cleanCommand>${MAKE} veryclean</cleanCommand>
           <executablePath></executablePath>
           <cTool>

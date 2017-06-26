@@ -12,7 +12,7 @@ using namespace EPOS;
 
 #define MAX_MSG_SIZE 100 //bytes
 OStream cout;
-GPIO * led;
+GPIO * led_data;
 NIC * nic;
 const char Traits<Build>::ID[Traits<Build>::ID_SIZE] = {'F','0'};
 NIC::Address to;
@@ -280,8 +280,8 @@ int main()
     cout << "Hello main" << endl;
     char data[MAX_MSG_SIZE];
 
-    led = new GPIO('c',3, GPIO::OUTPUT);
-    led->set(1);
+    led_data = new GPIO('c',3, GPIO::OUTPUT);
+    led_data->set(1);
 
     nic = new NIC();
     NIC::Address addr;

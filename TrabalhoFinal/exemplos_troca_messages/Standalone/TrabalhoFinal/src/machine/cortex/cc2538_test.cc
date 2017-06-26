@@ -13,7 +13,7 @@ const static unsigned int delay_time = 2000000;
 const static bool use_receive = true;
 
 bool led_value;
-GPIO * led;
+GPIO * led_data;
 NIC::Address peer;
 
 int sender(NIC * nic)
@@ -58,7 +58,7 @@ public:
     {
         cout << "Received buffer " << reinterpret_cast<void *>(b) << endl;
         led_value = !led_value;
-        led->set(led_value);
+        led_data->set(led_value);
         Frame * f = reinterpret_cast<Frame *>(b->frame());
         auto d = f->data<data_type>();
         auto from = f->src();
@@ -92,7 +92,7 @@ int receive(NIC * nic)
             size = nic->receive(&from, &prot, data, 128);
         }
         led_value = !led_value;
-        led->set(led_value);
+        led_data->set(led_value);
         cout << endl << "=====================" << endl;
         cout << "Received " << size << " bytes of payload from " << from << " :" << endl;
         for(int i=0; i<size/sizeof(Receiver::data_type); i++)
@@ -106,9 +106,9 @@ int main()
 {
     cout << "CC2538 Radio test" << endl;
 
-    led = new GPIO('C',3, GPIO::OUT);
+    led_data = new GPIO('C',3, GPIO::OUT);
     led_value = true;
-    led->set(led_value);
+    led_data->set(led_value);
 
     NIC * nic = new NIC();
     NIC::Address me = nic->address();

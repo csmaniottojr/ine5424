@@ -10,7 +10,7 @@
 using namespace EPOS;
 
 OStream cout;
-GPIO * led;
+GPIO * led_data;
 UART uart(Traits<UART>::DEF_BAUD_RATE, Traits<UART>::DEF_DATA_BITS, Traits<UART>::DEF_PARITY, Traits<UART>::DEF_STOP_BITS, 1);
 
 bool debugging_mode = false;
@@ -220,8 +220,8 @@ int main()
 	// Start accepting authentication requests
 	s->accepting_connections = true;
 
-    led = new GPIO{'c', 3, GPIO::OUTPUT};
-    led->set();
+    led_data = new GPIO{'c', 3, GPIO::OUTPUT};
+    led_data->set();
     Receiver receiver(s);
     Sender sender(s);
 

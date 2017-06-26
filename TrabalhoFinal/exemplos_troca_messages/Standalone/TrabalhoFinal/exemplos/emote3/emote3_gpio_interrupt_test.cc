@@ -6,13 +6,13 @@ using namespace EPOS;
 
 OStream cout;
 
-GPIO * led;
+GPIO * led_data;
 
 void handler(GPIO * pin)
 {
     cout << "User handler" << endl;
     cout << "GPIO pin state: " << pin->get() << endl;
-    led->set(pin->get());
+    led_data->set(pin->get());
 }
 
 void other(GPIO * pin)
@@ -67,9 +67,9 @@ void test_input()
 int main()
 {
     cout << "Creating LED" << endl;
-    led = new GPIO('c', 3, GPIO::OUTPUT);
+    led_data = new GPIO('c', 3, GPIO::OUTPUT);
     cout << "Clearing LED" << endl;
-    led->clear();
+    led_data->clear();
 
     //test_output();
     test_input();

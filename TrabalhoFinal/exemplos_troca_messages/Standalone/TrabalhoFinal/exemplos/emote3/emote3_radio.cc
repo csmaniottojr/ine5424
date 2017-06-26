@@ -23,7 +23,7 @@ void sender() {
 }
 
 bool led_value;
-GPIO * led;
+GPIO * led_data;
 
 class Receiver : public IEEE802_15_4::Observer {
     typedef char data_type;
@@ -42,7 +42,7 @@ public:
         cout << "Received buffer" << reinterpret_cast<void *> (b) << endl;
         if (p == _prot) {
             led_value = !led_value;
-            led->set(led_value);
+            led_data->set(led_value);
             Frame * f = b->frame();
             auto d = f->data<data_type>();
             cout << endl << "=====================" << endl;
@@ -60,9 +60,9 @@ private:
 };
 
 void receiver() {
-    led = new GPIO('C', 3, GPIO::OUT);
+    led_data = new GPIO('C', 3, GPIO::OUT);
     led_value = true;
-    led->set(led_value);
+    led_data->set(led_value);
     cout << "Hello, I am the receiver." << endl;
     cout << "I will attach myself to the NIC and print every message I get." << endl;
     NIC * nic = new NIC();

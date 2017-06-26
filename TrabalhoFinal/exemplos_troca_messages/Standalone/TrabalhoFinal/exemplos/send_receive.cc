@@ -15,7 +15,7 @@ IEEE802_15_4::Address peer;
 //const char Traits<Build>::ID[Traits<Build>::ID_SIZE] = {'A','1'};
 
 bool led_value;
-GPIO * led;
+GPIO * led_data;
 class Receiver : public IEEE802_15_4::Observer
 {
 public:
@@ -34,7 +34,7 @@ public:
         if(p == _prot)
         {
             led_value = !led_value;
-            led->set(led_value);
+            led_data->set(led_value);
             Frame * f = b->frame();
             char * d = f->data<char>();
             cout << endl << "=====================" << endl;
@@ -57,10 +57,10 @@ int main()
 {
     cout << "Hello main" << endl;
 
-    led = new GPIO('C',3, GPIO::OUTPUT); // This works for eMote3
+    led_data = new GPIO('C',3, GPIO::OUTPUT); // This works for eMote3
 
     led_value = true;
-    led->set(led_value);
+    led_data->set(led_value);
 
     NIC * nic = new NIC();
     Receiver * r = new Receiver(0x1010, nic);

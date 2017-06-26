@@ -1,8 +1,13 @@
 #ifndef usb_manager_h__
 #define usb_manager_h__
 
-#include <modbus_ascii.h>
+#include <ieee802_15_4.h>
 #include <usb.h>
+#include "../cheats/led.h"
+
+#include "messages/command_message.h"
+#include "messages/register_message.h"
+#include "objects/smartobject.h"
 #include "iot_gateway.h"
 
 using namespace EPOS;
@@ -11,41 +16,43 @@ namespace IoT {
 
 class USBManager {
 protected:
+    static const unsigned int MAX_LENGTH = IEEE802_15_4::Frame::MTU;
 public:
     static int run(IotGateway * _gateway){
         OStream cout;
-        USB usb;
+        char _msg[MAX_LENGTH];
 
-        char _msg[Modbus_ASCII::MSG_LEN];
-        memset(_msg, '\0', Modbus_ASCII::MSG_LEN);
         while(true){
-            int len;
-			bool ok_message = false;
-            memset(_msg, '\0', Modbus_ASCII::MSG_LEN);
-			while(!ok_message) {
-				ok_message = true;
-				len = 0;
-				_msg[len++] = usb.get();
-				_msg[len++] = usb.get();
-                cout << "Lido: " << _msg << endl;
-				while(!((_msg[len-2] == '\r') 
-                    && (_msg[len-1] == '\n'))) {
-					_msg[len++] = usb.get();
-					if(len >= Modbus_ASCII::MSG_LEN) {
-						ok_message = false;
-						break;
-					}
-				}
-			}
-
+            int len = 0;
+            memset(_msg, '\0', MAX_LENGTH);
+            _msg[len++] = USB::get();
+            _msg[len++] = USB::get();
+            if(!isValidMsg(_msg[0], _msg[1]))
+                continue;
+            while(len < ((unsigned char)_msg[1])) {
+                _msg[len++] = USB::get();
+            }
             if(_gateway != 0){
-                char * msg = new char[len+1];
-                memset(msg, '\0', len+1);
+                char * msg = new char[len];
+                memset(msg, '\0', len);
                 memcpy(msg, _msg, len);
-                _gateway->receive(msg, len+1);
+                _gateway->receive(msg, len);
                 delete msg;
             }
         }
+    }
+
+    static void send(const char * msg, unsigned int size){
+        USB::put(msg, size);
+    }
+    
+protected:
+    static bool isValidMsg(char start_char, unsigned char size){
+        return ((start_char == RegisterMessage::START_CHAR && 
+            size >= RegisterMessage::BASE_SIZE) ||
+                (start_char == CommandMessage::START_CHAR && 
+            size >= CommandMessage::BASE_SIZE)) &&
+            size <= MAX_LENGTH;
     }
 };
 

@@ -8,7 +8,7 @@ using namespace EPOS;
 
 namespace IoT {
 
-    class Parameter_Boolean : public Parameter_Type
+    class ParameterBoolean : public ParameterType
     {
     public:
         static const unsigned char VALUE_SIZE = sizeof (bool );
@@ -16,25 +16,30 @@ namespace IoT {
         bool * _data;
     public:
 
-        Parameter_Boolean ( bool * data )
-        : Parameter_Type ( ), _data ( data ) {
-            min ( false );
-            max ( true );
+        ParameterBoolean ( ) {
+            _update = new Callback ( );
+            _data = 0;
+        }
+
+        ParameterBoolean ( bool * data )
+        : ParameterType ( ), _data ( data ) {
+            setMinValue ( false );
+            setMaxValue ( true );
             _update = new Callback ( ); //Does nothing!
             this->_type = BOOLEAN;
 
         }
 
-        Parameter_Boolean ( Callback * update, bool * data )
-        : Parameter_Type ( ), _data ( data ) {
-            min ( false );
-            max ( true );
+        ParameterBoolean ( Callback * update, bool * data )
+        : ParameterType ( ), _data ( data ) {
+            setMinValue ( false );
+            setMaxValue ( true );
             this->_update = update;
             this->_type = BOOLEAN;
         }
 
         /* Setters */
-        void min ( bool min ) {
+        void setMinValue ( bool min ) {
 
             if ( _min != 0 )
                 delete _min;
@@ -47,7 +52,7 @@ namespace IoT {
             _min = value;
         }
 
-        void max ( bool max ) {
+        void setMaxValue ( bool max ) {
             if ( _max != 0 )
                 delete _max;
 
@@ -64,7 +69,7 @@ namespace IoT {
             _update->operator () ( );
         }
 
-        const bool * data ( ) {
+        const bool * getData ( ) {
             return _data;
         }
 

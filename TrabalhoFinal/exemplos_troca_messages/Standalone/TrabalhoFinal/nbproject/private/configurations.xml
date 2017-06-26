@@ -10,13 +10,13 @@
         </df>
         <df name="IoT">
           <df name="messages">
+            <in>command_message.h</in>
+            <in>command_serialization.h</in>
             <in>modbus_message.h</in>
             <in>register_message.h</in>
+            <in>register_serialization.h</in>
             <in>serialization_modbus.h</in>
             <in>serialization_register.h</in>
-          </df>
-          <df name="modbus">
-            <in>modbus.h</in>
           </df>
           <df name="objects">
             <in>callback.h</in>

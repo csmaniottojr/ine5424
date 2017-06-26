@@ -12,7 +12,7 @@ namespace IoT {
     typedef Simple_List<char> Option_List;
     typedef List_Elements::Singly_Linked<char> Option_List_Element;
 
-    class Parameter_Combo : public Parameter_Type
+    class ParameterCombo : public ParameterType
     {
     protected:
         Option_List _options;
@@ -20,23 +20,23 @@ namespace IoT {
         //        int & _data = _current_option_index;
     public:
 
-        Parameter_Combo ( Callback * update , int* data )
-        : Parameter_Type ( ) , _current_option_index ( data ) {
+        ParameterCombo ( Callback * update , int* data )
+        : ParameterType ( ) , _current_option_index ( data ) {
             this->_update = update;
             this->_type = COMBO;
         }
 
-        Parameter_Combo ( )
-        : Parameter_Type ( ) {
+        ParameterCombo ( )
+        : ParameterType ( ) {
             this->_update = new Callback ( );
             this->_type = COMBO;
         }
 
-        Option_List * get_options_list ( ) {
+        Option_List * getOptionsList ( ) {
             return &_options;
         }
 
-        const char* get_option ( int index ) {
+        const char* getOption ( int index ) {
             auto i = _options.begin ( );
             for ( ; index > 0; index-- ) {
                 i++;
@@ -46,7 +46,7 @@ namespace IoT {
         }
 
         /* Adders */
-        int add_option ( const char * option ) {
+        int addOption ( const char * option ) {
             unsigned int length = strlen ( option );
             char * copy = new char[length + 1];
             strcpy ( copy, option );
@@ -64,7 +64,7 @@ namespace IoT {
             }
         }
 
-        const int * data ( ) {
+        const int * getData ( ) {
             return _current_option_index;
         }
 

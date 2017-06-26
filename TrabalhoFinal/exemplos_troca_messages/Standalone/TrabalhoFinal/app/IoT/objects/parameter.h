@@ -12,10 +12,12 @@ namespace IoT {
 
     class Parameter
     {
+    public:
+        typedef unsigned short RegisterIdValue;
     protected:
         const char * _name;
-        unsigned short _register_id;
-        Parameter_Type *_type;
+        RegisterIdValue _register_id;
+        ParameterType *_type;
 
         union
         {
@@ -26,39 +28,51 @@ namespace IoT {
 
     public:
 
-        Parameter ( const char * name, unsigned short registerId, Parameter_Type * type )
+        Parameter ( const char * name, unsigned short registerId, ParameterType * type )
         : _name ( name ), _register_id ( registerId ), _type ( type ) { }
 
         /* Getters */
-        const char * name ( ) {
+        const char * getName ( ) {
             return _name;
         }
 
-        unsigned short register_id ( ) {
+        unsigned short getRegisterId ( ) {
             return _register_id;
         }
 
-        Parameter_Type::Type getType ( ) {
-            return _type->type ( );
+        ParameterType::Type getType ( ) {
+            return _type->getType ( );
         }
 
-        Parameter_Type * getParameterType ( ) {
+        ParameterType * getParameterType ( ) {
             return _type;
         }
 
+        const char * getMinValue ( ) {
+            return _type->getMinValue ( );
+        }
+
+        const char * getMaxValue ( ) {
+            return _type->getMaxValue ( );
+        }
+
+        const char * getOptions ( ) {
+            return _type->getOptions ( );
+        }
+
         void update ( bool value ) {
-            if ( _type->type ( ) == Parameter_Type::BOOLEAN ) {
-                static_cast < Parameter_Boolean * > ( _type )->update ( value );
+            if ( _type->getType ( ) == ParameterType::BOOLEAN ) {
+                static_cast < ParameterBoolean * > ( _type )->update ( value );
                 _flag = value;
             }
         }
 
         void update ( float value ) {
-            if ( _type->type ( ) == Parameter_Type::FLOAT ) {
-                static_cast < Parameter_Float * > ( _type )->update ( value );
+            if ( _type->getType ( ) == ParameterType::FLOAT ) {
+                static_cast < ParameterFloat * > ( _type )->update ( value );
                 float max, min;
-                max = *( float* ) ( _type->max ( ) + 1 );
-                min = *( float* ) ( _type->min ( ) + 1 );
+                max = *( float* ) ( _type->getMaxValue ( ) + 1 );
+                min = *( float* ) ( _type->getMinValue ( ) + 1 );
 
                 if ( value <= max && value >= min ) {
                     _value = value;
@@ -67,46 +81,46 @@ namespace IoT {
         }
 
         void update ( int value ) {
-            if ( _type->type ( ) == Parameter_Type::COMBO ) {
-                static_cast < Parameter_Combo * > ( _type )->update ( value );
+            if ( _type->getType ( ) == ParameterType::COMBO ) {
+                static_cast < ParameterCombo * > ( _type )->update ( value );
                 _index = value;
             }
         }
 
-        int insert_combo ( char * value ) {
-            if ( getType ( )  == Parameter_Type::COMBO ) {
-                return static_cast < Parameter_Combo* > ( _type )->add_option ( value );
+        int insertCombo ( char * value ) {
+            if ( getType ( )  == ParameterType::COMBO ) {
+                return static_cast < ParameterCombo* > ( _type )->addOption ( value );
             }
             return -1; //Not a COMBO!
         }
 
-        char * get_combo ( int index ) {
-            if ( getType ( ) == Parameter_Type::COMBO ) {
-                return ( char* ) static_cast < Parameter_Combo* > ( _type )->get_option ( index );
+        char * getCombo ( int index ) {
+            if ( getType ( ) == ParameterType::COMBO ) {
+                return ( char* ) static_cast < ParameterCombo* > ( _type )->getOption ( index );
             }
             return 0;
         }
 
-        int combo_value ( ) {
-            if ( getType ( ) == Parameter_Type::COMBO ) {
+        int comboValue ( ) {
+            if ( getType ( ) == ParameterType::COMBO ) {
                 _type->update ( )->operator () ( );
-                update ( * ( static_cast < Parameter_Combo* > ( _type )->data ( ) ) );
+                update ( * ( static_cast < ParameterCombo* > ( _type )->getData ( ) ) );
                 return _index;
             }
         }
 
-        float float_value ( ) {
-            if ( getType ( ) == Parameter_Type::FLOAT ) {
+        float floatValue ( ) {
+            if ( getType ( ) == ParameterType::FLOAT ) {
                 _type->update ( )->operator () ( );
-                update ( * ( static_cast < Parameter_Float* > ( _type )->data ( ) ) );
+                update ( * ( static_cast < ParameterFloat* > ( _type )->getData ( ) ) );
                 return _value;
             }
         }
 
-        bool bool_value ( ) {
-            if ( getType ( ) == Parameter_Type::BOOLEAN ) {
+        bool boolValue ( ) {
+            if ( getType ( ) == ParameterType::BOOLEAN ) {
                 _type->update ( )->operator () ( );
-                update ( * ( static_cast < Parameter_Boolean* > ( _type )->data ( ) ) );
+                update ( * ( static_cast < ParameterBoolean* > ( _type )->getData ( ) ) );
                 return _flag;
             }
         }

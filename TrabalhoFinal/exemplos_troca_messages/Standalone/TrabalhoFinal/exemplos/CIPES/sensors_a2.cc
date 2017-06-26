@@ -16,7 +16,7 @@ using namespace EPOS;
 OStream cout;
 UART uart;
 
-GPIO * led, * coil0;
+GPIO * led_data, * coil0;
 bool led_state = false;
 
 const auto ADC_PIN = ADC::SINGLE_ENDED_ADC6;
@@ -118,10 +118,10 @@ int main()
          << "   presence(coil0): PB0" << endl
          << "   luminosity: PA6" << endl;
 
-    led = new GPIO('c',3, GPIO::OUTPUT);
+    led_data = new GPIO('c',3, GPIO::OUTPUT);
     coil0 = new GPIO('b',0, GPIO::INPUT);
 
-    led->set(false);
+    led_data->set(false);
 
     NIC * nic = new NIC();
     nic->address(NIC::Address::RANDOM);
@@ -132,7 +132,7 @@ int main()
 
     while(true)
     {
-        led->set(sense_presence());
+        led_data->set(sense_presence());
     }
 
     return 0;

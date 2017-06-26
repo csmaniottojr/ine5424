@@ -10,7 +10,7 @@ using namespace EPOS;
 
 namespace IoT {
 
-    class Parameter_Type
+    class ParameterType
     {
     public:
         typedef unsigned char Type;
@@ -25,28 +25,33 @@ namespace IoT {
     protected:
         const char * _min;
         const char * _max;
+        const char * _options;
         /*Update function is called everytime the parameter is updated!*/
         Callback * _update; //Is a pointer already!
         Type _type;
 
     public:
 
-        Parameter_Type ( )
-        : _min ( 0 ), _max ( 0 ) {
+        ParameterType ( )
+        : _min ( 0 ), _max ( 0 ), _options ( 0 ) {
             _type = NONE;
         }
 
         /* Getters */
-        virtual Type type ( ) {
+        virtual Type getType ( ) {
             return _type;
         };
 
-        const char * min ( ) {
+        const char * getMinValue ( ) {
             return _min;
         }
 
-        const char * max ( ) {
+        const char * getMaxValue ( ) {
             return _max;
+        }
+
+        const char * getOptions ( ) {
+            return _options;
         }
 
         Callback* update ( ) {

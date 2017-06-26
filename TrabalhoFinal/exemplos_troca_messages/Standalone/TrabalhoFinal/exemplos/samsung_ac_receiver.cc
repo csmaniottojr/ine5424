@@ -14,7 +14,7 @@ using namespace EPOS;
 const unsigned int PWM_FREQUENCY = 37900; // 37.9 KHz
 
 OStream cout;
-GPIO * led;
+GPIO * led_data;
 
 bool led_value;
 
@@ -288,7 +288,7 @@ public:
         if(p == Traits<Secure_NIC>::PROTOCOL_ID)
         {
             led_value = !led_value;
-            led->set(led_value);
+            led_data->set(led_value);
             Frame * f = b->frame();
             Message * d = f->data<Message>();
             cout << endl << "=====================" << endl;
@@ -353,7 +353,7 @@ int main(void)
 {
     cout << "Samsung Air Conditioning Controller" << endl;
 
-    led = new GPIO('c',3, GPIO::OUTPUT);
+    led_data = new GPIO('c',3, GPIO::OUTPUT);
     NIC * nic = new NIC();
     NIC::Address addr;
     addr[0] = Traits<Build>::ID[0];

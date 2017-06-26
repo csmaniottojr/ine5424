@@ -7,11 +7,11 @@ using namespace EPOS;
 const unsigned int DEFAULT_TEST_N_TIMES = 200;
 const NIC::Protocol NIC_PROTOCOL = 42;
 
-GPIO * led;
+GPIO * led_data;
 
 void busy_wait(unsigned int limit = 0x3fffff) { for(volatile unsigned int i=0; i<limit; i++); }
 
-void blink_led(const int times = 10, const unsigned int delay = 0xffff, GPIO * _led = led)
+void blink_led(const int times = 10, const unsigned int delay = 0xffff, GPIO * _led = led_data)
 {
     for(int i=0;i<times;i++)
     {
@@ -24,7 +24,7 @@ void blink_led(const int times = 10, const unsigned int delay = 0xffff, GPIO * _
 
 void fail()
 {
-    led->set(true);
+    led_data->set(true);
     while(1);
 }
 
@@ -102,7 +102,7 @@ void success()
 
 int main()
 {
-    led = new GPIO('c', 3, GPIO::OUTPUT);
+    led_data = new GPIO('c', 3, GPIO::OUTPUT);
     blink_led();
     
     test_uart();
