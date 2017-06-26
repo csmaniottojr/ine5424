@@ -103,6 +103,8 @@ int main( ) {
     configura_geladeira.actuate( );
     //Simulando que deu um "get" na temperatura atual
     float temp = pTemperatura.float_value( );
+    //Agora digamos que por alguma razão eu queira verificar se a geladeira está em turbo
+    bool turbo = pTurbo.bool_value( );
 
 
 

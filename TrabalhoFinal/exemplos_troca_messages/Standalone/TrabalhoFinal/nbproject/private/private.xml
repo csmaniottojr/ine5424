@@ -11,12 +11,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_boolean.h</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_float.h</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/include/utility/random.h</file>
             <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parametertype.h</file>
-            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_combo.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/exemplo_geladeira.cc</file>
             <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/callback.h</file>
             <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/parameter_test.cc</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/iot_manager.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/smartobject.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/service.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_float.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/src/utility/string.cc</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/exemplos/smart_room/lights_a0.cc</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/IoT/objects/parameter_combo.h</file>
+            <file>file:/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal/app/iot_test.cc</file>
         </group>
     </open-files>
 </project-private>
