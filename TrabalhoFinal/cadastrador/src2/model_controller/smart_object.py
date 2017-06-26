@@ -10,3 +10,11 @@ class SmartObjectController(metaclass=ABCMeta):
     @abstractmethod
     def check_if_exists(self, device_id):
         pass
+
+    @abstractmethod
+    def list(self):
+        pass
+
+    @abstractmethod
+    def get_by_id(self, _id):
+        pass

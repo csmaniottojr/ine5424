@@ -12,6 +12,15 @@ class SmartObjectSQLAController(SmartObjectController):
         self.session.commit()
 
 
+    def list(self):
+        return self.session.query(SmartObject).all()
+
+
+    def get_by_id(self, _id):
+        return self.session.query(SmartObject).filter(
+            SmartObject.id == _id).first()
+
+
     def check_if_exists(self, device_id):
         smart_obj = self.session.query(SmartObject).filter(
             SmartObject.device_id == device_id).first()

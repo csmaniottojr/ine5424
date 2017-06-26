@@ -24,8 +24,8 @@ class SmartObject(Base):
         self.services.append(service)
 
     def __repr__(self):
-        return 'Smart Object: Id: {}, Nome: {}, Device_Id: {}, Servicos: {}'.\
-            format(self.id, self.name, self.device_id, self.services)
+        return 'Id: {}, Nome: {}, Device_Id: {}\n\t{}'.\
+            format(self.id, self.name, self.device_id, '\t'.join([str(serv) + '\n' for serv in self.services]))
 
 
 class Service(Base):
@@ -46,7 +46,7 @@ class Service(Base):
         self.parameters.append(parameter)
 
     def __repr__(self):
-        return '\nServico: {}\nParametros: {}'.format(self.name, self.parameters)
+        return 'Servico: {}\n\t\t{}'.format(self.name, '\t\t'.join([str(p) + '\n' for p in self.parameters]))
 
 
 class Parameter(AbstractConcreteBase, Base):
@@ -56,7 +56,7 @@ class Parameter(AbstractConcreteBase, Base):
         self.reg_id = reg_id
 
     def __repr__(self):
-        return '\nParametro: {}'.format(self.name)
+        return 'Parametro: {} ({})'.format(self.name, self.__class__.__name__[9:].lower())
 
 
 class ParameterBoolean(Parameter):
@@ -107,8 +107,8 @@ class ParameterOption(Parameter):
         self.options.append(option)
 
     def __repr__(self):
-        return super(ParameterOption, self).__repr__() + ' Opcoes: {}'.format(
-            self.options
+        return super(ParameterOption, self).__repr__() + ', opcoes: {}'.format(
+            ', '.join([str(op) for op in self.options])
         )
 
 
@@ -133,6 +133,10 @@ class ParameterInteger(Parameter):
         self.min_value = min_value
         self.max_value = max_value
 
+    def __repr__(self):
+        return super(ParameterInteger, self).__repr__() + ' min value: {},\
+        max value: {}'.format(self.min_value, self.max_value)
+
 
 class ParameterFloat(Parameter):
     __tablename__ = 'parameter_float'
@@ -155,6 +159,9 @@ class ParameterFloat(Parameter):
         self.min_value = min_value
         self.max_value = max_value
 
+    def __repr__(self):
+        return super(ParameterFloat, self).__repr__() + ' min value: {}, max value: {}'.format(self.min_value, self.max_value)
+
 
 class Option(Base):
     __tablename__ = 'option'
@@ -167,4 +174,4 @@ class Option(Base):
         self.name = name
 
     def __repr__(self):
-        return 'Opcao: {}'.format(self.name)
+        return self.name
