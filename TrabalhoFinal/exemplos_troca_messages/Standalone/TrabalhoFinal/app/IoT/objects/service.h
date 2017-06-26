@@ -16,10 +16,10 @@ namespace IoT {
         const char * _name;
         Parameter_List _parameters;
 
-       
+
     public:
 
-        Service ( const char * name)
+        Service ( const char * name )
         : _name ( name ) { }
 
         /* Getters */
@@ -29,6 +29,15 @@ namespace IoT {
 
         Parameter_List * getParameters ( ) {
             return &_parameters;
+        }
+
+        Parameter * findById ( Parameter::RegisterIdValue id ) {
+            for ( auto i = _parameters.head ( ); i; i = i->next ( ) ) {//For each parameter
+                if ( i->object ( )->getRegisterId ( ) == id ) {
+                    return i->object ( );
+                }
+            }
+            return 0;
         }
 
         /* Setters */
@@ -43,7 +52,7 @@ namespace IoT {
             _parameters.insert ( new_param );
         }
 
-        
+
     } ;
 
 };
