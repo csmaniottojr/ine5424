@@ -8,12 +8,12 @@ from models import SmartObject, Service, ParameterBoolean, ParameterFloat,\
     ParameterInteger, ParameterOption, Option
 
 class RegisterSerialization(object):
-    
+
     def __init__(self, model_controller):
         self.model_controller = model_controller
 
     # Formato das mensagens de Register:
-    # Byte 0            1          2       6          7        x   
+    # Byte 0            1          2       6          7        x
     #      +------------+----------+-------+----------+--- ~ --+
     #      | START_CHAR | msg size | SO id | msg type |  data  |
     #      +------------+----------+-------+----------+--- ~ --+
@@ -30,15 +30,15 @@ class RegisterSerialization(object):
     @staticmethod
     def deserialize_size(barray):
         return int(barray[1])
-    
+
     @staticmethod
     def deserialize_emote_id(barray):
         return Utils.unpack_with_byte_order("I", barray[2:6])
-    
+
     @staticmethod
     def deserialize_message_type(barray):
         return RegisterMessageType(int(barray[6]))
-    
+
     def deserialize(self, lines):
         first_barray = lines[0]
         size = first_barray[1]
@@ -79,21 +79,21 @@ class RegisterSerialization(object):
                             min_value = int.from_bytes(lines[i_line][11:15], byteorder=sys.byteorder)
                             max_value = int.from_bytes(lines[i_line][15:19], byteorder=sys.byteorder)
                             param_name = lines[i_line][19:size].decode('utf-8')
-                            param = ParameterInteger(param_name, reg_id, min_value, max_value)
+                            param = ParameterInteger(param_name, reg_id, read_only, min_value, max_value)
 
                         elif param_type == ParameterType.FLOAT:
                             min_value = struct.unpack('f', lines[i_line][11:15])[0]
                             max_value = struct.unpack('f', lines[i_line][15:19])[0]
                             param_name = lines[i_line][19:size].decode('utf-8')
-                            param = ParameterFloat(param_name, reg_id, min_value, max_value)
+                            param = ParameterFloat(param_name, reg_id, read_only, min_value, max_value)
 
                         elif param_type == ParameterType.BOOLEAN:
                             param_name = lines[i_line][13:size].decode('utf-8')
-                            param = ParameterBoolean(param_name, reg_id)
+                            param = ParameterBoolean(param_name, reg_id, read_only)
 
                         elif param_type == ParameterType.COMBO:
                             param_name = lines[i_line][11:size].decode('utf-8')
-                            param = ParameterOption(param_name, reg_id)
+                            param = ParameterOption(param_name, reg_id, read_only)
 
                             while RegisterMessageType(lines[i_line + 1][6]) == RegisterMessageType.REGISTER_OPTION_REQUEST:
                                 i_line += 1
@@ -107,5 +107,5 @@ class RegisterSerialization(object):
 
                 elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
                     print(smart_object)
-                    print("\n")            
+                    print("\n")
                     #self.model_controller.save(smart_object)

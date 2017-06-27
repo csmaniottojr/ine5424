@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base, AbstractConcreteBase
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Float, Boolean
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()
@@ -51,9 +51,10 @@ class Service(Base):
 
 class Parameter(AbstractConcreteBase, Base):
 
-    def __init__(self, name, reg_id):
+    def __init__(self, name, reg_id, read_only):
         self.name = name
         self.reg_id = reg_id
+        self.read_only = read_only
 
     def __repr__(self):
         return 'Parametro: {} ({})'.format(self.name, self.__class__.__name__[9:].lower())
@@ -65,6 +66,7 @@ class ParameterBoolean(Parameter):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     reg_id = Column(Integer)
+    read_only = Column(Boolean)
     service_id = Column(Integer, ForeignKey('service.id'))
 
     __mapper_args__ = {
@@ -73,8 +75,8 @@ class ParameterBoolean(Parameter):
     }
 
 
-    def __init__(self, name, reg_id):
-        super(ParameterBoolean, self).__init__(name, reg_id)
+    def __init__(self, name, reg_id, read_only):
+        super(ParameterBoolean, self).__init__(name, reg_id, read_only)
 
 
 association_table = Table('options', Base.metadata,
@@ -89,6 +91,7 @@ class ParameterOption(Parameter):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     reg_id = Column(Integer)
+    read_only = Column(Boolean)
     service_id = Column(Integer, ForeignKey('service.id'))
 
     options = relationship('Option', secondary=association_table)
@@ -99,8 +102,8 @@ class ParameterOption(Parameter):
     }
 
 
-    def __init__(self, name, reg_id):
-        super(ParameterOption, self).__init__(name, reg_id)
+    def __init__(self, name, reg_id, read_only):
+        super(ParameterOption, self).__init__(name, reg_id, read_only)
         self.options = []
 
     def add_option(self, option):
@@ -118,6 +121,7 @@ class ParameterInteger(Parameter):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     reg_id = Column(Integer)
+    read_only = Column(Boolean)
     min_value = Column(Integer)
     max_value = Column(Integer)
     service_id = Column(Integer, ForeignKey('service.id'))
@@ -128,8 +132,8 @@ class ParameterInteger(Parameter):
     }
 
 
-    def __init__(self, name, reg_id, min_value, max_value):
-        super(ParameterInteger, self).__init__(name, reg_id)
+    def __init__(self, name, reg_id, read_only, min_value, max_value):
+        super(ParameterInteger, self).__init__(name, reg_id, read_only)
         self.min_value = min_value
         self.max_value = max_value
 
@@ -144,6 +148,7 @@ class ParameterFloat(Parameter):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     reg_id = Column(Integer)
+    read_only = Column(Boolean)
     min_value = Column(Float)
     max_value = Column(Float)
     service_id = Column(Integer, ForeignKey('service.id'))
@@ -154,8 +159,8 @@ class ParameterFloat(Parameter):
     }
 
 
-    def __init__(self, name, reg_id, min_value, max_value):
-        super(ParameterFloat, self).__init__(name, reg_id)
+    def __init__(self, name, reg_id, read_only, min_value, max_value):
+        super(ParameterFloat, self).__init__(name, reg_id, read_only)
         self.min_value = min_value
         self.max_value = max_value
 
