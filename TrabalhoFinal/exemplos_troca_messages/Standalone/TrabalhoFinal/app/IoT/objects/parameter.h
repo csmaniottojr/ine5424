@@ -5,6 +5,7 @@
 #include "parameter_boolean.h"
 #include "parameter_combo.h"
 #include "parameter_float.h"
+#include "parameter_integer.h"
 
 using namespace EPOS;
 
@@ -72,29 +73,56 @@ namespace IoT {
         }
 
         void update ( bool value ) {
-            if ( _type->getType ( ) == ParameterType::BOOLEAN ) {
+            if ( !_read_only && _type->getType ( ) == ParameterType::BOOLEAN ) {
                 static_cast < ParameterBoolean * > ( _type )->update ( value );
                 _flag = value;
             }
         }
 
         void update ( float value ) {
-            if ( _type->getType ( ) == ParameterType::FLOAT ) {
-                static_cast < ParameterFloat * > ( _type )->update ( value );
+            if ( !_read_only && _type->getType ( ) == ParameterType::FLOAT ) {
                 float max, min;
                 max = *( float* ) ( _type->getMaxValue ( ) + 1 );
                 min = *( float* ) ( _type->getMinValue ( ) + 1 );
 
                 if ( value <= max && value >= min ) {
+                    static_cast < ParameterFloat * > ( _type )->update ( value );
                     _value = value;
                 }
             }
         }
 
         void update ( int value ) {
-            if ( _type->getType ( ) == ParameterType::COMBO ) {
-                static_cast < ParameterCombo * > ( _type )->update ( value );
-                _index = value;
+            if( !_read_only ){
+                if ( _type->getType ( ) == ParameterType::COMBO ) {
+                    static_cast < ParameterCombo * > ( _type )->update ( value );
+                    _index = value;
+                }else if( _type->getType ( ) == ParameterType::INTEGER ) {
+                    int max, min;
+                    max = *( int* ) ( _type->getMaxValue ( ) + 1 );
+                    min = *( int* ) ( _type->getMinValue ( ) + 1 );
+
+                    if ( value <= max && value >= min ) {
+                        static_cast < ParameterInteger * > ( _type )->update ( value );
+                        _index = value;
+                    }
+                }
+            }
+        }
+
+        bool boolValue ( ) {
+            if ( getType ( ) == ParameterType::BOOLEAN ) {
+                _type->update ( )->operator () ( );
+                _flag =  * ( static_cast < ParameterBoolean* > ( _type )->getData ( ) );
+                return _flag;
+            }
+        }
+
+        float floatValue ( ) {
+            if ( getType ( ) == ParameterType::FLOAT ) {
+                _type->update ( )->operator () ( );
+                _value = * ( static_cast < ParameterFloat* > ( _type )->getData ( ) ) ;
+                return _value;
             }
         }
 
@@ -120,23 +148,13 @@ namespace IoT {
             }
         }
 
-        float floatValue ( ) {
-            if ( getType ( ) == ParameterType::FLOAT ) {
+        int integerValue ( ) {
+            if ( getType ( ) == ParameterType::INTEGER ) {
                 _type->update ( )->operator () ( );
-                _value = * ( static_cast < ParameterFloat* > ( _type )->getData ( ) ) ;
-                return _value;
+                _index = * ( static_cast < ParameterInteger* > ( _type )->getData ( ) ) ;
+                return _index;
             }
         }
-
-        bool boolValue ( ) {
-            if ( getType ( ) == ParameterType::BOOLEAN ) {
-                _type->update ( )->operator () ( );
-                _flag =  * ( static_cast < ParameterBoolean* > ( _type )->getData ( ) );
-                return _flag;
-            }
-        }
-
-
     } ;
 
 } ;

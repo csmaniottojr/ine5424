@@ -5,6 +5,7 @@
 #include "IoT/objects/smartobject.h"
 #include "IoT/objects/parameter_boolean.h"
 #include "IoT/objects/parameter_float.h"
+#include "IoT/objects/parameter_combo.h"
 #include "IoT/iot_manager.h"
 
 using namespace EPOS;
@@ -34,10 +35,9 @@ void power_update( ) {
 
 void temperature_update( ) {
     cout << "Temperatura atual em " << *temperatura_data << endl;
-
 }
-//IDs: 101560330 e 101559240
 
+//IDs: 101560330 e 101559240
 int main( ) {
     //Time to minicom to connect
     eMoteIII::led::blink( 0.5, 4 );
@@ -89,7 +89,7 @@ int main( ) {
         }
     }
 
-    manager.run( );
+    manager.run( ); //inicia o object
 
     cout << endl; //end print
 

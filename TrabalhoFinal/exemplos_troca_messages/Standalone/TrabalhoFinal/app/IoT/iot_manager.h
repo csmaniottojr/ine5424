@@ -185,6 +185,14 @@ namespace IoT {
                             response->setData(resp_data, 4);
                             break;
                         }
+                        case ParameterType::INTEGER:
+                        {
+                            resp_data = new unsigned char[4];
+                            int data = parameter->integerValue ( );
+                            ((int*) resp_data)[0] = data;
+                            response->setData(resp_data, 4);
+                            break;
+                        }
                         default:
                         {
                             cout << "#  [WARNING!] Unknown parameter type requested for read!\n";
@@ -220,6 +228,12 @@ namespace IoT {
                         {
                             int index = *(( int* ) message->getData ( ));
                             parameter->update ( index );
+                            break;
+                        }
+                        case ParameterType::INTEGER:
+                        {
+                            int data = *(( int* ) message->getData ( ));
+                            parameter->update ( data );
                             break;
                         }
                         default:
