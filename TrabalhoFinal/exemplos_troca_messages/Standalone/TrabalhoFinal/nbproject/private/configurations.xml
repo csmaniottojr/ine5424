@@ -344,8 +344,6 @@
           <in>scenario.h</in>
           <in>stub.h</in>
         </df>
-        <df name="iot">
-        </df>
         <df name="machine">
           <df name="common">
             <in>ieee802_15_4_mac.h</in>
