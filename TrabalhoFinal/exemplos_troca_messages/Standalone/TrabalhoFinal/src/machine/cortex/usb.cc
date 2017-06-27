@@ -64,6 +64,7 @@ void USB::put(char c)
     while(reg(CS0_CSIL) & CSIL_INPKTRDY);
     reg(F3) = c;
     flush();
+    input();//TODO RELATAR ESSE PROBLEMA
     //unlock();
 }
 
@@ -82,6 +83,7 @@ void USB::put(const char * c, unsigned int size)
     for(unsigned int i = 0; (i < _max_packet_ep3) and (i < size); i++)
         reg(F3) = c[i];
     flush();
+    input();//TODO RELATAR ESSE PROBLEMA
     //unlock();
 }
 

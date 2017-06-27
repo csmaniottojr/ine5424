@@ -44,9 +44,11 @@ namespace IoT {
         }
 
         void run ( ) {
-            cout << "# Mandando RegisterRequest via broadcast!" << endl;
-            RegisterRequest request;
-            sendRequest ( &request, _nic->broadcast ( ), IEEE802_15_4::ELP );
+            if(!_registered){
+                cout << "# Mandando RegisterRequest via broadcast!" << endl;
+                RegisterRequest request;
+                sendRegisterMessage ( &request, _nic->broadcast ( ), IEEE802_15_4::ELP );
+            }
         }
 
         void update ( Observed * o, Protocol p, Buffer * b ) {
@@ -98,7 +100,7 @@ namespace IoT {
                             _object->getName ( ) << "..." << endl;
 
                     RegisterObjectRequest request ( _object );
-                    sendRequest ( &request, dst, prot );
+                    sendRegisterMessage ( &request, dst, prot );
                 } else {
                     cout << "# Object ja cadastrado, aguardando por comandos..." << endl << endl;
                     _registered = true;
@@ -144,80 +146,109 @@ namespace IoT {
         void processCommandMessage ( const char * msg, const Address & dst, const Protocol & prot ) {
             //Mensagens de comando
             CommandMessage * message = CommandSerialization::deserialize ( msg );
+            CommandMessage * response = new CommandMessage();
+            response->setRegisterId(message->getRegisterId());
+            unsigned char * resp_data = 0;
+
             if ( message->getType ( ) == CommandMessage::COMMAND_READ_REQUEST ) {
                 cout << "#   Type: CommandReadRequest!" << endl;
+                response->setType(CommandMessage::COMMAND_READ_RESPONSE);
+
                 auto id = message->getRegisterId ( );
                 auto parameter = _object->getById ( id );
                 if ( parameter == 0 ) {
                     cout << "#  [WARNING!]CAN'T FIND A PARAMETER WITH ID " << id << ", COMMAND DUMPED!\n";
-                    return;
-                }
-                switch ( parameter->getType ( ) ) {
-                    case ParameterType::BOOLEAN:
-                    {
-                        bool data = parameter->boolValue ( );
-                        break;
-                    }
-                    case ParameterType::FLOAT:
-                    {
-                        float data = parameter->floatValue ( );
-
-                        break;
-                    }
-                    case ParameterType::COMBO:
-                    {
-                        int index = parameter->comboValue ( );
-                        break;
-                    }
-                    default:
-                    {
-                        cout << "#  [WARNING!] Unknown parameter type requested for read!\n";
-                        break;
+                    // Manda resposta sem dado do mesmo jeito!?
+                }else{
+                    switch ( parameter->getType ( ) ) {
+                        case ParameterType::BOOLEAN:
+                        {
+                            resp_data = new unsigned char[1];
+                            bool data = parameter->boolValue ( );
+                            ((bool*) resp_data)[0] = data;
+                            response->setData(resp_data, 1);
+                            break;
+                        }
+                        case ParameterType::FLOAT:
+                        {
+                            resp_data = new unsigned char[4];
+                            float data = parameter->floatValue ( );
+                            ((float*) resp_data)[0] = data;
+                            response->setData(resp_data, 4);
+                            break;
+                        }
+                        case ParameterType::COMBO:
+                        {
+                            resp_data = new unsigned char[4];
+                            int index = parameter->comboValue ( );
+                            ((int*) resp_data)[0] = index;
+                            response->setData(resp_data, 4);
+                            break;
+                        }
+                        default:
+                        {
+                            cout << "#  [WARNING!] Unknown parameter type requested for read!\n";
+                            // Manda resposta sem dado do mesmo jeito!?
+                            break;
+                        }
                     }
                 }
             } else if ( message->getType ( ) == CommandMessage::COMMAND_WRITE_REQUEST ) {
                 cout << "#   Type: CommandWriteRequest!" << endl;
+                response->setType(CommandMessage::COMMAND_WRITE_RESPONSE);
+
                 auto id = message->getRegisterId ( );
                 auto parameter = _object->getById ( id );
                 if ( parameter == 0 ) {
                     cout << "#  [WARNING!]CAN'T FIND A PARAMETER WITH ID " << id << ", COMMAND DUMPED!\n";
-                    return;
-                }
-                switch ( parameter->getType ( ) ) {
-                    case ParameterType::BOOLEAN:
-                    {
-                        bool data = *( bool* )message->getData ( );
-                        parameter->update ( data );
-                        break;
-                    }
-                    case ParameterType::FLOAT:
-                    {
-                        float data = *( float* ) message->getData ( );
-                        parameter->update ( data );
-                        break;
-                    }
-                    case ParameterType::COMBO:
-                    {
-                        int index = *( int* ) message->getData ( );
-                        parameter->update ( index );
-                        break;
-                    }
-                    default:
-                    {
-                        cout << "#  [WARNING!] Unknown parameter type requested for read!\n";
-                        break;
+                    // Manda resposta sem dado do mesmo jeito!?
+                }else{
+                    switch ( parameter->getType ( ) ) {
+                        case ParameterType::BOOLEAN:
+                        {
+                            bool data = *(( bool* )message->getData ( ));
+                            parameter->update ( data );
+                            break;
+                        }
+                        case ParameterType::FLOAT:
+                        {
+                            float data = *(( float* ) message->getData ( ));
+                            parameter->update ( data );
+                            break;
+                        }
+                        case ParameterType::COMBO:
+                        {
+                            int index = *(( int* ) message->getData ( ));
+                            parameter->update ( index );
+                            break;
+                        }
+                        default:
+                        {
+                            cout << "#  [WARNING!] Unknown parameter type requested for read!\n";
+                            // Manda resposta sem dado do mesmo jeito!?
+                            break;
+                        }
                     }
                 }
             }
+            sendCommandMessage(response, dst, prot);
+            delete[] resp_data;
+            delete response;
             delete message;
         }
 
     protected:
 
-        void sendRequest ( RegisterMessage * request, const Address & dst, const Protocol & prot ) {
-            auto msg = RegisterSerialization::serialize ( request );
-            _nic->send ( dst, prot, msg, request->getSize ( ) + 2 );
-            delete msg;
+        void sendRegisterMessage ( RegisterMessage * message, const Address & dst, const Protocol & prot ) {
+            auto msg = RegisterSerialization::serialize ( message );
+            _nic->send ( dst, prot, msg, message->getSize ( ) + 2 );
+            delete[] msg;
+        }
+
+        void sendCommandMessage ( CommandMessage * message, const Address & dst, const Protocol & prot ) {
+            auto msg = CommandSerialization::serialize ( message );
+            _nic->send ( dst, prot, msg, message->getSize ( ) + 2 );
+            delete[] msg;
         }
 
         void sendService ( const Address & dst, const Protocol & p ) {
@@ -226,14 +257,14 @@ namespace IoT {
                         _currentService->object ( )->getName ( ) << "..." << endl;
 
                 RegisterServiceRequest request ( _currentService->object ( ) );
-                sendRequest ( &request, dst, p );
+                sendRegisterMessage ( &request, dst, p );
             } else {
                 cout << "# Fim dos servicos do object: "
                         << _object->getName ( ) << "..." << endl;
                 cout << "# Encerrando cadastro..." << endl;
 
                 RegisterEndObjectRequest request;
-                sendRequest ( &request, dst, p );
+                sendRegisterMessage ( &request, dst, p );
             }
         }
 
@@ -243,7 +274,7 @@ namespace IoT {
                         _currentParameter->object ( )->getName ( ) << "..." << endl;
 
                 RegisterParameterRequest request ( _currentParameter->object ( ) );
-                sendRequest ( &request, dst, p );
+                sendRegisterMessage ( &request, dst, p );
             } else {
                 cout << "# Fim dos parametros do servico: "
                         << _currentService->object ( )->getName ( ) << "..." << endl;
@@ -259,7 +290,7 @@ namespace IoT {
                         << _currentOption->object ( ) << "..." << endl;
 
                 RegisterOptionRequest request ( _currentOption->object ( ) );
-                sendRequest ( &request, dst, p );
+                sendRegisterMessage ( &request, dst, p );
             } else {
                 cout << "# Fim das options do parametro: "
                         << _currentParameter->object ( )->getName ( ) << "..." << endl;

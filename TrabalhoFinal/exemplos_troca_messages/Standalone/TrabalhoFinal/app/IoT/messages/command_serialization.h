@@ -29,10 +29,10 @@ public:
         memset(result, '\0', length);
 
         // Formato das mensagens de Command:
-        // Bit 0            1          2       6          7        x   
-        //     +------------+----------+-------+----------+--- ~ --+
-        //     | START_CHAR | msg size | SO id | msg type |  data  |
-        //     +------------+----------+-------+----------+--- ~ --+
+        // Bit 0            1          2       6          7        8        x   
+        //     +------------+----------+-------+----------+--------+--- ~ --+
+        //     | START_CHAR | msg size | SO id | msg type | reg id |  data  |
+        //     +------------+----------+-------+----------+--------+--- ~ --+
 
         result[index++] = CommandMessage::START_CHAR;
 

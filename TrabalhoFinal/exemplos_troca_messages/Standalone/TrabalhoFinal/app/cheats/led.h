@@ -1,4 +1,7 @@
 //Cheat utility to control a eMoteIII led.
+#ifndef cheats_led_h__
+#define cheats_led_h__
+
 #include <gpio.h>
 #include <alarm.h>
 
@@ -28,3 +31,4 @@ namespace eMoteIII {
         }
     }
 }
+#endif

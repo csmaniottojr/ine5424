@@ -31,7 +31,7 @@ namespace IoT {
 
         static const char START_CHAR = ':';
         static const Size BASE_SIZE = sizeof (START_CHAR ) + sizeof (Size ) + sizeof (ID )
-        + sizeof (Type ) + sizeof (RegisterIdValue );
+            + sizeof (Type ) + sizeof (RegisterIdValue );
         static const Size MTU = IEEE802_15_4::Frame::MTU - BASE_SIZE;
     protected:
         Size _size;
