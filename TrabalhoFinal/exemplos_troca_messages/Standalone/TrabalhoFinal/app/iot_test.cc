@@ -39,6 +39,10 @@ void temperature_update( ) {
 //IDs: 101560330 e 101559240
 
 int main( ) {
+    //Time to minicom to connect
+    eMoteIII::led::blink( 0.5, 4 );
+    eMoteIII::led::blink( 0.1, 5 );
+
     IoT::SmartObject object( "Epos" );
 
     IoT::Service atuacao( "Atuacao" );
