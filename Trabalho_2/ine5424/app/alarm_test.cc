@@ -12,15 +12,16 @@ void func_b(void);
 
 OStream cout;
 
-int main()
-{
+int main() {
     cout << "Alarm test" << endl;
 
     cout << "I'm the first thread of the first task created in the system." << endl;
     cout << "I'll now create two alarms and put myself in a delay ..." << endl;
+    Function_Handler handlerA(&func_a);
+    Function_Handler handlerB(&func_b);
 
-    Alarm alarm_a(2000000, &func_a, iterations);
-    Alarm alarm_b(1000000, &func_b, iterations);
+    Alarm alarm_a(2000000, &handlerA, iterations);
+    Alarm alarm_b(1000000, &handlerB, iterations);
 
     // Note that in case of idle-waiting, this thread will go into suspend
     // and the alarm handlers above will trigger the functions in the context
@@ -32,16 +33,14 @@ int main()
     return 0;
 }
 
-void func_a()
-{
-    for(int i = 0; i < 79; i++)
-        cout << "a";
+void func_a() {
+    for (int i = 0; i < 79; i++)
+        cout << "X";
     cout << endl;
 }
 
-void func_b(void)
-{
-    for(int i = 0; i < 79; i++)
-        cout << "b";
+void func_b(void) {
+    for (int i = 0; i < 79; i++)
+        cout << "-";
     cout << endl;
 }

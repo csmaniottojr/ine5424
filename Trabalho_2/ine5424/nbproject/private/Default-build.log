@@ -1,0 +1,23 @@
+make --print-directory APPLICATION=producer_consumer clean1 all1; make --print-directory APPLICATION=philosophers_dinner clean1 all1;
+make[1]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424'
+(cd etc && make -i clean)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/etc'
+sed -e 's/^#define MODE.*$/#define MODE xxx/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define ARCH.*$/#define ARCH xxx/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define MACH.*$/#define MACH xxx/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define MMOD.*$/#define MMOD xxx/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define APPL.*$/#define APPL xxx/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define __mode_.*__$/#define __mode_xxx__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define __arch_.*__$/#define __arch_xxx__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define __mach_.*__$/#define __mach_xxx__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+sed -e 's/^#define __mmod_.*__$/#define __mmod_xxx__/' -i /home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/include/system/config.h
+rm -f *.conf
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/etc'
+(cd app && make -i clean)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/app'
+rm -f *.o producer_consumer
+make[2]: Leaving directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/app'
+(cd img && make -i clean)
+make[2]: Entering directory '/home/decker/Documents/SOII/gitCesar/ine5424/Trabalho_2/ine5424/img'
+make: *** [makefile:13: all] Terminated
+make[1]: *** [makefile:81: clean1] Terminated

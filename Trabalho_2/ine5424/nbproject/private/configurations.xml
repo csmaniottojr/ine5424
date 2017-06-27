@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="app">
+        <in>alarm_test.cc</in>
+        <in>alarm_test_traits.h</in>
+        <in>philosophers_dinner.cc</in>
+        <in>producer_consumer.cc</in>
+      </df>
+      <df name="bin">
+      </df>
+      <df name="doc">
+      </df>
+      <df name="etc">
+      </df>
+      <df name="img">
+      </df>
+      <df name="include">
+        <df name="architecture">
+          <df name="ia32">
+            <in>cpu.h</in>
+            <in>mmu.h</in>
+            <in>traits.h</in>
+            <in>tsc.h</in>
+          </df>
+        </df>
+        <df name="machine">
+          <df name="pc">
+            <in>display.h</in>
+            <in>eeprom.h</in>
+            <in>ic.h</in>
+            <in>info.h</in>
+            <in>legacy_config.h</in>
+            <in>legacy_traits.h</in>
+            <in>machine.h</in>
+            <in>memory_map.h</in>
+            <in>pci.h</in>
+            <in>rtc.h</in>
+            <in>timer.h</in>
+            <in>uart.h</in>
+          </df>
+        </df>
+        <df name="system">
+          <in>config.h</in>
+          <in>info.h</in>
+          <in>kmalloc.h</in>
+          <in>memory_map.h</in>
+          <in>meta.h</in>
+          <in>traits.h</in>
+          <in>types.h</in>
+        </df>
+        <df name="utility">
+          <in>bitmap.h</in>
+          <in>crc.h</in>
+          <in>debug.h</in>
+          <in>elf-linux.h</in>
+          <in>elf.h</in>
+          <in>handler.h</in>
+          <in>hash.h</in>
+          <in>heap.h</in>
+          <in>list.h</in>
+          <in>malloc.h</in>
+          <in>math.h</in>
+          <in>observer.h</in>
+          <in>ostream.h</in>
+          <in>queue.h</in>
+          <in>random.h</in>
+          <in>spin.h</in>
+          <in>srec.h</in>
+          <in>string.h</in>
+          <in>vector.h</in>
+        </df>
+        <in>alarm.h</in>
+        <in>application.h</in>
+        <in>chronometer.h</in>
+        <in>clock.h</in>
+        <in>condition.h</in>
+        <in>cpu.h</in>
+        <in>display.h</in>
+        <in>eeprom.h</in>
+        <in>ic.h</in>
+        <in>machine.h</in>
+        <in>mmu.h</in>
+        <in>mutex.h</in>
+        <in>pci.h</in>
+        <in>rtc.h</in>
+        <in>semaphore.h</in>
+        <in>synchronizer.h</in>
+        <in>system.h</in>
+        <in>thread.h</in>
+        <in>timer.h</in>
+        <in>tsc.h</in>
+        <in>uart.h</in>
+      </df>
+      <df name="lib">
+      </df>
+      <df name="src">
+        <df name="abstraction">
+          <in>alarm.cc</in>
+          <in>alarm_init.cc</in>
+          <in>alarm_test.cc</in>
+          <in>chronometer_test.cc</in>
+          <in>condition.cc</in>
+          <in>mutex.cc</in>
+          <in>mutex_test.cc</in>
+          <in>semaphore.cc</in>
+          <in>semaphore_test.cc</in>
+          <in>synchronizer_test.cc</in>
+          <in>system_init.cc</in>
+          <in>thread.cc</in>
+          <in>thread_init.cc</in>
+          <in>thread_test.cc</in>
+        </df>
+        <df name="architecture">
+          <df name="ia32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>ia32_crt0.S</in>
+            <in>ia32_crtbegin.c</in>
+            <in>ia32_crtend.c</in>
+            <in>memchr.S</in>
+            <in>memcmp.S</in>
+            <in>memcpy.S</in>
+            <in>memset.S</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>strchr.S</in>
+            <in>strlen.S</in>
+          </df>
+        </df>
+        <df name="boot">
+          <in>pc_boot.S</in>
+          <in>pc_boot.s</in>
+        </df>
+        <df name="init">
+          <in>init_application.cc</in>
+          <in>init_first.cc</in>
+          <in>init_system.cc</in>
+        </df>
+        <df name="machine">
+          <df name="common">
+            <in>rtc_common.cc</in>
+            <in>serial_display.cc</in>
+          </df>
+          <df name="pc">
+            <in>display.cc</in>
+            <in>ic.cc</in>
+            <in>ic_entry.cc</in>
+            <in>ic_init.cc</in>
+            <in>info.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>pci.cc</in>
+            <in>pci_init.cc</in>
+            <in>pci_test.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+        </df>
+        <df name="setup">
+          <in>pc_setup.cc</in>
+        </df>
+        <df name="system">
+          <in>application_scaffold.cc</in>
+          <in>system_scaffold.cc</in>
+        </df>
+        <df name="utility">
+          <in>elf.cc</in>
+          <in>hash_test.cc</in>
+          <in>heap.cc</in>
+          <in>list_test.cc</in>
+          <in>malloc.cc</in>
+          <in>malloc_test.cc</in>
+          <in>ostream.cc</in>
+          <in>ostream_test.cc</in>
+          <in>queue_test.cc</in>
+          <in>random.cc</in>
+          <in>srec.cc</in>
+          <in>string.cc</in>
+          <in>vector_test.cc</in>
+        </df>
+      </df>
+      <df name="tools">
+        <df name="eposcc">
+        </df>
+        <df name="eposmkbi">
+          <in>eposmkbi.cc</in>
+        </df>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

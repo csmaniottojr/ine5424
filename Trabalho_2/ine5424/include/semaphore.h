@@ -4,22 +4,38 @@
 #define __semaphore_h
 
 #include <synchronizer.h>
+#include <utility/handler.h>
 
 __BEGIN_SYS
 
-class Semaphore: protected Synchronizer_Common
+class Semaphore : protected Synchronizer_Common
 {
 public:
-    Semaphore(int v = 1);
-    ~Semaphore();
+    Semaphore (int v = 1);
+    ~Semaphore ();
 
-    void p();
-    void v();
+    void p ();
+    void v ();
 
 private:
     volatile int _value;
 };
 
+class Semaphore_Handler : public Handler
+{
+public:
+
+    Semaphore_Handler (Semaphore * semaphore) : _semaphore (semaphore) { };
+
+    ~Semaphore_Handler () { };
+
+    void operator() () {
+        _semaphore->v ();
+    }
+private:
+    Semaphore * _semaphore;
+
+};
 
 __END_SYS
 

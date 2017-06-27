@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name=".settings">
+      </df>
+      <df name="app">
+        <df name="cheats">
+          <in>led.h</in>
+        </df>
+        <df name="IoT">
+          <df name="messages">
+            <in>command_message.h</in>
+            <in>command_serialization.h</in>
+            <in>modbus_message.h</in>
+            <in>register_message.h</in>
+            <in>register_serialization.h</in>
+            <in>serialization_register.h</in>
+          </df>
+          <df name="objects">
+            <in>callback.h</in>
+            <in>parameter.h</in>
+            <in>parameter_boolean.h</in>
+            <in>parameter_combo.h</in>
+            <in>parameter_float.h</in>
+            <in>parametertype.h</in>
+            <in>parametized_callback.h</in>
+            <in>service.h</in>
+            <in>smartobject.h</in>
+          </df>
+          <in>iot_gateway.h</in>
+          <in>iot_manager.h</in>
+          <in>usb_manager.h</in>
+        </df>
+        <in>callback_test.cc</in>
+        <in>callback_test_traits.h</in>
+        <in>exemplo_geladeira.cc</in>
+        <in>exemplo_geladeira_traits.h</in>
+        <in>iot_gateway_test.cc</in>
+        <in>iot_gateway_test_traits.h</in>
+        <in>iot_test.cc</in>
+        <in>iot_test_traits.h</in>
+        <in>parameter_test.cc</in>
+        <in>parameter_test_traits.h</in>
+        <in>testeIoT.cc</in>
+        <in>testeIoT_traits.h</in>
+      </df>
+      <df name="bin">
+      </df>
+      <df name="doc">
+        <df name="architectures">
+          <df name="arm">
+          </df>
+        </df>
+        <df name="IoT">
+        </df>
+        <df name="machines">
+          <df name="cortex_m">
+          </df>
+        </df>
+        <df name="templates">
+          <df name="include">
+            <df name="architecture">
+              <df name="xxxx">
+                <in>cpu.h</in>
+                <in>mmu.h</in>
+                <in>traits.h</in>
+                <in>tsc.h</in>
+              </df>
+            </df>
+            <df name="machine">
+              <df name="yyyy">
+                <in>bus.h</in>
+                <in>config.h</in>
+                <in>display.h</in>
+                <in>eeprom.h</in>
+                <in>ic.h</in>
+                <in>info.h</in>
+                <in>machine.h</in>
+                <in>memory_map.h</in>
+                <in>rtc.h</in>
+                <in>scratchpad.h</in>
+                <in>timer.h</in>
+                <in>traits.h</in>
+                <in>uart.h</in>
+              </df>
+            </df>
+          </df>
+          <df name="src">
+            <df name="architecture">
+              <df name="xxxx">
+                <in>cpu.cc</in>
+                <in>cpu_init.cc</in>
+                <in>cpu_test.cc</in>
+                <in>ia32_crt1.S</in>
+                <in>ia32_crtbegin.S</in>
+                <in>ia32_crtend.S</in>
+                <in>ia32_crti.S</in>
+                <in>ia32_crtn.S</in>
+                <in>memchr.S</in>
+                <in>memcmp.S</in>
+                <in>memcpy.S</in>
+                <in>memset.S</in>
+                <in>mmu.cc</in>
+                <in>mmu_init.cc</in>
+                <in>strchr.S</in>
+                <in>strlen.S</in>
+              </df>
+            </df>
+            <df name="machine">
+              <df name="yyyy">
+                <in>bus.cc</in>
+                <in>bus_init.cc</in>
+                <in>bus_test.cc</in>
+                <in>display.cc</in>
+                <in>ic.cc</in>
+                <in>ic_init.cc</in>
+                <in>machine.cc</in>
+                <in>machine_init.cc</in>
+                <in>rtc.cc</in>
+                <in>rtc_test.cc</in>
+                <in>scratchpad_init.cc</in>
+                <in>timer.cc</in>
+                <in>timer_init.cc</in>
+                <in>timer_test.cc</in>
+                <in>uart.cc</in>
+                <in>uart_test.cc</in>
+              </df>
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="etc">
+      </df>
+      <df name="exemplos">
+        <df name="CIPES">
+          <in>ac_control.h</in>
+          <in>cm1101_test.cc</in>
+          <in>gateway.cc</in>
+          <in>gateway_no_security.cc</in>
+          <in>home_thing.h</in>
+          <in>lights_a0.cc</in>
+          <in>lights_a1.cc</in>
+          <in>lights_a2.cc</in>
+          <in>lights_a3.cc</in>
+          <in>lights_a4.cc</in>
+          <in>lights_a5.cc</in>
+          <in>lights_a6.cc</in>
+          <in>lights_a7.cc</in>
+          <in>lights_a8.cc</in>
+          <in>luminosity_d5.cc</in>
+          <in>outlet_b0.cc</in>
+          <in>outlet_b1.cc</in>
+          <in>outlet_b2.cc</in>
+          <in>outlet_b3.cc</in>
+          <in>outlet_b4.cc</in>
+          <in>outlet_b5.cc</in>
+          <in>outlet_b6.cc</in>
+          <in>outlet_b7.cc</in>
+          <in>outlet_b8.cc</in>
+          <in>outlet_b9.cc</in>
+          <in>outlet_ba.cc</in>
+          <in>outlet_bb.cc</in>
+          <in>outlet_bc.cc</in>
+          <in>outlet_bd.cc</in>
+          <in>outlet_be.cc</in>
+          <in>outlet_bf.cc</in>
+          <in>outlet_c0.cc</in>
+          <in>outlet_c1.cc</in>
+          <in>power_meter_test.cc</in>
+          <in>presence_d0.cc</in>
+          <in>sensors_a2.cc</in>
+          <in>sensors_a3.cc</in>
+          <in>sht11_test.cc</in>
+          <in>temperature_da.cc</in>
+        </df>
+        <df name="Data">
+          <in>TestMessage.h</in>
+        </df>
+        <df name="emote3">
+          <in>emote3_gpio_interrupt_test.cc</in>
+          <in>emote3_gprs_http_test.cc</in>
+          <in>emote3_gprs_tcp_test.cc</in>
+          <in>emote3_gprs_uart_bypass.cc</in>
+          <in>emote3_gps_test.cc</in>
+          <in>emote3_mfrc522_test.cc</in>
+          <in>emote3_pwm_test.cc</in>
+          <in>emote3_radio.cc</in>
+          <in>emote3_radio_traits.h</in>
+          <in>emote3_sensors_test.cc</in>
+          <in>emote3_sensors_test_traits.h</in>
+          <in>emote3_sleep_test.cc</in>
+          <in>emote3_spi_test.cc</in>
+          <in>emote3_test.cc</in>
+          <in>emote3_w400_test.cc</in>
+        </df>
+        <df name="emote3_bootloader_app">
+          <in>emote3_bootloader.cc</in>
+          <in>emote3_bootloader_traits.h</in>
+          <in>emote3_nic_programmer.cc</in>
+          <in>emote3_nic_programmer_traits.h</in>
+        </df>
+        <df name="hydro">
+          <in>hydrology_collector.cc</in>
+          <in>hydrology_flash_eraser.cc</in>
+          <in>hydrology_logger.cc</in>
+          <in>hydrology_sender.cc</in>
+          <in>hydrology_sender_with_flash.cc</in>
+        </df>
+        <df name="hydro_station">
+          <df name="include">
+            <in>LedSignal.h</in>
+            <in>defines.h</in>
+            <in>flash.h</in>
+            <in>index.h</in>
+            <in>interface.h</in>
+            <in>messages.h</in>
+            <in>sender.h</in>
+            <in>sensors.h</in>
+            <in>watchdog.h</in>
+          </df>
+          <df name="src">
+            <in>flash.cc</in>
+            <in>interface.cc</in>
+            <in>messages.cc</in>
+            <in>sender.cc</in>
+            <in>sensors.cc</in>
+          </df>
+        </df>
+        <df name="smart_room">
+          <in>accontrol_a9.cc</in>
+          <in>gateway.cc</in>
+          <in>home_thing.h</in>
+          <in>lights_a0.cc</in>
+          <in>lights_a1.cc</in>
+          <in>lights_a2.cc</in>
+          <in>outlet_b0.cc</in>
+          <in>outlet_b1.cc</in>
+        </df>
+        <df name="SSB">
+          <in>gateway_ssb.cc</in>
+          <in>gateway_ssb_traits.h</in>
+          <in>lux_sensor.cc</in>
+          <in>lux_sensor_traits.h</in>
+          <in>pluviometer.cc</in>
+          <in>pluviometer_traits.h</in>
+          <in>smart_plug.cc</in>
+          <in>smart_plug_traits.h</in>
+          <in>temperature_sensor.cc</in>
+          <in>temperature_sensor_traits.h</in>
+          <in>water_flow_sensor.cc</in>
+          <in>water_flow_sensor_traits.h</in>
+        </df>
+        <df name="ultrasonic_sensor">
+          <df name="sensor">
+            <in>ultrasonic_sensor_controller.h</in>
+            <in>ultrasonic_sensor_hcsr04.h</in>
+          </df>
+          <in>ultrasonic_distance_meter.cc</in>
+          <in>ultrasonic_logger.cc</in>
+        </df>
+        <in>USB.cc</in>
+        <in>USB_traits.h</in>
+        <in>adc_test.cc</in>
+        <in>concurrent_philosophers_dinner.cc</in>
+        <in>concurrent_philosophers_dinner_traits.h</in>
+        <in>flash_logger_test.cc</in>
+        <in>gateway_os2.cc</in>
+        <in>gateway_os2_traits.h</in>
+        <in>gateway_testbed.cc</in>
+        <in>gateway_testbed_traits.h</in>
+        <in>gpio_sensor.cc</in>
+        <in>gpio_sensor_traits.h</in>
+        <in>hello.cc</in>
+        <in>hydro_hu_gateway.cc</in>
+        <in>hydro_hu_gateway_traits.h</in>
+        <in>hydro_station_app.cc</in>
+        <in>hydro_station_app_traits.h</in>
+        <in>hydro_tstp_gprs_gateway.cc</in>
+        <in>hydro_tstp_gprs_gateway_traits.h</in>
+        <in>hydro_tstp_station.cc</in>
+        <in>hydro_tstp_station_traits.h</in>
+        <in>id_commander.cc</in>
+        <in>id_commander_traits.h</in>
+        <in>id_sender.cc</in>
+        <in>id_sender_traits.h</in>
+        <in>led_blink.cc</in>
+        <in>led_blink_traits.h</in>
+        <in>producer_consumer.cc</in>
+        <in>radioTeste.cc</in>
+        <in>radioTeste_traits.h</in>
+        <in>samsung_ac_message.h</in>
+        <in>samsung_ac_receiver.cc</in>
+        <in>samsung_ac_sender.cc</in>
+        <in>send_receive.cc</in>
+        <in>sensor_os2.cc</in>
+        <in>sensor_os2_traits.h</in>
+        <in>smart_door.cc</in>
+        <in>smart_door_traits.h</in>
+        <in>smart_plug.cc</in>
+        <in>smart_plug_traits.h</in>
+        <in>testeID.cc</in>
+        <in>tst_sink.cc</in>
+        <in>tst_sink_traits.h</in>
+        <in>tstp_gateway.cc</in>
+        <in>tstp_gateway_traits.h</in>
+        <in>tstp_mac_test.cc</in>
+        <in>tstp_mac_test_traits.h</in>
+        <in>tstp_sensor.cc</in>
+        <in>tstp_sensor_traits.h</in>
+      </df>
+      <df name="img">
+      </df>
+      <df name="include">
+        <df name="architecture">
+          <df name="armv7">
+            <in>cpu.h</in>
+            <in>mmu.h</in>
+            <in>pmu.h</in>
+            <in>traits.h</in>
+            <in>tsc.h</in>
+          </df>
+          <df name="ia32">
+            <in>cpu.h</in>
+            <in>mmu.h</in>
+            <in>pmu.h</in>
+            <in>traits.h</in>
+            <in>tsc.h</in>
+          </df>
+        </df>
+        <df name="aspect">
+          <in>authenticated.h</in>
+          <in>shared.h</in>
+        </df>
+        <df name="framework">
+          <in>adapter.h</in>
+          <in>agent.h</in>
+          <in>handle.h</in>
+          <in>id.h</in>
+          <in>ipc.h</in>
+          <in>main.h</in>
+          <in>message.h</in>
+          <in>proxy.h</in>
+          <in>scenario.h</in>
+          <in>stub.h</in>
+        </df>
+        <df name="machine">
+          <df name="common">
+            <in>ieee802_15_4_mac.h</in>
+            <in>tstp_mac.h</in>
+          </df>
+          <df name="cortex">
+            <in>adc.h</in>
+            <in>cc2538.h</in>
+            <in>cm1101.h</in>
+            <in>emote3.h</in>
+            <in>emote3_traits.h</in>
+            <in>emote3_tsc.h</in>
+            <in>gem.h</in>
+            <in>gpio.h</in>
+            <in>hydro_board.h</in>
+            <in>i2c.h</in>
+            <in>ic.h</in>
+            <in>info.h</in>
+            <in>lm3s811.h</in>
+            <in>lm3s811_traits.h</in>
+            <in>m95.h</in>
+            <in>machine.h</in>
+            <in>memory_map.h</in>
+            <in>nic.h</in>
+            <in>persistent_storage.h</in>
+            <in>pwm.h</in>
+            <in>rfid_reader.h</in>
+            <in>rtc.h</in>
+            <in>sht11.h</in>
+            <in>smart_plug.h</in>
+            <in>spi.h</in>
+            <in>timer.h</in>
+            <in>transducer.h</in>
+            <in>uart.h</in>
+            <in>usb.h</in>
+            <in>watchdog.h</in>
+            <in>zynq.h</in>
+            <in>zynq_traits.h</in>
+          </df>
+          <df name="pc">
+            <in>c905.h</in>
+            <in>display.h</in>
+            <in>e100.h</in>
+            <in>eeprom.h</in>
+            <in>fpga.h</in>
+            <in>ic.h</in>
+            <in>info.h</in>
+            <in>keyboard.h</in>
+            <in>legacy_pc_traits.h</in>
+            <in>machine.h</in>
+            <in>memory_map.h</in>
+            <in>nic.h</in>
+            <in>pci.h</in>
+            <in>pcnet32.h</in>
+            <in>rtc.h</in>
+            <in>scratchpad.h</in>
+            <in>timer.h</in>
+            <in>transducer.h</in>
+            <in>uart.h</in>
+          </df>
+        </df>
+        <df name="system">
+          <in>config.h</in>
+          <in>info.h</in>
+          <in>memory_map.h</in>
+          <in>meta.h</in>
+          <in>traits.h</in>
+          <in>types.h</in>
+        </df>
+        <df name="utility">
+          <in>array.h</in>
+          <in>bignum.h</in>
+          <in>bitmap.h</in>
+          <in>buffer.h</in>
+          <in>crc.h</in>
+          <in>debug.h</in>
+          <in>elf-linux.h</in>
+          <in>elf.h</in>
+          <in>geometry.h</in>
+          <in>handler.h</in>
+          <in>hash.h</in>
+          <in>heap.h</in>
+          <in>key_database.h</in>
+          <in>list.h</in>
+          <in>logger.h</in>
+          <in>malloc.h</in>
+          <in>math.h</in>
+          <in>observer.h</in>
+          <in>ostream.h</in>
+          <in>queue.h</in>
+          <in>random.h</in>
+          <in>spin.h</in>
+          <in>srec.h</in>
+          <in>string.h</in>
+          <in>vector.h</in>
+        </df>
+        <in>active.h</in>
+        <in>adc.h</in>
+        <in>address_space.h</in>
+        <in>alarm.h</in>
+        <in>application.h</in>
+        <in>arp.h</in>
+        <in>channel.h</in>
+        <in>chronometer.h</in>
+        <in>cipher.h</in>
+        <in>clock.h</in>
+        <in>communicator.h</in>
+        <in>condition.h</in>
+        <in>cpu.h</in>
+        <in>dhcp.h</in>
+        <in>diffie_hellman.h</in>
+        <in>display.h</in>
+        <in>eeprom.h</in>
+        <in>elp.h</in>
+        <in>ethernet.h</in>
+        <in>fpga.h</in>
+        <in>gpio.h</in>
+        <in>http.h</in>
+        <in>hydro_board.h</in>
+        <in>i2c.h</in>
+        <in>ic.h</in>
+        <in>icmp.h</in>
+        <in>ieee802_15_4.h</in>
+        <in>ip.h</in>
+        <in>keyboard.h</in>
+        <in>machine.h</in>
+        <in>mifare.h</in>
+        <in>mmu.h</in>
+        <in>modbus_ascii.h</in>
+        <in>mutex.h</in>
+        <in>network.h</in>
+        <in>nic.h</in>
+        <in>pcap.h</in>
+        <in>pci.h</in>
+        <in>periodic_thread.h</in>
+        <in>persistent_storage.h</in>
+        <in>pmu.h</in>
+        <in>poly1305.h</in>
+        <in>pwm.h</in>
+        <in>rfid_reader.h</in>
+        <in>rtc.h</in>
+        <in>scheduler.h</in>
+        <in>scratchpad.h</in>
+        <in>segment.h</in>
+        <in>semaphore.h</in>
+        <in>smart_data.h</in>
+        <in>smart_plug.h</in>
+        <in>spi.h</in>
+        <in>synchronizer.h</in>
+        <in>system.h</in>
+        <in>task.h</in>
+        <in>tcp.h</in>
+        <in>thread.h</in>
+        <in>timer.h</in>
+        <in>transducer.h</in>
+        <in>tsc.h</in>
+        <in>tstp.h</in>
+        <in>uart.h</in>
+        <in>udp.h</in>
+        <in>usb.h</in>
+        <in>watchdog.h</in>
+      </df>
+      <df name="lib">
+      </df>
+      <df name="src">
+        <df name="architecture">
+          <df name="armv7">
+            <in>armv7_crt0.S</in>
+            <in>armv7_crtbegin.c</in>
+            <in>armv7_crtend.c</in>
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_test.cc</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>pmu.cc</in>
+            <in>pmu_init.cc</in>
+            <in>tsc.cc</in>
+            <in>tsc_init.cc</in>
+          </df>
+          <df name="ia32">
+            <in>cpu.cc</in>
+            <in>cpu_init.cc</in>
+            <in>cpu_syscall.cc</in>
+            <in>cpu_test.cc</in>
+            <in>ia32_crt0.S</in>
+            <in>ia32_crtbegin.c</in>
+            <in>ia32_crtend.c</in>
+            <in>memchr.S</in>
+            <in>memcmp.S</in>
+            <in>memcpy.S</in>
+            <in>memset.S</in>
+            <in>mmu.cc</in>
+            <in>mmu_init.cc</in>
+            <in>pmu.cc</in>
+            <in>pmu_init.cc</in>
+            <in>pmu_test.cc</in>
+            <in>pmu_test_traits.h</in>
+            <in>strchr.S</in>
+            <in>strlen.S</in>
+          </df>
+        </df>
+        <df name="boot">
+          <in>pc_boot.S</in>
+        </df>
+        <df name="component">
+          <in>active_test.cc</in>
+          <in>address_space.cc</in>
+          <in>alarm.cc</in>
+          <in>alarm_init.cc</in>
+          <in>alarm_test.cc</in>
+          <in>chronometer_test.cc</in>
+          <in>cipher_test.cc</in>
+          <in>condition.cc</in>
+          <in>dhcp.cc</in>
+          <in>diffie_hellman.cc</in>
+          <in>diffie_hellman_test.cc</in>
+          <in>http.cc</in>
+          <in>http_init.cc</in>
+          <in>icmp.cc</in>
+          <in>ip.cc</in>
+          <in>ip_init.cc</in>
+          <in>ip_test.cc</in>
+          <in>ip_test_traits.h</in>
+          <in>mutex.cc</in>
+          <in>mutex_test.cc</in>
+          <in>network_init.cc</in>
+          <in>page_coloring.cc</in>
+          <in>page_coloring_init.cc</in>
+          <in>page_coloring_test.cc</in>
+          <in>page_coloring_test_traits.h</in>
+          <in>periodic_thread_test.cc</in>
+          <in>periodic_thread_test_traits.h</in>
+          <in>persistent_storage_test.cc</in>
+          <in>persistent_storage_test_traits.h</in>
+          <in>poly1305_test.cc</in>
+          <in>scheduler_cedf_test.cc</in>
+          <in>scheduler_cedf_test_traits.h</in>
+          <in>scheduler_cpu_affinity_test.cc</in>
+          <in>scheduler_cpu_affinity_test_traits.h</in>
+          <in>scheduler_dm_test.cc</in>
+          <in>scheduler_dm_test_traits.h</in>
+          <in>scheduler_edf_test.cc</in>
+          <in>scheduler_edf_test_traits.h</in>
+          <in>scheduler_gedf_test.cc</in>
+          <in>scheduler_gedf_test_traits.h</in>
+          <in>scheduler_llf_test.cc</in>
+          <in>scheduler_llf_test_traits.h</in>
+          <in>scheduler_pedf_test.cc</in>
+          <in>scheduler_pedf_test_traits.h</in>
+          <in>scheduler_rm_test.cc</in>
+          <in>scheduler_rm_test_traits.h</in>
+          <in>scheduling_criteria.cc</in>
+          <in>segment.cc</in>
+          <in>segment_test.cc</in>
+          <in>segment_test_traits.h</in>
+          <in>semaphore.cc</in>
+          <in>semaphore_test.cc</in>
+          <in>semaphore_test_traits.h</in>
+          <in>smart_data_test.cc</in>
+          <in>smart_data_test_traits.h</in>
+          <in>synchronizer_test.cc</in>
+          <in>synchronizer_test_traits.h</in>
+          <in>system_init.cc</in>
+          <in>task.cc</in>
+          <in>task_test.cc</in>
+          <in>task_test_traits.h</in>
+          <in>tcp.cc</in>
+          <in>thread.cc</in>
+          <in>thread_init.cc</in>
+          <in>thread_test.cc</in>
+          <in>tstp.cc</in>
+          <in>tstp_init.cc</in>
+          <in>udp.cc</in>
+        </df>
+        <df name="init">
+          <in>init_application.cc</in>
+          <in>init_first.cc</in>
+          <in>init_system.cc</in>
+        </df>
+        <df name="machine">
+          <df name="common">
+            <in>modbus_ascii.cc</in>
+            <in>rtc_common.cc</in>
+            <in>scratchpad_common.cc</in>
+            <in>serial_display.cc</in>
+            <in>serial_keyboard.cc</in>
+          </df>
+          <df name="cortex">
+            <in>cc2538.cc</in>
+            <in>cc2538_init.cc</in>
+            <in>cc2538_test.cc</in>
+            <in>cc2538_test_traits.h</in>
+            <in>emote3_init.cc</in>
+            <in>emote3_mac_timer_test.cc</in>
+            <in>emote3_tsc_test.cc</in>
+            <in>emote3_watchdog_test.cc</in>
+            <in>gpio.cc</in>
+            <in>hydro_board.cc</in>
+            <in>hydro_board_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_init.cc</in>
+            <in>lm3s811_init.cc</in>
+            <in>m95.cc</in>
+            <in>m95_init.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>nic_init.cc</in>
+            <in>persistent_storage.cc</in>
+            <in>persistent_storage_init.cc</in>
+            <in>rfid_reader.cc</in>
+            <in>sht11.cc</in>
+            <in>smart_plug.cc</in>
+            <in>smart_plug_init.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>usb.cc</in>
+            <in>usb_init.cc</in>
+            <in>zynq_init.cc</in>
+          </df>
+          <df name="pc">
+            <in>display.cc</in>
+            <in>e100.cc</in>
+            <in>e100_init.cc</in>
+            <in>fpga.cc</in>
+            <in>fpga_init.cc</in>
+            <in>ic.cc</in>
+            <in>ic_entry.cc</in>
+            <in>ic_init.cc</in>
+            <in>info.cc</in>
+            <in>keyboard.cc</in>
+            <in>keyboard_init.cc</in>
+            <in>machine.cc</in>
+            <in>machine_init.cc</in>
+            <in>nic_init.cc</in>
+            <in>nic_test.cc</in>
+            <in>nic_test_traits.h</in>
+            <in>pci.cc</in>
+            <in>pci_init.cc</in>
+            <in>pci_test.cc</in>
+            <in>pcnet32.cc</in>
+            <in>pcnet32_init.cc</in>
+            <in>rtc.cc</in>
+            <in>rtc_test.cc</in>
+            <in>scratchpad_init.cc</in>
+            <in>timer.cc</in>
+            <in>timer_init.cc</in>
+            <in>timer_test.cc</in>
+            <in>uart_test.cc</in>
+          </df>
+        </df>
+        <df name="setup">
+          <in>cortex_setup.S</in>
+          <in>cortex_setup.s</in>
+          <in>pc_setup.cc</in>
+        </df>
+        <df name="system">
+          <in>application_binding.cc</in>
+          <in>application_scaffold.cc</in>
+          <in>kernel_binding.cc</in>
+          <in>system_binding.cc</in>
+          <in>system_scaffold.cc</in>
+        </df>
+        <df name="utility">
+          <in>aes.cc</in>
+          <in>bignum.cc</in>
+          <in>bignum_test.cc</in>
+          <in>elf.cc</in>
+          <in>handler_test.cc</in>
+          <in>hash_test.cc</in>
+          <in>heap.cc</in>
+          <in>list_test.cc</in>
+          <in>malloc.cc</in>
+          <in>malloc_test.cc</in>
+          <in>ostream.cc</in>
+          <in>ostream_test.cc</in>
+          <in>poly1305.cc</in>
+          <in>queue_test.cc</in>
+          <in>random.cc</in>
+          <in>srec.cc</in>
+          <in>string.cc</in>
+          <in>vector_test.cc</in>
+        </df>
+      </df>
+      <df name="tools">
+        <df name="eposcc">
+        </df>
+        <df name="eposflash">
+        </df>
+        <df name="eposiotgw">
+        </df>
+        <df name="eposmkbi">
+          <in>eposmkbi.cc</in>
+        </df>
+        <df name="epossectst">
+        </df>
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -18,7 +18,8 @@ ser.flushOutput()
 print(ser.get_settings())
 print('Escrevendo...')
 
-msg = bytearray([0x3b, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05])
+#3a a a b0 d 6 3 1 0 1 [ligar o led]
+msg = bytearray([0x3a, 0x0a, 0x0a, 0xb0, 0x0d, 0x06, 0x03, 0x01, 0x00, 0x00])
 n = ser.write(msg)
 print('Escritos %d bytes...' % n)
 print('\nFechando...\n')
