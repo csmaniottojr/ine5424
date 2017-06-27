@@ -46,7 +46,8 @@ class RegisterSerialization(object):
         first_msg_type = RegisterMessageType(first_barray[6])
 
         if first_msg_type == RegisterMessageType.REGISTER_REQUEST:
-            Utils.debug ('Exists: %d\n\n' % self.model_controller.check_if_exists(emote_id))
+            Utils.debug ('SO %d Exist?: %d\n\n' % (emote_id, \
+                self.model_controller.check_if_exists(emote_id)))
             return self.model_controller.check_if_exists(emote_id)
 
         elif first_msg_type == RegisterMessageType.REGISTER_OBJECT_REQUEST:

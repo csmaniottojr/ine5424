@@ -14,10 +14,12 @@ from threading import Thread
 import time
 
 class App(Thread):
-    def __init__(self, so_controller, serial_manager):
+    def __init__(self, so_controller, serial_manager, command_manager):
         Thread.__init__(self)
         self.so_controller = so_controller
         self.serial_manager = serial_manager
+        self.command_manager = command_manager
+        
         self.cases = {'1': self.case_1, '2': self.case_2, '3': self.case_3, '4': self.case_4}
         self._running = True
     
@@ -35,11 +37,11 @@ class App(Thread):
         except:
             print(traceback.format_exc())
         finally:
-            Utils.enable_debug(True)
-            self._running = False
+            self.case_4()
 
     def print_menu(self):
-        print ('\n1. Listar dispositivos\n2. Ver dispositivo\n3. Executar serviço\n4. Sair\n')
+        print ('===================================' +\
+            '\n1. Listar dispositivos\n2. Ver dispositivo\n3. Executar serviço\n4. Sair\n')
 
     def case_1(self):
         smart_objects = self.so_controller.list()
@@ -81,12 +83,15 @@ class App(Thread):
                     service_defined = True
             
             param_value = []
+            read_onlys = []
             for param in service.parameters:
                 if param.read_only:
-                    continue
+                    read_onlys.append(param)
+                    param_value.append( (param.reg_id,) )
+
                 if isinstance(param, ParameterBoolean):
                     
-                    valid_value = False
+                    valid_value = param.read_only
 
                     while not valid_value:
                         try:
@@ -98,7 +103,7 @@ class App(Thread):
                             param_value.append( (param.reg_id, Utils.pack_with_byte_order("?", value)) )
 
                 elif isinstance(param, ParameterInteger):
-                    valid_value = False
+                    valid_value = param.read_only
 
                     while not valid_value:
                         try:
@@ -114,7 +119,7 @@ class App(Thread):
 
 
                 elif isinstance(param, ParameterFloat):
-                    valid_value = False
+                    valid_value = param.read_only
 
                     while not valid_value:
                         try:
@@ -130,7 +135,7 @@ class App(Thread):
 
 
                 elif isinstance(param, ParameterOption):
-                    valid_value = False
+                    valid_value = param.read_only
                     while not valid_value:
                         for i in range(len(param.options)):
                             print ('{}. {}'.format(i+1, param.options[i]))
@@ -142,14 +147,27 @@ class App(Thread):
                             print ('Parâmetro não encontrado!')
                         else:
                             valid_value = True
-                            param_value.append( (param.reg_id, Utils.pack_with_byte_order("I", op)) )
+                            param_value.append( (param.reg_id, Utils.pack_with_byte_order("I", op-1)) )
 
         for value in param_value:
             resp['reg_id'] = value[0]
-            resp['data'] = bytearray(value[1])
-            #print("Escrevendo: %s" % resp)
+            if len(value) == 2:
+                resp['data'] = bytearray(value[1])
+            else:
+                resp['msg_type'] = CommandMessageType.COMMAND_READ_REQUEST#read only
             msg = CommandSerialization.serialize(resp)
             self.serial_manager.write(msg)
+        
+        msg_type = CommandMessageType.COMMAND_READ_RESPONSE
+        for p in read_onlys:
+            value = self.command_manager.get_response(smart_object.device_id, p.reg_id, msg_type)
+            while len(value) == 0:
+                time.sleep(0.5)
+                value = self.command_manager.get_response(smart_object.device_id, p.reg_id, msg_type)
+            reg_id = CommandSerialization.deserialize_register_id(value)
+            data = CommandSerialization.deserialize_data(value)
+            data = self.parse_data(data, p)
+            print("Resposta do reg_id %d: %f\n" % (reg_id, data) )
 
     def case_4(self):
         print ('Saindo do programa...\n')
@@ -158,3 +176,15 @@ class App(Thread):
 
     def default(self):
         print ('Opção inválida')
+    
+    def parse_data(self, data, param):
+        if isinstance(param, ParameterBoolean):
+            return Utils.unpack_with_byte_order("?", data)
+        elif isinstance(param, ParameterInteger):
+            return Utils.unpack_with_byte_order("I", data)
+        elif isinstance(param, ParameterFloat):
+            return Utils.unpack_with_byte_order("f", data)
+        elif isinstance(param, ParameterCombo):
+            return Utils.unpack_with_byte_order("I", data)
+        else:
+            return 0

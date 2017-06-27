@@ -31,7 +31,7 @@ class SerialPortManager(Observable):
 
                     # Ignora caso nao seja o comeco de uma msg valida
                     if not line and not self.is_valid_start_of_message(_byte):
-                        Utils.debug ("Ignorando byte:", _byte)
+                        Utils.debug("Ignorando byte: %s" % _byte)
                         continue
                     
                     line += bytearray(_byte)

@@ -34,7 +34,7 @@ class CommandSerialization(object):
         return Utils.unpack_with_byte_order("H", barray[7:9])
     
     def deserialize_data(barray):
-        size = deserialize_size(barray)
+        size = CommandSerialization.deserialize_size(barray)
         length = size - CommandSerialization.BASE_SIZE
         if length > 0:
             return barray[9:(9+length)]

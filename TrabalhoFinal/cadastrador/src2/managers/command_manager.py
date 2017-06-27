@@ -4,6 +4,7 @@ from threading import Lock
 from utils.observer import Observer
 from utils.utils import Utils
 from command.command_serialization import CommandSerialization
+from command.command_message_type import CommandMessageType
 
 class CommandManager(Observer):
     def __init__(self):
@@ -26,6 +27,8 @@ class CommandManager(Observer):
     # msg_type que esta esperando, COMMAND_READ_RESPONSE por exemplo...
     def get_response(self, emote_id, register_id, msg_type):
         index = -1
+        if not isinstance(msg_type, CommandMessageType):
+            msg_type = CommandMessageType( int(msg_type) )
         with self.mutex:
             for idx, command in enumerate(self.commands[emote_id]):
                 _reg_id = CommandSerialization.deserialize_register_id(command)

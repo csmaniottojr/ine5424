@@ -4,7 +4,6 @@ from managers.debug_manager import DebugManager
 from managers.register_manager import RegisterManager
 
 from app import App
-import time
 
 from model_controller.sqlalchemy.smart_object import SmartObjectSQLAController
 from sqlalchemy import create_engine
@@ -12,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 import config_bd
 
 if __name__ == '__main__':
-    print("Iniciando o app...")
+    print("Iniciando o programa...")
     engine = create_engine('mysql+pymysql://{}:{}@{}/{}'.format(
         config_bd.DB_USER,
         config_bd.DB_PASSWORD,
@@ -21,7 +20,6 @@ if __name__ == '__main__':
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
     smart_object_controller = SmartObjectSQLAController(session)
 
     serial_manager = SerialPortManager('/dev/ttyACM0', 115200, 2.0)
@@ -35,7 +33,7 @@ if __name__ == '__main__':
     register_manager = RegisterManager(smart_object_controller)
     serial_manager.register(register_manager)
 
-    app = App(smart_object_controller, serial_manager)
+    app = App(smart_object_controller, serial_manager, command_manager)
     app.start()
 
     serial_manager.run()
