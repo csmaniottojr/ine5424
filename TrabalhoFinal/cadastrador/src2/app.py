@@ -37,7 +37,8 @@ class App(Thread):
         except:
             print(traceback.format_exc())
         finally:
-            self.case_4()
+            self._running = False
+            Utils.enable_debug(True)
 
     def print_menu(self):
         print ('===================================' +\
@@ -149,25 +150,25 @@ class App(Thread):
                             valid_value = True
                             param_value.append( (param.reg_id, Utils.pack_with_byte_order("I", op-1)) )
 
-        for value in param_value:
-            resp['reg_id'] = value[0]
-            if len(value) == 2:
-                resp['data'] = bytearray(value[1])
-            else:
-                resp['msg_type'] = CommandMessageType.COMMAND_READ_REQUEST#read only
-            msg = CommandSerialization.serialize(resp)
-            self.serial_manager.write(msg)
-        
-        msg_type = CommandMessageType.COMMAND_READ_RESPONSE
-        for p in read_onlys:
-            value = self.command_manager.get_response(smart_object.device_id, p.reg_id, msg_type)
-            while len(value) == 0:
-                time.sleep(0.5)
+            for value in param_value:
+                resp['reg_id'] = value[0]
+                if len(value) == 2:
+                    resp['data'] = bytearray(value[1])
+                else:
+                    resp['msg_type'] = CommandMessageType.COMMAND_READ_REQUEST#read only
+                msg = CommandSerialization.serialize(resp)
+                self.serial_manager.write(msg)
+            
+            msg_type = CommandMessageType.COMMAND_READ_RESPONSE
+            for p in read_onlys:
                 value = self.command_manager.get_response(smart_object.device_id, p.reg_id, msg_type)
-            reg_id = CommandSerialization.deserialize_register_id(value)
-            data = CommandSerialization.deserialize_data(value)
-            data = self.parse_data(data, p)
-            print("Resposta do reg_id %d: %f\n" % (reg_id, data) )
+                while len(value) == 0:
+                    time.sleep(0.5)
+                    value = self.command_manager.get_response(smart_object.device_id, p.reg_id, msg_type)
+                reg_id = CommandSerialization.deserialize_register_id(value)
+                data = CommandSerialization.deserialize_data(value)
+                data = self.parse_data(data, p)
+                print("Resposta do reg_id %d: %f\n" % (reg_id, data) )
 
     def case_4(self):
         print ('Saindo do programa...\n')
