@@ -35,10 +35,7 @@ if __name__ == '__main__':
     register_manager = RegisterManager(smart_object_controller)
     serial_manager.register(register_manager)
 
-    serial_manager.start()
-
-    while not serial_manager.is_open():
-        time.sleep(1)
-
     app = App(smart_object_controller, serial_manager)
-    app.run()
+    app.start()
+
+    serial_manager.run()

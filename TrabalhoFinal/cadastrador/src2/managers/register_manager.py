@@ -1,6 +1,8 @@
 from collections import defaultdict
 
 from utils.observer import Observer
+from utils.utils import Utils
+
 from register.register_serialization import RegisterSerialization
 from utils.message_validator import MessageValidator
 from register.register_message_responser import RegisterMessageResponser
@@ -17,7 +19,7 @@ class RegisterManager(Observer):
             emote_id = RegisterSerialization.deserialize_emote_id(data)
             type = RegisterSerialization.deserialize_message_type(data);
 
-            print("Mensagem de registro recebida: {id: %d, type: %s}" % \
+            Utils.debug("Mensagem de registro recebida: {id: %d, type: %s}" % \
                 (emote_id, type))
             
             self.registers[emote_id].append(data)

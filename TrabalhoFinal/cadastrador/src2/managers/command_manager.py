@@ -2,6 +2,7 @@ from collections import defaultdict
 from threading import Lock
 
 from utils.observer import Observer
+from utils.utils import Utils
 from command.command_serialization import CommandSerialization
 
 class CommandManager(Observer):
@@ -16,7 +17,7 @@ class CommandManager(Observer):
             emote_id = CommandSerialization.deserialize_emote_id(data)
             type = CommandSerialization.deserialize_message_type(data)
 
-            print("Mensagem de comando recebida: {id: %d, type: %s}" % \
+            Utils.debug("Mensagem de comando recebida: {id: %d, type: %s}" % \
                 (emote_id, type))
                 
             with self.mutex:

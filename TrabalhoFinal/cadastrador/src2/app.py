@@ -4,25 +4,39 @@ from sqlalchemy import create_engine
 from models import *
 from sqlalchemy.orm import sessionmaker
 import config_bd
-import sys
+import sys, traceback
 
 from command.command_message_type import CommandMessageType
 from command.command_serialization import CommandSerialization
-from utils.utils import *
+from utils.utils import Utils
 
 from threading import Thread
+import time
 
-class App(object):
+class App(Thread):
     def __init__(self, so_controller, serial_manager):
+        Thread.__init__(self)
         self.so_controller = so_controller
         self.serial_manager = serial_manager
         self.cases = {'1': self.case_1, '2': self.case_2, '3': self.case_3, '4': self.case_4}
+        self._running = True
     
     def run(self):
-        while True:
-            self.print_menu()
-            op = input('Insira a opção: ')
-            self.cases.get(op, self.default)()
+        try:
+            while not self.serial_manager.is_open():
+                time.sleep(1)
+            Utils.enable_debug(False)
+            while self._running:
+                self.print_menu()
+                op = input('Insira a opção: ')
+                self.cases.get(op, self.default)()
+        except KeyboardInterrupt:
+            pass
+        except:
+            print(traceback.format_exc())
+        finally:
+            Utils.enable_debug(True)
+            self._running = False
 
     def print_menu(self):
         print ('\n1. Listar dispositivos\n2. Ver dispositivo\n3. Executar serviço\n4. Sair\n')
@@ -139,7 +153,8 @@ class App(object):
 
     def case_4(self):
         print ('Saindo do programa...\n')
-        sys.exit(0)
+        self._running = False
+        Utils.enable_debug(True)        
 
     def default(self):
         print ('Opção inválida')

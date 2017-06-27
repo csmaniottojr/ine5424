@@ -2,6 +2,7 @@ import sys, struct
 
 class Utils:
     BYTE_ORDER = ((sys.byteorder == "little") and "<" or ">")
+    DEBUG = True
 
     @staticmethod
     def pack_with_byte_order(fmt, value):
@@ -14,3 +15,12 @@ class Utils:
     @staticmethod
     def bytearray_2_array(ba):
         return ([ "0x%02x" % b for b in ba ])
+
+    @staticmethod
+    def enable_debug(v):
+        Utils.DEBUG = bool(v)
+
+    @staticmethod
+    def debug(msg):
+        if Utils.DEBUG:
+            print(msg)

@@ -1,4 +1,5 @@
 from utils.observer import Observer
+from utils.utils import Utils
 from debug.debug_serialization import DebugSerialization
 
 class DebugManager(Observer):
@@ -7,4 +8,4 @@ class DebugManager(Observer):
     
     def update(self, observable, data):
         if chr(data[0]) == DebugSerialization.START_CHAR:
-            print("DEBUG: %s" % data.decode("utf-8"))
+            Utils.debug("DEBUG: %s" % data.decode("utf-8"))
