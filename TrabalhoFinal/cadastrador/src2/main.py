@@ -3,6 +3,8 @@ from managers.command_manager import CommandManager
 from managers.debug_manager import DebugManager
 from managers.register_manager import RegisterManager
 
+from app import App
+
 from model_controller.sqlalchemy.smart_object import SmartObjectSQLAController
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -31,5 +33,8 @@ if __name__ == '__main__':
     
     register_manager = RegisterManager(smart_object_controller)
     serial_manager.register(register_manager)
+
+    app = App(smart_object_controller, serial_manager)
+    app.start()
 
     serial_manager.run()

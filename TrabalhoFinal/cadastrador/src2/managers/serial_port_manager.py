@@ -1,6 +1,7 @@
 import serial, time, sys, traceback
 from utils.observable import Observable
 from utils.message_validator import MessageValidator
+from utils.utils import Utils
 
 class SerialPortManager(Observable):
     def __init__(self, port, baudrate, write_timeout):
@@ -19,6 +20,7 @@ class SerialPortManager(Observable):
         try:
             self.open_serial_port()
             
+            self.ser.flushInput()
             print("Esperando por mensagens...")
             while True:
                 line = bytearray()
@@ -44,9 +46,10 @@ class SerialPortManager(Observable):
             exit()
     
     def write(self, msg):
+        print("Enviando msg %s\n" % Utils.bytearray_2_array(msg))
         if self.ser.is_open:
             try:
-                self.ser.flushOutput()
+                #self.ser.flushOutput()
                 n = self.ser.write(msg)
                 print("Escritos %d bytes na porta serial..." % n)
             except serial.SerialTimeoutException:

@@ -71,7 +71,6 @@ class RegisterSerialization(object):
                         param_type = ParameterType(lines[i_line][7])
                         reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
                         read_only = bool(lines[i_line][10])
-                        print("Read_only: %d" % read_only)
 
                         size = lines[i_line][1]
                         param = None
@@ -106,6 +105,4 @@ class RegisterSerialization(object):
                     smart_object.add_service(service)
 
                 elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
-                    print(smart_object)
-                    print("\n")
-                    #self.model_controller.save(smart_object)
+                    self.model_controller.save(smart_object)

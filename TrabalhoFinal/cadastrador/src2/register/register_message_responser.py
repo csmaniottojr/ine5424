@@ -40,5 +40,4 @@ class RegisterMessageResponser(object):
         elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
             barray.append(RegisterMessageType.REGISTER_END_OBJECT_RESPONSE.value)
         
-        print('Resposta: %s\n' % ([ "0x%02x" % b for b in barray ]))
         return barray

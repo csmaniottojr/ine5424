@@ -43,4 +43,38 @@ class CommandSerialization(object):
     
     @staticmethod
     def serialize(params):
-        pass
+        # Espera os seguintes dados:
+        #   params['emote_id']  [int]
+        #   params['msg_type']  [CommandMessageType]
+        #   params['reg_id']    [unsigned short]
+        #   params['data']      [bytearray]
+        result = bytearray()
+
+        print('data isinstance:', isinstance(params['data'], bytearray))
+        print('data:', params['data'])
+        if params['data'] is None:
+            params['data'] = bytearray()
+
+        if not isinstance(params['data'], bytearray):
+            return result
+
+        result.append(ord(CommandSerialization.START_CHAR))
+
+        result.append(CommandSerialization.BASE_SIZE + len(params['data']))
+
+        id = Utils.pack_with_byte_order("I", params['emote_id'])
+        result.extend(id)
+
+        type = params['msg_type']
+        if not isinstance(type, CommandMessageType):
+            type = CommandMessageType( int(type) )
+        tmp = Utils.pack_with_byte_order("B", type.value)
+        result.extend(tmp)
+
+        regId = Utils.pack_with_byte_order("H", params['reg_id'])
+        result.extend(regId)
+
+        if len(params['data']) > 0:
+            result.extend(params['data'])
+        
+        return result
