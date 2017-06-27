@@ -50,9 +50,7 @@ class CommandSerialization(object):
         #   params['data']      [bytearray]
         result = bytearray()
 
-        print('data isinstance:', isinstance(params['data'], bytearray))
-        print('data:', params['data'])
-        if params['data'] is None:
+        if 'data' not in data or params['data'] is None:
             params['data'] = bytearray()
 
         if not isinstance(params['data'], bytearray):

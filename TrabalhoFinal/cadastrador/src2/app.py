@@ -12,9 +12,8 @@ from utils.utils import *
 
 from threading import Thread
 
-class App(Thread):
+class App(object):
     def __init__(self, so_controller, serial_manager):
-        Thread.__init__(self)
         self.so_controller = so_controller
         self.serial_manager = serial_manager
         self.cases = {'1': self.case_1, '2': self.case_2, '3': self.case_3, '4': self.case_4}

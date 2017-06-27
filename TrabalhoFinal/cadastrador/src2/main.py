@@ -4,6 +4,7 @@ from managers.debug_manager import DebugManager
 from managers.register_manager import RegisterManager
 
 from app import App
+import time
 
 from model_controller.sqlalchemy.smart_object import SmartObjectSQLAController
 from sqlalchemy import create_engine
@@ -34,7 +35,10 @@ if __name__ == '__main__':
     register_manager = RegisterManager(smart_object_controller)
     serial_manager.register(register_manager)
 
-    app = App(smart_object_controller, serial_manager)
-    app.start()
+    serial_manager.start()
 
-    serial_manager.run()
+    while not serial_manager.is_open():
+        time.sleep(1)
+
+    app = App(smart_object_controller, serial_manager)
+    app.run()
