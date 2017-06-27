@@ -13,10 +13,10 @@ class RegisterSerialization(object):
         self.model_controller = model_controller
 
     # Formato das mensagens de Register:
-    # Bit 0            1          2       6          7        x   
-    #     +------------+----------+-------+----------+--- ~ --+
-    #     | START_CHAR | msg size | SO id | msg type |  data  |
-    #     +------------+----------+-------+----------+--- ~ --+
+    # Byte 0            1          2       6          7        x   
+    #      +------------+----------+-------+----------+--- ~ --+
+    #      | START_CHAR | msg size | SO id | msg type |  data  |
+    #      +------------+----------+-------+----------+--- ~ --+
     # PS: data se refere aos dados especificos de cada tipo de mensagem
 
     START_CHAR = ';'
@@ -69,30 +69,30 @@ class RegisterSerialization(object):
                     while RegisterMessageType(lines[i_line + 1][6]) == RegisterMessageType.REGISTER_PARAMETER_REQUEST:
                         i_line += 1
                         param_type = ParameterType(lines[i_line][7])
+                        reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
+                        read_only = bool(lines[i_line][10])
+                        print("Read_only: %d" % read_only)
+
                         size = lines[i_line][1]
                         param = None
                         if param_type == ParameterType.INTEGER:
-                            reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
-                            min_value = int.from_bytes(lines[i_line][10:14], byteorder=sys.byteorder)
-                            max_value = int.from_bytes(lines[i_line][14:18], byteorder=sys.byteorder)
-                            param_name = lines[i_line][18:size].decode('utf-8')
+                            min_value = int.from_bytes(lines[i_line][11:15], byteorder=sys.byteorder)
+                            max_value = int.from_bytes(lines[i_line][15:19], byteorder=sys.byteorder)
+                            param_name = lines[i_line][19:size].decode('utf-8')
                             param = ParameterInteger(param_name, reg_id, min_value, max_value)
 
                         elif param_type == ParameterType.FLOAT:
-                            reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
-                            min_value = struct.unpack('f', lines[i_line][10:14])[0]
-                            max_value = struct.unpack('f', lines[i_line][14:18])[0]
-                            param_name = lines[i_line][18:size].decode('utf-8')
+                            min_value = struct.unpack('f', lines[i_line][11:15])[0]
+                            max_value = struct.unpack('f', lines[i_line][15:19])[0]
+                            param_name = lines[i_line][19:size].decode('utf-8')
                             param = ParameterFloat(param_name, reg_id, min_value, max_value)
 
                         elif param_type == ParameterType.BOOLEAN:
-                            reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
-                            param_name = lines[i_line][12:size].decode('utf-8')
+                            param_name = lines[i_line][13:size].decode('utf-8')
                             param = ParameterBoolean(param_name, reg_id)
 
                         elif param_type == ParameterType.COMBO:
-                            reg_id = int.from_bytes(lines[i_line][8:10], byteorder=sys.byteorder)
-                            param_name = lines[i_line][10:size].decode('utf-8')
+                            param_name = lines[i_line][11:size].decode('utf-8')
                             param = ParameterOption(param_name, reg_id)
 
                             while RegisterMessageType(lines[i_line + 1][6]) == RegisterMessageType.REGISTER_OPTION_REQUEST:
@@ -101,10 +101,11 @@ class RegisterSerialization(object):
                                 op_name = lines[i_line][7:size].decode('utf-8')
                                 option = Option(op_name)
                                 param.add_option(option)
-                        print(param_type)
-                        service.add_parameter(param)
+                        if param is not None:
+                            service.add_parameter(param)
                     smart_object.add_service(service)
 
                 elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
-                    print(smart_object)            
-                    self.model_controller.save(smart_object)
+                    print(smart_object)
+                    print("\n")            
+                    #self.model_controller.save(smart_object)

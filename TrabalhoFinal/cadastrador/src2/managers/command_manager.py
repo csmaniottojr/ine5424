@@ -13,10 +13,12 @@ class CommandManager(Observer):
     
     def update(self, observable, data):
         if chr(data[0]) == CommandSerialization.START_CHAR:
-            print("Mensagem de comando recebida: %s" % \
-                ([ "0x%02x" % b for b in data ]))
-                
             emote_id = CommandSerialization.deserialize_emote_id(data)
+            type = CommandSerialization.deserialize_message_type(data)
+
+            print("Mensagem de comando recebida: {id: %d, type: %s}" % \
+                (emote_id, type))
+                
             with self.mutex:
                 self.commands[emote_id].append(data)
     

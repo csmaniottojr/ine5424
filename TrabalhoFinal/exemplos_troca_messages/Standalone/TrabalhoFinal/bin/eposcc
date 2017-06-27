@@ -6,7 +6,7 @@
 #=========================================================================
 # PATHS
 #=========================================================================
-EPOS=/home/decker/Documents/SOII/gitCesar/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal
+EPOS=/home/gilne/Documentos/git/ine5424/TrabalhoFinal/exemplos_troca_messages/Standalone/TrabalhoFinal
 TMP=/tmp
 INC=$EPOS/include
 SRC=$EPOS/src

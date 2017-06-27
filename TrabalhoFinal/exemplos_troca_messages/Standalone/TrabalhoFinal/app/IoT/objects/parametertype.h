@@ -14,7 +14,6 @@ namespace IoT {
     {
     public:
         typedef unsigned char Type;
-
         enum
         {
             NONE =              0,
@@ -26,7 +25,6 @@ namespace IoT {
     protected:
         const char * _min;
         const char * _max;
-        const char * _options;
         /*Update function is called everytime the parameter is updated!*/
         Callback * _update; //Is a pointer already!
         Type _type;
@@ -34,25 +32,33 @@ namespace IoT {
     public:
 
         ParameterType ( )
-        : _min ( 0 ), _max ( 0 ), _options ( 0 ) {
-            _type = NONE;
-        }
+        : _min ( 0 ), _max ( 0 ), _type(NONE) {}
 
         /* Getters */
         virtual Type getType ( ) {
             return _type;
         };
 
+        /**
+         * Retorna o valor minimo do parametro.
+         * O retorno é da forma: 
+         * Byte 0      1     x
+         *      | size | min |
+         * aonde size se refere ao tamanho do valor min
+         */
         const char * getMinValue ( ) {
             return _min;
         }
 
+        /**
+         * Retorna o valor máximo do parametro.
+         * O retorno é da forma: 
+         * Byte 0      1     x
+         *      | size | max |
+         * aonde size se refere ao tamanho do valor max
+         */
         const char * getMaxValue ( ) {
             return _max;
-        }
-
-        const char * getOptions ( ) {
-            return _options;
         }
 
         Callback* update ( ) {
@@ -62,28 +68,4 @@ namespace IoT {
     } ;
 
 } ;
-
-/* Exemplo de leitura do min e max [byte 0 tem o tamanho do valor]
-    cout << "\nFloat values: " << endl;
-    cout << temp.getType() << endl;
-
-    const char * temp_min = temp.getMinValue();
-    cout << "Size: " << (unsigned char) temp_min[0] << endl;
-
-    for(int i = 1; i<=((unsigned char)temp_min[0]); i++)
-        cout << (unsigned char) temp_min[i] << " ";
-    cout << dec << endl;
-    cout << "Min: " << ((float*) &temp_min[1])[0] << endl;
-
-    const char * temp_max = temp.getMaxValue();
-    cout << "Size: " << (unsigned char) temp_max[0] << endl;
-
-    for(int i = 1; i<=((unsigned char)temp_max[0]); i++)
-        cout << (unsigned char) temp_max[i] << " ";
-    cout << dec << endl;
-    cout << "Max: " << ((float*) &temp_max[1])[0] << endl;
- */
-
-
-
 #endif

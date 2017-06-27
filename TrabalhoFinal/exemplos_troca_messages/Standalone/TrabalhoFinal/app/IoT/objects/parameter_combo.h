@@ -17,18 +17,18 @@ namespace IoT {
     protected:
         Option_List _options;
         int * _current_option_index;
-        //        int & _data = _current_option_index;
+
     public:
+
+        ParameterCombo ( )
+        : ParameterType ( ), _current_option_index ( 0 ) {
+            this->_update = new Callback ( );
+            this->_type = COMBO;
+        }
 
         ParameterCombo ( Callback * update , int* data )
         : ParameterType ( ) , _current_option_index ( data ) {
             this->_update = update;
-            this->_type = COMBO;
-        }
-
-        ParameterCombo ( )
-        : ParameterType ( ) {
-            this->_update = new Callback ( );
             this->_type = COMBO;
         }
 
@@ -57,7 +57,6 @@ namespace IoT {
         }
 
         void update ( int index ) {
-            debug << "update combo called " << index << " " << _options.size ( ) - 1 << "\n" ;
             if ( index < _options.size ( ) ) {
                 *_current_option_index = index;
                 _update->operator () ( );

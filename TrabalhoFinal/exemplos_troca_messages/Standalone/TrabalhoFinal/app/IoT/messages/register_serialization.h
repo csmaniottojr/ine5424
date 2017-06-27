@@ -6,6 +6,7 @@
 #include "../objects/parameter_boolean.h"
 #include "../objects/parameter_combo.h"
 #include "../objects/parameter_float.h"
+#include "../objects/parameter_integer.h"
 #include "register_message.h"
 
 using namespace EPOS;
@@ -22,18 +23,19 @@ public:
 
     static const unsigned char BASE_SIZE = RegisterMessage::BASE_SIZE;
 public:
+
+    // Formato das mensagens de Register:
+    // Byte 0            1          2       6          7        x   
+    //      +------------+----------+-------+----------+--- ~ --+
+    //      | START_CHAR | msg size | SO id | msg type |  data  |
+    //      +------------+----------+-------+----------+--- ~ --+
+    // PS: data se refere aos dados especificos de cada tipo de mensagem
+
     static const char * serialize(RegisterMessage * message){
         unsigned int index = 0;
         Size length = message->getSize();
         char * result = new char[length];
         memset(result, '\0', length);
-
-        // Formato das mensagens de Register:
-        // Bit 0            1          2       6          7        x   
-        //     +------------+----------+-------+----------+--- ~ --+
-        //     | START_CHAR | msg size | SO id | msg type |  data  |
-        //     +------------+----------+-------+----------+--- ~ --+
-        // PS: data se refere aos dados especificos de cada tipo de mensagem
 
         result[index++] = RegisterMessage::START_CHAR;
         result[index++] = message->getSize();
@@ -47,19 +49,19 @@ public:
                 break;
             }case RegisterMessage::REGISTER_RESPONSE:{
                 // Formato do data:
-                // Bit 0              1
-                //     +------ ~ -----+
-                //     | isRegistered |
-                //     +------ ~ -----+
+                // Byte 0              1
+                //      +------ ~ -----+
+                //      | isRegistered |
+                //      +------ ~ -----+
                 RegisterResponse * res = reinterpret_cast<RegisterResponse*>(message);
                 result[index++] = res->isRegistered();
                 break;
             }case RegisterMessage::REGISTER_OBJECT_REQUEST:{
                 // Formato do data:
-                // Bit 0          x
-                //     +---- ~ ---+
-                //     | obj name |
-                //     +---- ~ ---+
+                // Byte 0          x
+                //      +---- ~ ---+
+                //      | obj name |
+                //      +---- ~ ---+
                 // PS: x depende do tamanho do nome [strlen]
                 RegisterObjectRequest * req = reinterpret_cast<RegisterObjectRequest*>(message);
                 auto objectName = req->getObjectName();
@@ -71,10 +73,10 @@ public:
                 break;
             }case RegisterMessage::REGISTER_SERVICE_REQUEST:{
                 // Formato do data:
-                // Bit 0              x
-                //     +------ ~ -----+
-                //     | service name |
-                //     +------ ~ -----+
+                // Byte 0              x
+                //      +------ ~ -----+
+                //      | service name |
+                //      +------ ~ -----+
                 // PS: x depende do tamanho do nome [strlen]
                 RegisterServiceRequest * req = reinterpret_cast<RegisterServiceRequest*>(message);
                 auto serviceName = req->getServiceName();
@@ -86,11 +88,11 @@ public:
                 break;
             }case RegisterMessage::REGISTER_PARAMETER_REQUEST:{
                 // Formato do data:
-                // Bit 0            1        3           x           y          z
-                //     +------------+--------+---- ~ ----+---- ~ ----+----- ~ ----+
-                //     | param type | reg id | min value | max value | param name |
-                //     +------------+--------+---- ~ ----+---- ~ ----+----- ~ ----+
-                // PS: x e y dependem do tipo do parametro [float=4, bool=1]
+                // Byte 0            1        3           4           x           y            z
+                //      +------------+--------+-----------+---- ~ ----+---- ~ ----+----- ~ ----+
+                //      | param type | reg id | read_only | min value | max value | param name |
+                //      +------------+--------+-----------+---- ~ ----+---- ~ ----+----- ~ ----+
+                // PS: x e y dependem do tipo do parametro [float=integer=4, bool=1]
                 //     z depende do tamanho do nome [strlen]
                 RegisterParameterRequest * req = 
                     reinterpret_cast<RegisterParameterRequest*>(message);
@@ -98,6 +100,7 @@ public:
                 result[index++] = req->getType();
                 ((RegisterIdValue*) &result[index])[0] = req->getRegisterId();
                 index += sizeof(RegisterIdValue);
+                ((bool*) &result[index++])[0] = req->isReadOnly();
 
                 const char * tmp = req->getMinValue();
                 if(tmp != 0){
@@ -119,10 +122,10 @@ public:
                 break;
             }case RegisterMessage::REGISTER_OPTION_REQUEST:{
                 // Formato do data:
-                // Bit 0        x
-                //     +--- ~ --+
-                //     | option |
-                //     +--- ~ --+
+                // Byte 0        x
+                //      +--- ~ --+
+                //      | option |
+                //      +--- ~ --+
                 // PS: x depende do tamanho da option [strlen]
                 RegisterOptionRequest * req = reinterpret_cast<RegisterOptionRequest*>(message);
                 auto option = req->getOption();
@@ -206,6 +209,7 @@ public:
                 ParameterType::Type pType = (ParameterType::Type) msg[index++];
                 RegisterIdValue registerId = *((RegisterIdValue*) &msg[index]);
                 index += sizeof(RegisterIdValue);
+                bool read_only = *((bool*) &msg[index++]);
 
                 ParameterType * parameterType = 0;
                 switch(pType){
@@ -224,6 +228,16 @@ public:
 
                         parameterType = pFloat;
                         break;
+                    }case ParameterType::INTEGER:{
+                        ParameterInteger * pInteger = new ParameterInteger();
+
+                        pInteger->setMinValue( *((int*) &msg[index]) );
+                        index += ParameterInteger::VALUE_SIZE;
+                        pInteger->setMaxValue( *((int*) &msg[index]) );
+                        index += ParameterInteger::VALUE_SIZE;
+
+                        parameterType = pInteger;
+                        break;
                     }case ParameterType::COMBO:{
                         ParameterCombo * pCombo = new ParameterCombo();
                         parameterType = pCombo;
@@ -237,7 +251,7 @@ public:
                 memcpy(name, &msg[index], length);
                 index += length;
 
-                Parameter * parameter = new Parameter(name, registerId, parameterType);
+                Parameter * parameter = new Parameter(name, registerId, read_only, parameterType);
                 RegisterParameterRequest * req = new RegisterParameterRequest(parameter);
                 result = req;
                 break;

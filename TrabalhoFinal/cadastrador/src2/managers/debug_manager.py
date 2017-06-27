@@ -7,4 +7,4 @@ class DebugManager(Observer):
     
     def update(self, observable, data):
         if chr(data[0]) == DebugSerialization.START_CHAR:
-            print("Mensagem de comentario recebida: %s" % data.decode("utf-8"))
+            print("DEBUG: %s" % data.decode("utf-8"))

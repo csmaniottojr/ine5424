@@ -16,7 +16,6 @@ class RegisterMessageResponser(object):
         barray.extend(emote_id)
 
         msg_type = RegisterSerialization.deserialize_message_type(msg)
-        print("msg type: ", msg_type)
 
         if msg_type == RegisterMessageType.REGISTER_REQUEST:
             id = int.from_bytes(emote_id, byteorder=sys.byteorder)
@@ -24,7 +23,7 @@ class RegisterMessageResponser(object):
             
             barray.append(int(self.model_controller.check_if_exists(id)))
             
-            barray[1] = int(barray[1]) + 1
+            barray[1] = int(barray[1]) + 1#atualiza o size
 
         elif msg_type == RegisterMessageType.REGISTER_OBJECT_REQUEST:
             barray.append(RegisterMessageType.REGISTER_OBJECT_RESPONSE.value)
@@ -41,5 +40,5 @@ class RegisterMessageResponser(object):
         elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
             barray.append(RegisterMessageType.REGISTER_END_OBJECT_RESPONSE.value)
         
-        print('resposta: ', ([ "0x%02x" % b for b in barray ]))
+        print('Resposta: %s\n' % ([ "0x%02x" % b for b in barray ]))
         return barray

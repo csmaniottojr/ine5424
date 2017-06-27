@@ -14,10 +14,12 @@ class RegisterManager(Observer):
     
     def update(self, observable, data):
         if chr(data[0]) == RegisterSerialization.START_CHAR:
-            print("Mensagem de registro recebida: %s" % \
-                ([ "0x%02x" % b for b in data ]))
-            
             emote_id = RegisterSerialization.deserialize_emote_id(data)
+            type = RegisterSerialization.deserialize_message_type(data);
+
+            print("Mensagem de registro recebida: {id: %d, type: %s}" % \
+                (emote_id, type))
+            
             self.registers[emote_id].append(data)
 
             #TODO melhorar isso...

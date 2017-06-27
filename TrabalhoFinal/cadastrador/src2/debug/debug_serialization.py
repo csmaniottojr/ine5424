@@ -1,10 +1,10 @@
 class DebugSerialization(object):
 
-    # Formato das mensagens de Register:
-    # Bit 0            1       2           x     x+2           
-    #     +------------+-------+---- ~ ----+------+
-    #     | START_CHAR | space | debug msg | \r\n |
-    #     +------------+-------+---- ~ ----+------+
+    # Formato das mensagens de Debug:
+    # Byte 0            1       2           x     x+2           
+    #      +------------+-------+---- ~ ----+------+
+    #      | START_CHAR | space | debug msg | \r\n |
+    #      +------------+-------+---- ~ ----+------+
 
     START_CHAR = '#'
 

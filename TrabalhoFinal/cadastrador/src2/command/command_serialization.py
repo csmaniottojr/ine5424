@@ -4,10 +4,10 @@ from .command_message_type import CommandMessageType
 class CommandSerialization(object):
     
     # Formato das mensagens de Command:
-    # Bit 0            1          2       6          7        9        x   
-    #     +------------+----------+-------+----------+--------+--- ~ --+
-    #     | START_CHAR | msg size | SO id | msg type | reg id |  data  |
-    #     +------------+----------+-------+----------+--------+--- ~ --+
+    # Byte 0            1          2       6          7        9        x   
+    #      +------------+----------+-------+----------+--------+--- ~ --+
+    #      | START_CHAR | msg size | SO id | msg type | reg id |  data  |
+    #      +------------+----------+-------+----------+--------+--- ~ --+
 
     START_CHAR = ':'
     BASE_SIZE = 9

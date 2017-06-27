@@ -217,6 +217,10 @@ namespace IoT {
             return _parameter->getRegisterId ( );
         }
 
+        bool isReadOnly(){
+            return _parameter->isReadOnly();
+        }
+
         ParameterType::Type getType ( ) {
             return _parameter->getType ( );
         }
@@ -229,21 +233,17 @@ namespace IoT {
             return _parameter->getMaxValue ( );
         }
 
-        const char * getOptions ( ) {
-            return _parameter->getOptions ( );
-        }
     protected:
 
         void updateSize ( ) {
             Size size = sizeof (ParameterType::Type );
             size += sizeof (RegisterIdValue );
+            size += sizeof (bool);
 
             const char * tmp = _parameter->getMinValue ( );
             size += ( unsigned char ) tmp[0];
             tmp = _parameter->getMaxValue ( );
             size += ( unsigned char ) tmp[0];
-            tmp = _parameter->getOptions ( );
-            size += strlen ( tmp );
 
             size += strlen ( _parameter->getName ( ) );
             setSizeAddedWithBaseSize ( size );

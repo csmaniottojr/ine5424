@@ -17,6 +17,7 @@ namespace IoT {
     protected:
         const char * _name;
         RegisterIdValue _register_id;
+        bool _read_only;
         ParameterType *_type;
 
         union
@@ -29,7 +30,13 @@ namespace IoT {
     public:
 
         Parameter ( const char * name, unsigned short registerId, ParameterType * type )
-        : _name ( name ), _register_id ( registerId ), _type ( type ) { }
+        : _name ( name ), _register_id ( registerId ), _type ( type ),
+          _read_only ( false ) { }
+        
+        Parameter ( const char * name, unsigned short registerId, 
+            bool read_only, ParameterType * type )
+        : _name ( name ), _register_id ( registerId ), _type ( type ),
+          _read_only( read_only ) { }
 
         /* Getters */
         const char * getName ( ) {
@@ -38,6 +45,14 @@ namespace IoT {
 
         unsigned short getRegisterId ( ) {
             return _register_id;
+        }
+
+        bool isReadOnly(){
+            return _read_only;
+        }
+
+        void setReadOnly(bool value){
+            _read_only = value;
         }
 
         ParameterType::Type getType ( ) {
@@ -54,10 +69,6 @@ namespace IoT {
 
         const char * getMaxValue ( ) {
             return _type->getMaxValue ( );
-        }
-
-        const char * getOptions ( ) {
-            return _type->getOptions ( );
         }
 
         void update ( bool value ) {
