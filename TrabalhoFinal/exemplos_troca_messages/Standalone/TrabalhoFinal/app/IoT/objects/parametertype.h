@@ -20,7 +20,8 @@ namespace IoT {
             NONE =              0,
             FLOAT =             1,
             BOOLEAN =           2,
-            COMBO =             3
+            COMBO =             3,
+            INTEGER =           4
         } ;
     protected:
         const char * _min;

@@ -67,28 +67,32 @@ int main( ) {
     IoT::IotManager manager( IEEE802_15_4::ELP, nic, &object );
 
 
-    eMoteIII::led::blink( 0.1, 2 );
-    cout << endl; //start print
+    while(1){
+        eMoteIII::led::blink( 0.1, 2 );
+        cout << endl; //start print
 
-    cout << "# Obj ID: " << object.getId( ) << endl;
-    cout << "# Obj Name: " << object.getName( ) << endl;
-    auto services = object.getServices( );
-    for ( auto e = services->head( ); e; e = e->next( ) ) {
-        cout << "#   Service Name: " << e->object( )->getName( ) << endl;
+        cout << "# Obj ID: " << object.getId( ) << endl;
+        cout << "# Obj Name: " << object.getName( ) << endl;
+        auto services = object.getServices( );
+        for ( auto e = services->head( ); e; e = e->next( ) ) {
+            cout << "#   Service Name: " << e->object( )->getName( ) << endl;
 
-        auto params = e->object( )->getParameters( );
-        for ( auto e2 = params->head( ); e2; e2 = e2->next( ) ) {
-            cout << "#      Param Name: " << e2->object( )->getName( ) << endl;
-            cout << "#      Param RegId: " << e2->object( )->getRegisterId( ) << endl;
-            auto max = e2->object( )->getMaxValue( );
-            cout << "#      Param maxValue: ";
-            for ( int i = 1; i <= ( ( unsigned char ) max[0] ); i++ )
-                cout << ( unsigned char ) max[i] << " ";
-            cout << endl;
+            auto params = e->object( )->getParameters( );
+            for ( auto e2 = params->head( ); e2; e2 = e2->next( ) ) {
+                cout << "#      Param Name: " << e2->object( )->getName( ) << endl;
+                cout << "#      Param RegId: " << e2->object( )->getRegisterId( ) << endl;
+                auto max = e2->object( )->getMaxValue( );
+                cout << "#      Param maxValue: ";
+                for ( int i = 1; i <= ( ( unsigned char ) max[0] ); i++ )
+                    cout << ( unsigned char ) max[i] << " ";
+                cout << endl;
+            }
         }
+
+        manager.run( );
+
+        cout << endl; //end print
+
+        Alarm::delay(10000000);
     }
-
-    manager.run( );
-
-    cout << endl; //end print
 }

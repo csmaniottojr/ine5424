@@ -98,12 +98,13 @@ class RegisterSerialization(object):
                             while RegisterMessageType(lines[i_line + 1][6]) == RegisterMessageType.REGISTER_OPTION_REQUEST:
                                 i_line += 1
                                 size = lines[i_line][1]
-                                op_name = lines[i_line][8:size].decode('utf-8')
+                                op_name = lines[i_line][7:size].decode('utf-8')
                                 option = Option(op_name)
                                 param.add_option(option)
-
+                        print(param_type)
                         service.add_parameter(param)
                     smart_object.add_service(service)
 
                 elif msg_type == RegisterMessageType.REGISTER_END_OBJECT_REQUEST:
+                    print(smart_object)            
                     self.model_controller.save(smart_object)

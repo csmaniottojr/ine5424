@@ -35,8 +35,8 @@ public:
         auto data = b->frame()->data<char>();
 
         //eMoteIII::led::blink(0.1, 1);
-        /*cout << "# Received " << b->size() << " bytes of payload from " << b->frame()->src() << " :";
-        for(int i=0; i<b->size(); i++)
+        cout << "# Received " << b->size() << " bytes of payload from " << b->frame()->src() << endl;
+        /*for(int i=0; i<b->size(); i++)
             cout << " " << (unsigned char) data[i];
         cout << endl;*/
 
