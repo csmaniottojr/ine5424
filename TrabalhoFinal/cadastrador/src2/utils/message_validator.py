@@ -1,8 +1,13 @@
+# encoding: utf-8
 from register.register_message_type import RegisterMessageType
 from command.command_serialization import CommandSerialization
 from register.register_serialization import RegisterSerialization
 from debug.debug_serialization import DebugSerialization 
 
+"""
+    Classe que possui métodos para validar as
+    mensagens vindas do gateway.
+"""
 class MessageValidator(object):
 
     START_CHARES = RegisterSerialization.START_CHAR + \

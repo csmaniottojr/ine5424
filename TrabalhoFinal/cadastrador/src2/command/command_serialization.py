@@ -1,6 +1,11 @@
+# encoding: utf-8
 from utils.utils import Utils
 from .command_message_type import CommandMessageType
 
+"""
+    Classe responsável pela serialização e 
+    deserialização das mensagens de comando.
+"""
 class CommandSerialization(object):
     
     # Formato das mensagens de Command:
@@ -45,7 +50,7 @@ class CommandSerialization(object):
     def serialize(params):
         # Espera os seguintes dados:
         #   params['emote_id']  [int]
-        #   params['msg_type']  [CommandMessageType]
+        #   params['msg_type']  [int ou CommandMessageType]
         #   params['reg_id']    [unsigned short]
         #   params['data']      [bytearray]
         result = bytearray()

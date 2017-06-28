@@ -13,7 +13,6 @@ using namespace EPOS;
 
 namespace IoT {
 
-//TODO testar!
 class RegisterSerialization {
 public:
     typedef RegisterMessage::Size Size;

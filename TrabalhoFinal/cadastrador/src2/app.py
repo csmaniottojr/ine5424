@@ -13,6 +13,10 @@ from utils.utils import Utils
 from threading import Thread
 import time
 
+"""
+    Aplicativo responsável por fazer uma interface simples 
+    que permita que um usuário controle os objetos inteligentes.
+"""
 class App(Thread):
     def __init__(self, so_controller, serial_manager, command_manager):
         Thread.__init__(self)

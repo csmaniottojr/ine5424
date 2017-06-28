@@ -12,7 +12,6 @@ using namespace EPOS;
 
 namespace IoT {
 
-//TODO testar!
 class CommandSerialization {
 public:
     typedef CommandMessage::Size Size;

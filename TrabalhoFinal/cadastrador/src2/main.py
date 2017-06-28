@@ -1,3 +1,4 @@
+# encoding: utf-8
 from managers.serial_port_manager import SerialPortManager
 from managers.command_manager import CommandManager
 from managers.debug_manager import DebugManager
@@ -10,6 +11,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import config_bd
 
+""" 
+    Arquivo responsável por iniciar todos os componentes
+    necessários para o funcionamento do sistema.
+"""
 if __name__ == '__main__':
     print("Iniciando o programa...")
     engine = create_engine('mysql+pymysql://{}:{}@{}/{}'.format(

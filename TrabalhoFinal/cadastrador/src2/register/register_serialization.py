@@ -1,3 +1,4 @@
+# encoding: utf-8
 from utils.utils import Utils
 from .register_message_type import RegisterMessageType
 
@@ -7,6 +8,9 @@ from .parameter_type import ParameterType
 from models import SmartObject, Service, ParameterBoolean, ParameterFloat,\
     ParameterInteger, ParameterOption, Option
 
+"""
+    Classe responsável pela deserialização das mensagens de registro.
+"""
 class RegisterSerialization(object):
 
     def __init__(self, model_controller):

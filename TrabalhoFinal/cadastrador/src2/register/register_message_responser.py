@@ -1,7 +1,12 @@
+# encoding: utf-8
 import sys
 from .register_serialization import RegisterSerialization
 from .register_message_type import RegisterMessageType
 
+"""
+    Classe responsável por responder as mensagens
+    de registro vindas de um objeto inteligente.
+"""
 class RegisterMessageResponser(object):
 
     def __init__(self, model_controller):

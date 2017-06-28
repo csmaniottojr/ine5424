@@ -4,7 +4,9 @@ from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
-
+"""
+    Classes do modelo do sistema.
+"""
 class SmartObject(Base):
     __tablename__ = 'smart_object'
 

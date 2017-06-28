@@ -1,3 +1,4 @@
+# encoding: utf-8
 from collections import defaultdict
 from threading import Lock
 
@@ -6,6 +7,10 @@ from utils.utils import Utils
 from command.command_serialization import CommandSerialization
 from command.command_message_type import CommandMessageType
 
+"""
+    Classe responsável por gerenciar as mensagens de 
+    comando vindas dos objetos inteligentes.
+"""
 class CommandManager(Observer):
     def __init__(self):
         Observer.__init__(self)

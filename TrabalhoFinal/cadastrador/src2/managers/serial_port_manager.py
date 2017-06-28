@@ -1,8 +1,13 @@
+# encoding: utf-8
 import serial, time, sys, traceback
 from utils.observable import Observable
 from utils.message_validator import MessageValidator
 from utils.utils import Utils
 
+"""
+    Gerenciador da porta serial usada para comunicação
+    com o gateway.
+"""
 class SerialPortManager(Observable):
     def __init__(self, port, baudrate, write_timeout):
         Observable.__init__(self)
